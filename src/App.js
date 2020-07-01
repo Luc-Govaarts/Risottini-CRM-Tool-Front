@@ -25,8 +25,8 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route path="/login" component={Signup}/>
-        <Route path="/signup" component={Login}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/signup" component={Signup}/>
         <Route exact path="/" component={Homepage}/>
       </Switch>
     </div>
