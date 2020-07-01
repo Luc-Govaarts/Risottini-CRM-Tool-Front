@@ -5,6 +5,7 @@ import MessageBox from "./Components/MessageBox";
 import Homepage from './Pages/Homepage'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
+import Navigation from "./Components/Navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
@@ -20,6 +21,7 @@ function App() {
   
   return (
     <div className="App">
+      <Navigation/>
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
