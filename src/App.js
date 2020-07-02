@@ -4,6 +4,7 @@ import Homepage from './Pages/Homepage'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import AddLead from './Pages/AddLead'
+import LeadDetails from './Pages/LeadDetails'
 import Navigation from "./Components/Navigation";
 import Loading from "./Components/Loading";
 import MessageBox from "./Components/MessageBox";
@@ -28,7 +29,8 @@ function App() {
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/addlead" component={AddLead}/>
+        <Route path="/lead/add" component={AddLead}/>
+        <Route path="/lead/:id" component={LeadDetails}/>
         <Route exact path="/" component={Homepage}/>
       </Switch>
     </div>

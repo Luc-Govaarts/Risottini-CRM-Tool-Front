@@ -3,7 +3,7 @@ import { fetchLeads } from '../store/appFeed/actions'
 import { selectLeads, selectAppFeedState} from "../store/appFeed/selectors"
 import { useSelector, useDispatch } from "react-redux";
 import LeadCard from '../Components/LeadCard'
-import { Container } from 'react-bootstrap'
+import { Container, Col } from 'react-bootstrap'
 
 export default function Homepage() {
     const dispatch = useDispatch()
@@ -16,10 +16,12 @@ export default function Homepage() {
 
 
     return (
-        <Container className="">
+        <Container fluid>
+            <Col xs={6} >
             {leads.map(lead => {
                 return <LeadCard 
                             key={lead.id}
+                            id={lead.id}
                             lead={lead.company_name}
                             partner={lead.associated_company_name}
                             address={lead.company_address}
@@ -27,6 +29,10 @@ export default function Homepage() {
                             email={lead.company_email}
                             supplier={lead.supplier}/>
             })}
+            </Col>
+            <Col>
+                
+            </Col>
         </Container>
         
             
