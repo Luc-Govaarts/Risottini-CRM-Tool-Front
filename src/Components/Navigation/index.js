@@ -6,7 +6,6 @@ import { selectToken } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import AddLeadButton from "./AddLeadButton"
 
 export default function Navigation() {
   const token = useSelector(selectToken);
@@ -22,7 +21,7 @@ export default function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem path="/" linkText="Home" />
-          <AddLeadButton/>
+          <NavbarItem path="/addlead" linkText="Nieuwe Lead" />
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>
