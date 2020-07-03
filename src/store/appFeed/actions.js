@@ -20,7 +20,6 @@ export async function fetchLeads(dispatch, getState) {
   const res = await axios({method: 'get',
                             url: `${apiUrl}/leads`,
                             headers: {'Authorization': `Bearer ${token}`}})
-  const leads = res.data
-  console.log("leads: ", leads)
+  const leads = res.data                            
   dispatch(storeLeads(leads))
 }   

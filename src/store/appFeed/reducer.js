@@ -1,7 +1,8 @@
 
 const initialState = {
   loading: true,
-  leads: []
+  leads: [],
+  SalesCyclePhases: []
 };
 
 export default (state = initialState, action) => {

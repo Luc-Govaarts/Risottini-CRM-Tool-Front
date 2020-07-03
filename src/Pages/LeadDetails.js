@@ -5,6 +5,7 @@ import { fetchLeads } from '../store/appFeed/actions'
 import {selectLeadById} from '../store/appFeed/selectors'
 import ReportCard from '../Components/ReportCard'
 
+
 export default function LeadDetails() {
     const dispatch = useDispatch()
     const params = useParams()   
@@ -25,17 +26,19 @@ export default function LeadDetails() {
         return "LOADING"
     } else {
         return (<div>
-            {reports.map(report => {
-                return <ReportCard
-                    key={report.id}
-                    id={report.id}
-                    lead={report.company_name}
-                    user={report.userId}
-                    date={report.createdAt}
-                    note={report.note}
-                />
-            })}
-        </div>
+                    <div>
+                        {reports.map(report => {
+                            return <ReportCard
+                                key={report.id}
+                                id={report.id}
+                                lead={report.company_name}
+                                user={lead.user.name}
+                                date={report.createdAt}
+                                note={report.note}
+                            />
+                        })}
+                    </div>
+                </div>
         )
     }  
 }

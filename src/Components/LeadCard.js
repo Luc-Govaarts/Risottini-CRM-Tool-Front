@@ -10,10 +10,10 @@ export default function LeadCard(props) {
                     {props.partner}</Card.Subtitle>
                 </Card.Header>
                 <Card.Body>
-                    <Card.Text >Address: {props.address}
-                                Email: {props.email}
-                                Leverancier: {props.supplier}
-                                Telefoon: {props.phone}</Card.Text>
+                    <Card.Text >Address: {props.address}</Card.Text>
+                    <Card.Text >Email: {props.email}</Card.Text>
+                    <Card.Text >Leverancier: {props.supplier}</Card.Text>
+                    <Card.Text >Telefoon: {props.phone}</Card.Text>
                 </Card.Body>
                 <Card.Footer>
                     <Button href={`/lead/${props.id}`}
