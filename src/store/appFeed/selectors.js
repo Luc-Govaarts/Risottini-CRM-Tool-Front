@@ -9,3 +9,7 @@ export function selectLeads(state) {
 export const selectLeadById = (id) => (state) => {
     return state.appFeed.leads.find(lead => lead.id === id)
 }
+
+export function selectContacts(state) {
+    return state.appFeed.contacts
+}
