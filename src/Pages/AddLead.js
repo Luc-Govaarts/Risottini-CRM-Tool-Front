@@ -6,6 +6,7 @@ import { selectToken } from "../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
+import { addLead } from "../store/appFeed/actions";
 
 export default function AddProspect() {
     const [company_name, set_company_name] = useState("")
@@ -25,8 +26,13 @@ export default function AddProspect() {
       }, [token, history]);
 
     const submitForm = () => {
-        
-
+        dispatch(addLead(
+          company_name, 
+          associated_company_name,
+          company_phone, 
+          company_address, 
+          company_email, 
+          supplier)) 
 
         set_associated_company_name("")
         set_company_phone()

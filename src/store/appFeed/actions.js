@@ -23,3 +23,23 @@ export async function fetchLeads(dispatch, getState) {
   const leads = res.data                            
   dispatch(storeLeads(leads))
 }   
+
+export function addLead(company_name, associated_company_name, 
+  company_phone, company_address, company_email, supplier) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    console.log("CHEKCING FORM DATA:", company_name, associated_company_name, 
+    company_phone, company_address, company_email, supplier)
+    const res = await axios({method: 'post',
+                              url: `${apiUrl}/leads`,
+                              data: {
+                                company_name, associated_company_name, 
+                                company_phone, company_address, company_email, supplier
+                              },
+                              headers: {'Authorization': `Bearer ${token}`}
+                            })       
+    console.log("Response:", res)
+  }
+}
