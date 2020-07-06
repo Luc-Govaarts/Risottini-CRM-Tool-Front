@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Container, CardHeader, TextField, Button, Card, Box } from '@material-ui/core'
+import { addNewReport } from '../store/appFeed/actions'
 
-export default function AddReportForm() {
+export default function AddReportForm(props) {
     const [note, set_note] = useState("")
     const dispatch = useDispatch()
 
     const submitHandler = () => {
-        // dispatch(postNewReport)
+        dispatch(addNewReport(note, props.leadId))
 
         set_note("")
     } 
 
+    console.log(note)
+
     return (
-        <Container component="main" maxWidth="xs">
-            <Card >
+        <Container component="main">
+            <Card>
                 <Box m={3}>
                     <CardHeader title="Maak een notitie"/>
                     <form>
@@ -31,7 +34,6 @@ export default function AddReportForm() {
                         <Button
                             onClick={submitHandler}
                             type="submit"
-                            fullWidth
                             variant="contained"
                             color="primary">
                             Bewaren

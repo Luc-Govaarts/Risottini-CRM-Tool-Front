@@ -25,11 +25,12 @@ export function storeNewContact(data) {
   }
 }
 
-export function storeReportUserName(data) {
+export function storeNewReport(data) {
   return {
-    type: "STORE_REPORT_USER_NAME", payload: data
+  type: "STORE_NEW_REPORT", payload: data
   }
 }
+
 export async function fetchLeads(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -80,17 +81,37 @@ export function addContact(contact_name, contact_email, contact_phone) {
     const res = await axios({method: 'post',
                               url: `${apiUrl}/contacts`,
                               data: {contact_name, contact_email, contact_phone},
-                              headers: {'Authorization': `Bearer ${token}`}                         
-  })
+                              headers: {'Authorization': `Bearer ${token}`}})
     console.log(res.data)
     dispatch(storeNewContact(res.data)) 
   }
 }
 
-export function fetchUserById(id) {
+export function addNewReport(note, leadId) {
   return async function thunk(dispatch, getState) {
-    const res = await axios.get(`/users/${id}`)
-    dispatch(storeReportUserName(res.data))
-    console.log(res.data)
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const name = state.user.name
+
+    const res = await axios({ method: 'post',
+                              url: `${apiUrl}/reports`,
+                              data: {name, note, leadId},
+                              headers: {'Authorization': `Bearer ${token}`}})
+    dispatch(storeNewReport(res.data))
   }
-} 
+}
+
+// export function storeReportUserName(data) {
+//   return {
+//     type: "STORE_REPORT_USER_NAME", payload: data
+//   }
+// }
+
+// export function fetchUserById(id) {
+//   return async function thunk(dispatch, getState) {
+//     const res = await axios.get(`/users/${id}`)
+//     dispatch(storeReportUserName(res.data))
+//     console.log(res.data)
+//   }
+// } 
