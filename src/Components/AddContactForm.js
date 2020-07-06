@@ -58,7 +58,7 @@ export default function AddContactForm() {
                 </Form.Group>
 
                 <Form.Group className="mt-3">
-                    <Button variant="primary" type="submit" onClick={submitForm}>
+                    <Button variant="primary" type="submit" onClick={submitContactForm}>
                         Voeg contact toe
                     </Button>
                 </Form.Group>

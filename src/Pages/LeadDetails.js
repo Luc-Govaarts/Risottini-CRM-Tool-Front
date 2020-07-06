@@ -12,9 +12,6 @@ export default function LeadDetails() {
     const leadId = parseInt(params.id)
     const lead = useSelector(selectLeadById(leadId))
     const reports = {...lead}.reports || []
-    
-    console.log("leads:", lead)
-    console.log("reports:" , reports)
 
     useEffect(() =>  {
         if(!lead) {

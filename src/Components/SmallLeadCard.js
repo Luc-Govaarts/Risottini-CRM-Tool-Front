@@ -1,16 +1,38 @@
-import React from 'react'
-import { Card, Badge, Button } from 'react-bootstrap'
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, CardHeader, IconButton } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-export default function SmallLeadCard(props) {
-    
-    return (
-        <Card bg={'light'} text={'dark'}>
-            <Card.Header>
-                <Card.Title>{props.lead}</Card.Title><Badge pill={true} variant={"secondary"}>{props.phase}</Badge>
-            </Card.Header>
-            <Card.Body>
-                <Card.Text>Contact persoon: {props.contact}</Card.Text>
-            </Card.Body>
-        </Card>
-    )
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+});
+
+export default function SimpleCard(props) {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.root}>
+        <CardHeader 
+        title={props.lead}
+        subheader={props.partner}
+        action={
+          <IconButton aria-label="settings">
+            <MoreVertIcon />
+          </IconButton>
+        }/>
+    </Card>
+  );
 }

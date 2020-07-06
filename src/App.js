@@ -1,21 +1,24 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import Homepage from './Pages/Homepage'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
 import AddLead from './Pages/AddLead'
 import LeadDetails from './Pages/LeadDetails'
-import Navigation from "./Components/Navigation";
-import Loading from "./Components/Loading";
-import MessageBox from "./Components/MessageBox";
-
+import NavDrawer from "./Components/NavDrawer"
+import { selectToken } from "./store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
+import AddContactForm from "./Components/AddContactForm";
 
 function App() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectAppLoading);
+  const token = useSelector(selectToken)
+  const history = useHistory();
+
+  if(!token) {
+    history.push("/login")
+  }
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
@@ -23,14 +26,13 @@ function App() {
   
   return (
     <div className="App">
-      <Navigation />
-      <MessageBox />
-      {isLoading ? <Loading /> : null}
+      <NavDrawer/>
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/lead/add" component={AddLead}/>
-        <Route path="/lead/:id" component={LeadDetails}/>
+        <Route path="/leads/add" component={AddLead}/>
+        <Route path="/leads/:id" component={LeadDetails}/>
+        <Route path="/contacts/add" components={AddContactForm}/>
         <Route exact path="/" component={Homepage}/>
       </Switch>
     </div>

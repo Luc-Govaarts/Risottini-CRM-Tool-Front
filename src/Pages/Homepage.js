@@ -2,32 +2,8 @@ import React, {useEffect} from 'react'
 import { fetchLeads } from '../store/appFeed/actions'
 import { selectLeads, selectAppFeedState} from "../store/appFeed/selectors"
 import { useSelector, useDispatch } from "react-redux";
+import { Grid, Paper, Box, Typography} from '@material-ui/core'
 import SmallLeadCard from '../Components/SmallLeadCard'
-import { Container, Col, Row, Card } from 'react-bootstrap'
-import { MyMapComponent } from '../Components/Map'
-
-// const markers = [
-//     {
-//         latitude: 52.011112,
-//         longitude: 4.711111
-//     },
-//     {
-//         latitude: 53.331028, 
-//         longitude: 6.924460
-//     },
-//     {
-//         latitude: 50.851368, 
-//         longitude: 5.690973
-//     },
-//     {
-//         latitude: 52.518536, 
-//         longitude: 5.471422
-//     },
-//     {
-//         latitude: 52.371807, 
-//         longitude: 4.896029
-//     }
-// ]
 
 export default function Homepage() {
     const dispatch = useDispatch()
@@ -54,93 +30,70 @@ export default function Homepage() {
         return lead.salesCyclePhase.id === 5
     })
 
-    return (
-        <Container fluid>
-            <Row>
-                <Col sm={3}>
-                    <Card className="mt-3">
-                        <Card.Header>
-                         <Card.Title>{"Lead in"}</Card.Title>
-                        </Card.Header>
-                        <Card.Body>    
-                {leads_cold.map(lead => {
-                    return <SmallLeadCard 
-                                key={lead.id}
-                                id={lead.id}
-                                lead={lead.company_name}
-                                contact={lead.contact.name}
-                                phase={lead.salesCyclePhase.name}/>})}
-                        </Card.Body>
-                        </Card>
-                </Col>
-                <Col sm={3}>
-                    <Card className="mt-3">
-                        <Card.Header>
-                         <Card.Title>{"Lead in"}</Card.Title>
-                        </Card.Header>
-                        <Card.Body> 
-                {leads_made_contact.map(lead => {
-                    return <SmallLeadCard 
-                                key={lead.id}
-                                id={lead.id}
-                                lead={lead.company_name}
-                                contact={lead.contact.name}
-                                phase={lead.salesCyclePhase.name}/>})}
-                        </Card.Body>
-                        </Card>
-                </Col>
-                <Col sm={3}>
-                    <Card className="mt-3">
-                        <Card.Header>
-                         <Card.Title>{"Lead in"}</Card.Title>
-                        </Card.Header>
-                        <Card.Body> 
-                {leads_tasting.map(lead => {
-                    return <SmallLeadCard 
-                                key={lead.id}
-                                id={lead.id}
-                                lead={lead.company_name}
-                                contact={lead.contact.name}
-                                phase={lead.salesCyclePhase.name}/>})}
-                        </Card.Body>
-                        </Card>
-                </Col>
-                <Col sm={3}>
-                    <Card className="mt-3">
-                        <Card.Header>
-                         <Card.Title>{"Lead in"}</Card.Title>
-                        </Card.Header>
-                        <Card.Body> 
-                {leads_deal_closed.map(lead => {
-                    return <SmallLeadCard 
-                                key={lead.id}
-                                id={lead.id}
-                                lead={lead.company_name}
-                                contact={lead.contact.name}
-                                phase={lead.salesCyclePhase.name}/>})}
-                        </Card.Body>
-                        </Card>
-                </Col>
-                {/* <Col sm={3}>
-                {leads_rejected.map(lead => {
-                    return <SmallLeadCard 
-                                key={lead.id}
-                                id={lead.id}
-                                lead={lead.company_name}
-                                contact={lead.contact.name}
-                                phase={lead.salesCyclePhase.name}/>})}
-                </Col> */}
-                
-            </Row>
-            <Row>
-            {/* <Col sm={8}>
-                    <MyMapComponent markers={markers}/>
-                </Col> */}
-            </Row>
-        </Container>
-        
-            
-            
-        
-    )
+    return <>
+        <Box mt={10}>
+           <Grid 
+                container
+                direction="row"
+                justify="center"
+                alignItems="center">
+                <Grid item>
+                    <Box m={3}>
+                    <Box m={3}>
+                        <Typography variant="h3"> Nieuwe Leads</Typography>
+                    </Box>
+                    <Paper>
+                        {leads_cold.map(lead => {
+                            return <SmallLeadCard
+                                        key={lead.id}
+                                        lead={lead.company_name}
+                                        partner={lead.associated_company_name}/>})}
+                    </Paper>
+                    </Box>
+                </Grid>
+                <Grid item>
+                    <Box m={3}>
+                    <Box m={3}>
+                        <Typography variant="h3"> Contact Gemaakt </Typography>
+                    </Box>
+                    <Paper>
+                        {leads_made_contact.map(lead => {
+                            return <SmallLeadCard
+                                        key={lead.id}
+                                        lead={lead.company_name}
+                                        partner={lead.associated_company_name}/>})}
+                    </Paper>
+                    </Box>
+                </Grid>
+                <Grid item>
+                    <Box m={3}> 
+                    <Box m={3}>
+                        <Typography variant="h3"> Ballen Proeven </Typography>
+                    </Box>
+                    <Paper>
+                        {leads_tasting.map(lead => {
+                            return <SmallLeadCard
+                                        key={lead.id}
+                                        lead={lead.company_name}
+                                        partner={lead.associated_company_name}/>})}
+                    </Paper>
+                    </Box>
+                </Grid>
+                <Grid item>
+                    <Box m={3}>
+                    <Box m={3}>
+                        <Typography variant="h3"> Gesloten Deals </Typography>
+                    </Box>
+                    <Paper>
+                        {leads_deal_closed.map(lead => {
+                            return <SmallLeadCard
+                                        key={lead.id}
+                                        lead={lead.company_name}
+                                        partner={lead.associated_company_name}/>})}
+                    </Paper>
+                    </Box>
+                </Grid>
+            </Grid>
+        </Box>
+    </>
 }
