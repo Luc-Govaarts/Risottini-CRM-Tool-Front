@@ -2,9 +2,9 @@ import React, { useEffect }from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLeads } from '../store/appFeed/actions'
-import {selectLeadById} from '../store/appFeed/selectors'
-import ReportCard from '../Components/ReportCard'
-
+import { selectLeadById} from '../store/appFeed/selectors'
+import { Box, Grid } from'@material-ui/core'
+import LeadCard1 from '../Components/LeadCard'
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -19,23 +19,31 @@ export default function LeadDetails() {
         }
     }, [dispatch])
 
+    console.log("LEAD:", lead)
+
     if (!lead) {
         return "LOADING"
     } else {
-        return (<div>
-                    <div>
-                        {reports.map(report => {
-                            return <ReportCard
-                                key={report.id}
-                                id={report.id}
-                                lead={report.company_name}
-                                user={lead.user.name}
-                                date={report.createdAt}
-                                note={report.note}
-                            />
-                        })}
-                    </div>
-                </div>
+        return (
+            <Box mt={15}>
+                <Grid 
+                container
+                direction="row"
+                justify="center"
+                alignItems="center">
+                    <Grid item>
+                        <LeadCard1
+                            lead={lead.company_name}
+                            partner={lead.associated_company_name}
+                            phase={lead.salesCyclePhase.name}
+                            address={lead.company_address}
+                            phone={lead.company_phone}
+                            email={lead.company_email}
+                            supplier={lead.supplier}
+                            createdAt={lead.createdAt}/>
+                    </Grid>
+                </Grid>
+            </Box>
         )
     }  
 }
