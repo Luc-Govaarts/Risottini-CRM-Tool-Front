@@ -1,10 +1,11 @@
 import React, { useEffect }from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLeads } from '../store/appFeed/actions'
+import { fetchLeads, fetchUserById } from '../store/appFeed/actions'
 import { selectLeadById} from '../store/appFeed/selectors'
 import { Box, Grid } from'@material-ui/core'
-import LeadCard1 from '../Components/LeadCard'
+import LeadCard from '../Components/LeadCard'
+import ReportCard from '../Components/ReportCard'
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -19,8 +20,6 @@ export default function LeadDetails() {
         }
     }, [dispatch])
 
-    console.log("LEAD:", lead)
-
     if (!lead) {
         return "LOADING"
     } else {
@@ -32,7 +31,7 @@ export default function LeadDetails() {
                 justify="center"
                 alignItems="center">
                     <Grid item>
-                        <LeadCard1
+                        <LeadCard
                             lead={lead.company_name}
                             partner={lead.associated_company_name}
                             phase={lead.salesCyclePhase.name}
@@ -41,6 +40,16 @@ export default function LeadDetails() {
                             email={lead.company_email}
                             supplier={lead.supplier}
                             createdAt={lead.createdAt}/>
+                    </Grid>
+                    <Grid item>
+                        {reports.map(report => {
+                            
+                            return <ReportCard
+                                        key={report.id}
+                                        lead={lead.company_name}
+                                        note={report.note}
+                                        createdAt={report.createdAt}/>})}
+
                     </Grid>
                 </Grid>
             </Box>

@@ -25,6 +25,11 @@ export function storeNewContact(data) {
   }
 }
 
+export function storeReportUserName(data) {
+  return {
+    type: "STORE_REPORT_USER_NAME", payload: data
+  }
+}
 export async function fetchLeads(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -81,3 +86,11 @@ export function addContact(contact_name, contact_email, contact_phone) {
     dispatch(storeNewContact(res.data)) 
   }
 }
+
+export function fetchUserById(id) {
+  return async function thunk(dispatch, getState) {
+    const res = await axios.get(`/users/${id}`)
+    dispatch(storeReportUserName(res.data))
+    console.log(res.data)
+  }
+} 

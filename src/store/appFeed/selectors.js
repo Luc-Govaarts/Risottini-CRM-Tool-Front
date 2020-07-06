@@ -13,3 +13,7 @@ export const selectLeadById = (id) => (state) => {
 export function selectContacts(state) {
     return state.appFeed.contacts
 }
+
+export function selectReportOwner(state) {
+    return state.appFeed.ReportOwner
+}
