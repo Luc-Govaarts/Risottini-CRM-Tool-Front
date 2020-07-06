@@ -1,11 +1,13 @@
 import React, { useEffect }from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLeads, fetchUserById } from '../store/appFeed/actions'
+import { fetchLeads } from '../store/appFeed/actions'
 import { selectLeadById} from '../store/appFeed/selectors'
 import { Box, Grid } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
 import ReportCard from '../Components/ReportCard'
+import AddReportForm from '../Components/AddReportForm'
+
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -40,6 +42,9 @@ export default function LeadDetails() {
                             email={lead.company_email}
                             supplier={lead.supplier}
                             createdAt={lead.createdAt}/>
+                    </Grid>
+                    <Grid item>
+                        <AddReportForm/>
                     </Grid>
                     <Grid item>
                         {reports.map(report => {
