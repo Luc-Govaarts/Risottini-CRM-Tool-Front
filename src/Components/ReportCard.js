@@ -4,7 +4,7 @@ import { Card, CardHeader, CardContent,Typography } from '@material-ui/core'
 export default function ReportCard1(props) {
 
     return (
-        <Card>
+        <Card style={{ minWidth: "500px"}}>
             <CardHeader
                 title={props.lead}/>
             <CardContent>

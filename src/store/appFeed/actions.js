@@ -37,6 +37,12 @@ export function storeNewReport(data) {
   }
 }
 
+export function storeUpdatedLead(data) {
+  return {
+    type: "STORE_UPDATED_LEAD", payload: data
+    }
+}
+
 export async function fetchLeads(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -106,6 +112,19 @@ export function addNewReport(note, leadId) {
                               data: {name, note, leadId},
                               headers: {'Authorization': `Bearer ${token}`}})
     dispatch(storeNewReport(res.data))
+  }
+}
+
+export function changePhaseTo(newPhaseId, id) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({ method: 'patch',
+                              url: `${apiUrl}/leads/${id}/phase`,
+                              data: {newPhaseId},
+                              headers: {'Authorization': `Bearer ${token}`}})
+    dispatch(storeUpdatedLead(res.data))
   }
 }
 

@@ -13,6 +13,9 @@ export default (state = initialState, action) => {
       return {...state, loading: action.payload}
     case "STORE_LEADS":
       return {...state, leads: [...action.payload], loading: false}
+    case "STORE_UPDATED_LEAD":
+      const newLeadsArray = state.leads.map(lead => lead.id === action.payload.id ? action.payload : lead )
+      return {...state, leads: newLeadsArray, loading: false}
     case "STORE_NEW_LEAD":
       return {...state, leads: [...state.leads, action.payload], loading: false}
     case "STORE_CONTACTS":
