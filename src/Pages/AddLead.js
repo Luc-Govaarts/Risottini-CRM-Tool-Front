@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Box } from '@material-ui/core'
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -20,7 +21,7 @@ export default function AddProspect() {
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
-    const [contactId, set_contactId] = useState("")
+    const [contactId, set_contactId] = useState()
     const [contact_toggle, set_contact_toggle] = useState(false)
     const dispatch = useDispatch();
     const token = useSelector(selectToken);
@@ -41,13 +42,15 @@ export default function AddProspect() {
           company_phone, 
           company_address, 
           company_email, 
-          supplier)) 
+          supplier,
+          contactId)) 
 
         set_associated_company_name("")
         set_company_phone()
         set_company_address("")
         set_company_email("")
         set_supplier("")
+        set_contactId()
     }
 
     const submitContactForm = () => {
@@ -65,7 +68,8 @@ export default function AddProspect() {
     if (contact_toggle) {
       return (
           <Container>
-              <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3">
+            <Box mt={15}>
+              <Form as={Col} md={{ span: 6, offset: 3 }}>
                   <h1 className="mt-3 mb-3">Niew Contact Persoon</h1>
                   <Form.Group>
                       <Form.Label>Naam</Form.Label>
@@ -106,11 +110,13 @@ export default function AddProspect() {
                       </Button>
                   </Form.Group>
               </Form>
+              </Box>
           </Container>
       )
     } else {
     return (
     <Container>
+      <Box mt={15}>
         <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3">
             <h1 className="mt-5 mb-3">Niewe lead</h1>
 
@@ -206,6 +212,7 @@ export default function AddProspect() {
               </Button>
             </Form.Group>
         </Form>
+      </Box>
     </Container>
     ) 
 }}

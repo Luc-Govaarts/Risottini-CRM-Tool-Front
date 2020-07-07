@@ -1,4 +1,5 @@
 import React, { useState, useEffect }from 'react';
+import { Box } from '@material-ui/core'
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -32,6 +33,7 @@ export default function Login() {
     
       return (
         <Container>
+          <Box mt={15}>
           <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
             <h1 className="mt-5 mb-5">Login</h1>
             <Form.Group controlId="formBasicEmail">
@@ -64,6 +66,7 @@ export default function Login() {
               Click here to sign up
             </Link>
           </Form>
+          </Box>
         </Container>
         )
 }

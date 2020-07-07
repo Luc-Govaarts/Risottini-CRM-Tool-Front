@@ -13,6 +13,12 @@ export function storeLeads(data) {
   } 
 }
 
+export function storeNewLead(data) {
+  return {
+      type: "STORE__NEW_LEAD", payload: data
+  } 
+}
+
 export function storeContacts(data) {
   return {
       type: "STORE_CONTACTS", payload: data
@@ -54,22 +60,23 @@ export async function fetchContacts(dispatch, getState) {
 }  
 
 export function addLead(company_name, associated_company_name, 
-  company_phone, company_address, company_email, supplier) {
+  company_phone, company_address, company_email, supplier, contactId) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
-    console.log("CHEKCING FORM DATA:", company_name, associated_company_name, 
-    company_phone, company_address, company_email, supplier)
+    const userId = state.user.id
     const res = await axios({method: 'post',
                               url: `${apiUrl}/leads`,
                               data: {
                                 company_name, associated_company_name, 
-                                company_phone, company_address, company_email, supplier
+                                company_phone, company_address, 
+                                company_email, supplier, 
+                                contactId, userId
                               },
                               headers: {'Authorization': `Bearer ${token}`}
                             })       
-    console.log("Response:", res)
+    dispatch(storeNewLead(res.data))
   }
 }
 

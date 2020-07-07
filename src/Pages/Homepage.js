@@ -8,7 +8,7 @@ import SmallLeadCard from '../Components/SmallLeadCard'
 export default function Homepage() {
     const dispatch = useDispatch()
     const leads = useSelector(selectLeads)
-    const loading = useSelector(selectAppFeedState)
+    // const loading = useSelector(selectAppFeedState)
 
     useEffect(() => {
         dispatch(fetchLeads);
@@ -31,12 +31,12 @@ export default function Homepage() {
     })
 
     return <>
-        <Box mt={10}>
+        <Box mt={15}>
            <Grid 
                 container
                 direction="row"
                 justify="center"
-                alignItems="center">
+                alignItems="flex-start">
                 <Grid item>
                     <Box m={3}>
                     <Box m={3}>
@@ -46,6 +46,7 @@ export default function Homepage() {
                         {leads_cold.map(lead => {
                             return <SmallLeadCard
                                         key={lead.id}
+                                        leadId={lead.id}
                                         lead={lead.company_name}
                                         partner={lead.associated_company_name}/>})}
                     </Paper>
@@ -60,6 +61,7 @@ export default function Homepage() {
                         {leads_made_contact.map(lead => {
                             return <SmallLeadCard
                                         key={lead.id}
+                                        leadId={lead.id}
                                         lead={lead.company_name}
                                         partner={lead.associated_company_name}/>})}
                     </Paper>
@@ -74,6 +76,7 @@ export default function Homepage() {
                         {leads_tasting.map(lead => {
                             return <SmallLeadCard
                                         key={lead.id}
+                                        leadId={lead.id}
                                         lead={lead.company_name}
                                         partner={lead.associated_company_name}/>})}
                     </Paper>
@@ -88,6 +91,7 @@ export default function Homepage() {
                         {leads_deal_closed.map(lead => {
                             return <SmallLeadCard
                                         key={lead.id}
+                                        leadId={lead.id}
                                         lead={lead.company_name}
                                         partner={lead.associated_company_name}/>})}
                     </Paper>

@@ -13,6 +13,8 @@ export default (state = initialState, action) => {
       return {...state, loading: action.payload}
     case "STORE_LEADS":
       return {...state, leads: [...action.payload], loading: false}
+    case "STORE_NEW_LEAD":
+      return {...state, leads: [...state.leads, action.payload], loading: false}
     case "STORE_CONTACTS":
       return {...state, contacts: [...action.payload], loading: false}
     case "STORE_NEW_CONTACT":
