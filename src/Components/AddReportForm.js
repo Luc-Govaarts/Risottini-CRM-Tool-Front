@@ -14,7 +14,6 @@ export default function AddReportForm(props) {
     } 
 
     return (
-        <Container component="main">
             <Card>
                 <Box m={3}>
                     <CardHeader title="Maak een notitie"/>
@@ -39,6 +38,5 @@ export default function AddReportForm(props) {
                     </form>
                 </Box>
             </Card>
-        </Container>
     )
 }

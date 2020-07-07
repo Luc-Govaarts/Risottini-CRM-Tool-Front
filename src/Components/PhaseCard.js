@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import { Card, Button, Box,
-    Typography, CardContent
- } from '@material-ui/core'
+import React from 'react'
+import { Grid, Card, Button, Box,
+    Typography, CardContent } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { changePhaseTo } from '../store/appFeed/actions'
 import { selectLeadById } from '../store/appFeed/selectors'
@@ -25,48 +24,87 @@ export default function PhaseCard(props) {
     }
     if (phase_id === 5) {
         return (
-            <Card style={{minWidth: "500px"}}>
-                <CardContent>
-                    <Typography variant="h4">{props.phase}</Typography>
-                </CardContent>
-                <Box m={3}> 
-                <Button 
-                    variant="contained" 
-                    color="primary"
-                    onClick={handleReset}>Reset</Button></Box>
+            <Card>
+                <Grid
+                    container
+                    direction="column"
+                    justify="space-evenly"
+                    alignItems="center">
+                    <Grid item>
+                        <CardContent>
+                            <Typography variant="h4">{props.phase}</Typography>
+                        </CardContent>
+                    </Grid>
+                    <Grid item>
+                        <Box m={3}> 
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={handleReset}>Reset
+                            </Button>
+                        </Box>
+                    </Grid>
+                    
+                </Grid>
             </Card>
         )
     } else if (phase_id === 1) {
         return (
-            <Card style={{minWidth: "500px"}}>
-                <CardContent>
-                    <Typography variant="h4">{props.phase}</Typography>
-                    <Box m={3}> 
-                        <Button 
-                            variant="contained" 
-                            color="primary"
-                            onClick={handlePlus}>+</Button></Box>
-                </CardContent>
+            <Card>
+                <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="center">
+                    <Grid item>
+                        <CardContent>
+                            <Typography variant="h4">{props.phase}</Typography>
+                        </CardContent>
+                    </Grid>
+                    <Grid item>
+                        <Box m={3}> 
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={handlePlus}>+
+                            </Button>
+                        </Box>
+                    </Grid>
+                </Grid>
             </Card>
         )
     } else {
         return (
-            <Card style={{minWidth: "500px"}}>
-                <CardContent>
-                    <Typography variant="h4">{props.phase}</Typography>
-                    <Box m={3}>
-                        <Box display="inline" m={3}> 
-                            <Button 
-                                variant="contained" 
-                                color="primary"
-                                onClick={handleMin}>-</Button></Box>
-                        <Box display="inline" m={3}> 
-                            <Button 
-                                variant="contained" 
-                                color="primary"
-                                onClick={handlePlus}>+</Button></Box>
-                    </Box>
-                </CardContent>
+            <Card>
+                <Grid
+                container
+                direction="column"
+                justify="space-evenly"
+                alignItems="center">
+                    <Grid item>
+                        <CardContent>
+                            <Typography variant="h4">{props.phase}</Typography>
+                        </CardContent>
+                    </Grid>
+                    <Grid item>
+                        <Box m={3}>
+                            <Box display="inline" m={3}> 
+                                <Button 
+                                    variant="contained" 
+                                    color="primary"
+                                    onClick={handleMin}>-
+                                </Button>
+                            </Box>
+                            <Box display="inline" m={3}> 
+                                <Button 
+                                    variant="contained" 
+                                    color="primary"
+                                    onClick={handlePlus}>+
+                                </Button>
+                            </Box>
+                        </Box>
+                    </Grid>
+                </Grid>
             </Card>
         )
     }}

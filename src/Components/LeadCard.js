@@ -6,8 +6,6 @@ import { Card, CardHeader, Typography, CardContent, Chip, Box
 export default function LeadCard(props) {
     return (
         <Card>
-            <CardHeader
-            title="Details"/>
             <CardContent>
             <Typography variant="h6" 
                         component="p"><strong>Address: </strong>{props.address}</Typography>
