@@ -1,15 +1,17 @@
 import React from 'react'
-import { Card, CardHeader, CardContent,Typography } from '@material-ui/core'
+import { Card, CardHeader, 
+    CardContent, Typography,
+    Box } from '@material-ui/core'
 
 export default function ReportCard1(props) {
 
     return (
-        <Card style={{ minWidth: "500px"}}>
-            <CardHeader
-                title={props.lead}/>
+        <Card>
             <CardContent>
                 <Typography variant="body1"><strong>Notitie: </strong> {props.note}</Typography>
-                <Typography textalign="right" variant="captiontext"><em>Gecreëerd: </em> {props.createdAt}</Typography>
+                <Box textAlign='right'>
+                    <Typography textAlign='right' variant="captiontext"><em>Gecreëerd:</em> {props.createdAt}</Typography>
+                </Box>
             </CardContent>
         </Card>
     )

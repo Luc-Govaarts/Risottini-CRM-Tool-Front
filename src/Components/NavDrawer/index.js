@@ -24,7 +24,6 @@ export default function PersistentDrawerRight() {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
       <MyAppBar open={open} handler={handleDrawerOpen}/>
       <MyDrawer open={open} close={handleDrawerClose}/>
     </div>

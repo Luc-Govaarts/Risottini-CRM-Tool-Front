@@ -15,7 +15,7 @@ export default function AddReportForm(props) {
 
     return (
         <Container component="main">
-            <Card style={{ minWidth: "500px"}}>
+            <Card>
                 <Box m={3}>
                     <CardHeader title="Maak een notitie"/>
                     <form>

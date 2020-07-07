@@ -72,7 +72,7 @@ export default function MyDrawer(props) {
               </ListItemText>
             </List>
             <Divider />
-            <List>
+            {/* <List>
               <ListItem>
                 <ListItemIcon><ContactsIcon/></ListItemIcon>
                 <ListItemText>Contacten</ListItemText>
@@ -91,7 +91,7 @@ export default function MyDrawer(props) {
                   </Link>
                 </Box>
               </ListItemText>
-            </List>
+            </List> */}
           </Drawer>
         </div>
     )

@@ -17,7 +17,9 @@ export default function LeadCard(props) {
                         component="p"><strong>Email: </strong>{props.email}</Typography>
             <Typography variant="h6" 
                         component="p"><strong>Leverancier: </strong>{props.supplier}</Typography>
-            <Box textAlign='right'><Typography variant="captiontext"><em>Gecreëerd:</em> {props.createdAt}</Typography></Box>
+            <Box textAlign='right'>
+                <Typography textAlign='right' variant="captiontext"><em>Gecreëerd:</em> {props.createdAt}</Typography>
+            </Box>
             </CardContent>
         </Card>
     )

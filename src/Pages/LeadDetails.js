@@ -9,6 +9,7 @@ import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'
 import PlanActionForm from '../Components/PlanActionForm'
+import MyTimeline from '../Components/MyTimeline'
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -35,51 +36,57 @@ export default function LeadDetails() {
                 direction="row"
                 justify="flex-start"
                 alignItems="center">
-                <Grid xs={5} item>
-                        <LeadCard
-                            address={lead.company_address}
-                            phone={lead.company_phone}
-                            email={lead.company_email}
-                            supplier={lead.supplier}
-                            createdAt={lead.createdAt}/>
-                </Grid>
-                <Grid item>
-                    <Box>
-                        <PlanActionForm leadId={leadId}/>
-                    </Box>
-                </Grid>
+                    <Grid xs={5} item>
+                            <LeadCard
+                                address={lead.company_address}
+                                phone={lead.company_phone}
+                                email={lead.company_email}
+                                supplier={lead.supplier}
+                                createdAt={lead.createdAt}/>
+                    </Grid>
+                    <Grid xs={5} item> 
+                            <Box mt={3}>
+                                <Typography variant="h4">Verkoop fase</Typography>
+                            </Box>
+                            <Box ml={3} mt={3}>
+                                <PhaseCard 
+                                    phase={lead.salesCyclePhase.name}
+                                    phase_id={lead.salesCyclePhaseId}
+                                    leadId={leadId}/>
+                            </Box>
+                    </Grid>
                 </Grid>
                 <Grid 
                 container
-                direction="column"
-                justify="flex-start"
-                alignItems="flex-start">
-                    <Box mt={3}>
-                        <Typography variant="h4">Verkoop fase</Typography>
-                    </Box>
-                    <Grid xs={5} item> 
-                        <Box ml={3} mt={3}>
-                            <PhaseCard 
-                                phase={lead.salesCyclePhase.name}
-                                phase_id={lead.salesCyclePhaseId}
-                                leadId={leadId}/>
+                direction="row"
+                justify="space-evenly"
+                alignItems="start">
+                    <Grid xs={4} item>
+                        <Box mt={2} style={{width: "350px"}}>
+                            <Typography variant="h4">Notities</Typography>
                         </Box>
-                    </Grid>
-                    <Box mt={2}>
-                        <Typography variant="h4">Notities</Typography>
-                    <Grid xs={5} item>
-                        <Box mt={3}>
+                        <Box mt={3} style={{width: "350px"}}>
                             <AddReportForm leadId={leadId}/>
                         </Box>
                         {reports.map(report => {
-                            return <Box mt={3} ml={3}>
+                            return <Box mt={3} ml={3} style={{width: "350px"}}>
                                     <ReportCard
                                         key={report.id}
                                         lead={lead.company_name}
                                         note={report.note}
                                         createdAt={report.createdAt}/></Box>})}
                     </Grid>
-                    </Box>
+                    <Grid xs={4} item>
+                        <Box mt={3} style={{width: "350px"}}>
+                            <Typography variant="h4">Tijdlijn</Typography>
+                            <MyTimeline/>
+                        </Box>        
+                    </Grid>
+                    <Grid xs={4} item>
+                        <Box mt={3} style={{width: "350px"}}>
+                            <PlanActionForm leadId={leadId}/>
+                        </Box>
+                    </Grid>
                 </Grid>
             </Box>
         )
