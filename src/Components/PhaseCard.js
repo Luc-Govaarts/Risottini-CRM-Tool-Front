@@ -54,16 +54,18 @@ export default function PhaseCard(props) {
             <Card style={{minWidth: "500px"}}>
                 <CardContent>
                     <Typography variant="h4">{props.phase}</Typography>
-                    <Box display="inline" m={3}> 
-                        <Button 
-                            variant="contained" 
-                            color="primary"
-                            onClick={handleMin}>-</Button></Box>
-                    <Box display="inline" m={3}> 
-                        <Button 
-                            variant="contained" 
-                            color="primary"
-                            onClick={handlePlus}>+</Button></Box>
+                    <Box m={3}>
+                        <Box display="inline" m={3}> 
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={handleMin}>-</Button></Box>
+                        <Box display="inline" m={3}> 
+                            <Button 
+                                variant="contained" 
+                                color="primary"
+                                onClick={handlePlus}>+</Button></Box>
+                    </Box>
                 </CardContent>
             </Card>
         )

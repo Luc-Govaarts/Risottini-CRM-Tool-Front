@@ -43,6 +43,13 @@ export function storeUpdatedLead(data) {
     }
 }
 
+export function storeNewAction(data) {
+  return {
+    type: "STORE_NEW_ACTION", payload: data
+    }
+}
+
+
 export async function fetchLeads(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -128,6 +135,19 @@ export function changePhaseTo(newPhaseId, id) {
   }
 }
 
+export function createAction(leadId, action, date, note) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const userId = state.user.id
+    const res = await axios({ method: 'post',
+                              url: `${apiUrl}/actions`,
+                              data: {leadId, userId, action, date, note},
+                              headers: {'Authorization': `Bearer ${token}`}})
+    dispatch(storeNewAction(res.data))
+  }
+}
 // export function storeReportUserName(data) {
 //   return {
 //     type: "STORE_REPORT_USER_NAME", payload: data

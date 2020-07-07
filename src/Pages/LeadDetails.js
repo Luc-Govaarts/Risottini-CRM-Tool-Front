@@ -8,6 +8,7 @@ import LeadCard from '../Components/LeadCard'
 import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'
+import PlanActionForm from '../Components/PlanActionForm'
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -41,6 +42,11 @@ export default function LeadDetails() {
                             email={lead.company_email}
                             supplier={lead.supplier}
                             createdAt={lead.createdAt}/>
+                </Grid>
+                <Grid item>
+                    <Box>
+                        <PlanActionForm leadId={leadId}/>
+                    </Box>
                 </Grid>
                 </Grid>
                 <Grid 
