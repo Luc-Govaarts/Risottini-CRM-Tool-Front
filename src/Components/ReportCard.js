@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, CardHeader, 
+import { Card,
     CardContent, Typography,
     Box } from '@material-ui/core'
 import moment from 'moment';
