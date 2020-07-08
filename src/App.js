@@ -10,7 +10,7 @@ import { selectToken } from "./store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserWithStoredToken } from "./store/user/actions";
 import AddContactForm from "./Components/AddContactForm";
-import SnackBar from './Components/Timeline/SnackBar';
+import SnackBar from './Components/NavDrawer/SnackBar';
 
 function App() {
   const dispatch = useDispatch();

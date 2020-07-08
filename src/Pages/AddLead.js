@@ -10,7 +10,7 @@ import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import { addLead, fetchContacts } from "../store/appFeed/actions";
 import { addContact } from '../store/appFeed/actions'
-import SnackBar from "../Components/Timeline/SnackBar";
+import SnackBar from "../Components/NavDrawer/SnackBar";
 
 export default function AddProspect() {
     const [contact_name, set_contact_name] = useState("")
