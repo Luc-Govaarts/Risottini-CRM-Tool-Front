@@ -1,7 +1,6 @@
 import React from 'react'
-import { Card, CardHeader, Typography, CardContent, Chip, Box
- } from '@material-ui/core'
-
+import { Card, Typography, CardContent, Box} from '@material-ui/core'
+import moment from 'moment';
 
 export default function LeadCard(props) {
     return (
@@ -16,7 +15,7 @@ export default function LeadCard(props) {
             <Typography variant="h6" 
                         component="p"><strong>Leverancier: </strong>{props.supplier}</Typography>
             <Box textAlign='right'>
-                <Typography textAlign='right' variant="captiontext"><em>Gecreëerd:</em> {props.createdAt}</Typography>
+                <Typography textAlign='right' variant="captiontext"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>
             </Box>
             </CardContent>
         </Card>

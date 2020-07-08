@@ -5,7 +5,8 @@ import { Timeline } from '@material-ui/lab'
 import { Paper, Typography, Box} from '@material-ui/core'
 import ActionTimelineItem from './ActionTimelineItem'
 import ReportTimelineItem from './ReportTimelineItem'
-
+import Today from './Today'
+import moment from 'moment';
  
 function compareDates(a, b) {
     return new Date(a.due_date || a.createdAt) - new Date(b.due_date || b.createdAt)
@@ -16,16 +17,19 @@ export default function MyTimeline(props) {
     const lead = useSelector(selectLeadById(leadId))
     const reports = lead.reports
     const actions = lead.actions
-    const timelineObjects = reports.concat(actions)
+    const today = {createdAt: moment()}
+    const timelineObjects = reports.concat(actions).concat(today)
     const sortedTimelineObjects = [...timelineObjects].sort(compareDates)
 
-
+    console.log(sortedTimelineObjects)
 
     return (
         <Box>
             <Timeline align="alternate">
                 {[...sortedTimelineObjects].map((timelineObject, index) => {
-                    if(timelineObject.hasOwnProperty("due_date")){
+                    if(timelineObject.hasOwnProperty("note") === false) {
+                        return <Today/>
+                    } else if(timelineObject.hasOwnProperty("due_date")){
                         return <ActionTimelineItem
                                     key={index}
                                     event={timelineObject.action}
