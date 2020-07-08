@@ -9,7 +9,7 @@ import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'
 import PlanActionForm from '../Components/PlanActionForm'
-import MyTimeline from '../Components/MyTimeline'
+import MyTimeline from '../Components/Timeline/MyTimeline'
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -104,7 +104,7 @@ export default function LeadDetails() {
                     <Grid xs={4} item>
                         <Box mt={3} style={{width: "350px"}}>
                             <Typography variant="h4">Tijdlijn</Typography>
-                            <MyTimeline/>
+                            <MyTimeline leadId={leadId}/>
                         </Box>        
                     </Grid>
                     <Grid xs={4} item>
