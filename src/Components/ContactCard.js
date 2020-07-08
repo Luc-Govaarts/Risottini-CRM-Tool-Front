@@ -33,9 +33,11 @@ export default function ContactCard(props) {
                 <Typography variant="h6" component="p">
                     <strong>Telefoon: </strong> {props.phone}
                 </Typography>
-                <Typography textAlign='right' variant="captiontext">
-                    <em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")
-                }</Typography>
+                <Box textAlign='right'>
+                    <Typography variant="captiontext">
+                        <em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}
+                    </Typography>
+                </Box>
             </CardContent>
         </Card>
     )

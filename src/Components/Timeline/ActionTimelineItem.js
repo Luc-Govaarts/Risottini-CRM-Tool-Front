@@ -23,9 +23,6 @@ const useStyles = makeStyles((theme) => ({
         padding: "0.5rem",
         minWidth: "250px"
     },
-    date: {
-        width: "100px"
-    }
   }));
   
 export default function TimelineItemLeft(props) {
@@ -34,7 +31,7 @@ export default function TimelineItemLeft(props) {
     return (
         <TimelineItem>
             <TimelineOppositeContent>
-                <Box className={classes.date}>
+                <Box>
                     <Typography variant="body2" color="textSecondary">
                         {due_date}
                     </Typography>

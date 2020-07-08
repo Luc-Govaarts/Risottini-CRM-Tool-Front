@@ -8,14 +8,34 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ThemeProvider } from '@material-ui/core'
+import { createMuiTheme } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
+import { deepOrange } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: green[500],
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
+
+
 
 ReactDOM.render(
   <Router>
-    <CssBaseline>
-    <Provider store={store}>
-      <App />
-    </Provider>
-    </CssBaseline>
+    <ThemeProvider theme={theme}>
+      <CssBaseline>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </CssBaseline>
+    </ThemeProvider>
   </Router>,
 document.getElementById("root")
 );

@@ -15,7 +15,7 @@ export default function LeadCard(props) {
             <Typography variant="h6" 
                         component="p"><strong>Leverancier: </strong>{props.supplier}</Typography>
             <Box textAlign='right'>
-                <Typography textAlign='right' variant="captiontext"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>
+                <Typography variant="captiontext"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>
             </Box>
             </CardContent>
         </Card>

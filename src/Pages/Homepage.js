@@ -37,10 +37,10 @@ export default function Homepage() {
                 direction="row"
                 justify="center"
                 alignItems="flex-start">
-                <Grid item>
+                <Grid xs={3} item>
                     <Box m={3}>
                     <Box m={3}>
-                        <Typography variant="h3"> Nieuwe Leads</Typography>
+                        <Typography variant="h5"> Nieuwe Leads</Typography>
                     </Box>
                     <Paper>
                         {leads_cold.map(lead => {
@@ -52,10 +52,10 @@ export default function Homepage() {
                     </Paper>
                     </Box>
                 </Grid>
-                <Grid item>
+                <Grid xs={3} item>
                     <Box m={3}>
                     <Box m={3}>
-                        <Typography variant="h3"> Contact Gemaakt </Typography>
+                        <Typography variant="h5"> Contact Gemaakt </Typography>
                     </Box>
                     <Paper>
                         {leads_made_contact.map(lead => {
@@ -67,10 +67,10 @@ export default function Homepage() {
                     </Paper>
                     </Box>
                 </Grid>
-                <Grid item>
+                <Grid xs={3} item>
                     <Box m={3}> 
                     <Box m={3}>
-                        <Typography variant="h3"> Ballen Proeven </Typography>
+                        <Typography variant="h5"> Ballen Proeven </Typography>
                     </Box>
                     <Paper>
                         {leads_tasting.map(lead => {
@@ -82,10 +82,10 @@ export default function Homepage() {
                     </Paper>
                     </Box>
                 </Grid>
-                <Grid item>
+                <Grid xs={3} item>
                     <Box m={3}>
                     <Box m={3}>
-                        <Typography variant="h3"> Gesloten Deals </Typography>
+                        <Typography variant="h5"> Gesloten Deals </Typography>
                     </Box>
                     <Paper>
                         {leads_deal_closed.map(lead => {
