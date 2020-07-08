@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card, Typography, CardContent, Box, CardHeader} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+import { Card, Typography, CardContent, Box, CardHeader, Avatar} from '@material-ui/core'
 import moment from 'moment';
 import { red } from '@material-ui/core/colors';
 

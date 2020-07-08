@@ -10,6 +10,7 @@ import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'
 import PlanActionForm from '../Components/PlanActionForm'
 import MyTimeline from '../Components/Timeline/MyTimeline'
+import ContactCard from '../Components/ContactCard';
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -17,6 +18,7 @@ export default function LeadDetails() {
     const leadId = parseInt(params.id)
     const lead = useSelector(selectLeadById(leadId))
     const reports = {...lead}.reports || []
+    const contact = {...lead}.contact
 
     useEffect(() =>  {
         if(!lead) {
@@ -38,12 +40,13 @@ export default function LeadDetails() {
                         justify="space-between"
                         alignItems="center">
                             <Grid item> 
-                                <Box>
-                                    <Grid 
-                                    container
+                                <Box > 
+                                    <Grid style={{height: "700px"}}
+                                    container           
                                     direction="column"
                                     justify="flex-start"
-                                    alignItems="start">
+                                    alignItems="center"
+                                    flex-wrap="wrap">
                                         <Grid item>
                                             <Box mt={4}>
                                                 <Typography variant="h4">Details</Typography>
@@ -57,17 +60,27 @@ export default function LeadDetails() {
                                                     createdAt={lead.createdAt}/>
                                             </Box>
                                         </Grid>
-                                        <Grid item> 
-                                            <Box mt={3} style={{width: "350px"}}>
+                                        <Grid item>
+                                            <Box mt={4} style={{width: "350px"}}>
                                                 <Box>
-                                                    <Typography variant="h4">Verkoop fase</Typography>
+                                                    <Typography variant="h4">Contact</Typography>
                                                 </Box>
                                                 <Box mt={3}>
-                                                    <PhaseCard 
-                                                        phase={lead.salesCyclePhase.name}
-                                                        phase_id={lead.salesCyclePhaseId}
-                                                        leadId={leadId}/>
+                                                    <ContactCard
+                                                        key={contact.id}
+                                                        name={contact.name}
+                                                        email={contact.email}
+                                                        phone={contact.phone}
+                                                        createdAt={contact.createdAt}/>
                                                 </Box>
+                                            </Box>
+                                        </Grid>                                   
+                                        <Grid item>
+                                            <Box ml={3} mt={4}>
+                                                <Typography variant="h4">Acties</Typography>
+                                            </Box>
+                                            <Box mt={3} style={{width: "350px"}}>
+                                                <PlanActionForm leadId={leadId}/>
                                             </Box>
                                         </Grid>
                                     </Grid>
@@ -75,8 +88,13 @@ export default function LeadDetails() {
                             </Grid>
                             <Grid item>
                                 <Box mr={12} mt={4}>
-                                    <Card style={{width: "800px",
-                                                    height: "600px"}}></Card>
+                                    <Box ml={3} mt={4} >
+                                        <Typography variant="h4">Kaart</Typography>
+                                    </Box>
+                                    <Box mt={3}>
+                                        <Card style={{width: "800px", height: "600px"}}>
+                                        </Card>
+                                    </Box>
                                 </Box>
                             </Grid>    
                     </Grid>
@@ -87,7 +105,7 @@ export default function LeadDetails() {
                 justify="space-evenly"
                 alignItems="start">
                     <Grid xs={4} item>
-                        <Box mt={2} style={{width: "350px"}}>
+                        <Box mt={3} style={{width: "350px"}}>
                             <Typography variant="h4">Notities</Typography>
                         </Box>
                         <Box mt={3} style={{width: "350px"}}>
@@ -107,9 +125,17 @@ export default function LeadDetails() {
                             <MyTimeline leadId={leadId}/>
                         </Box>        
                     </Grid>
-                    <Grid xs={4} item>
+                    <Grid xs={4} item> 
                         <Box mt={3} style={{width: "350px"}}>
-                            <PlanActionForm leadId={leadId}/>
+                            <Box>
+                                <Typography variant="h4">Verkoop fase</Typography>
+                            </Box>
+                            <Box mt={3}>
+                                <PhaseCard 
+                                    phase={lead.salesCyclePhase.name}
+                                    phase_id={lead.salesCyclePhaseId}
+                                    leadId={leadId}/>
+                            </Box>
                         </Box>
                     </Grid>
                 </Grid>

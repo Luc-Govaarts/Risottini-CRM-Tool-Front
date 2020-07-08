@@ -5,13 +5,13 @@ import {
   Drawer, ListItem,
   ListItemIcon, ListItemText,
   List, Divider, 
-  IconButton} from '@material-ui/core';
-import ContactsIcon from '@material-ui/icons/Contacts';
+  IconButton,
+  Typography} from '@material-ui/core';
 import WorkIcon from '@material-ui/icons/Work'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-const drawerWidth = 240;
+const drawerWidth = 340;
 
 const useStyles = makeStyles((theme) => ({
     drawer: {
@@ -54,44 +54,24 @@ export default function MyDrawer(props) {
             <List>
               <ListItem>
                 <ListItemIcon><WorkIcon/></ListItemIcon>
-                <ListItemText>Leads</ListItemText>
+                <ListItemText><Typography variant="h4">leads</Typography></ListItemText>
               </ListItem>
               <ListItemText>
                 <Box ml={3}>
-                <Link href={"/"}>
-                  Alle Leads
+                  <Link href={"/"}>
+                  <Typography variant="h5">Alle Leads</Typography>
                   </Link>
                 </Box>
               </ListItemText>
               <ListItemText >
                 <Box ml={3}>
                   <Link href={"/leads/add"}>
-                  nieuwe Lead
+                    <Typography variant="h5">Nieuwe Lead</Typography>
                   </Link>
                 </Box>
               </ListItemText>
             </List>
             <Divider />
-            {/* <List>
-              <ListItem>
-                <ListItemIcon><ContactsIcon/></ListItemIcon>
-                <ListItemText>Contacten</ListItemText>
-              </ListItem>
-              <ListItemText>
-                <Box ml={3}>
-                  <Link href={"/contacts"}>
-                  Alle Contacten
-                  </Link>
-                </Box>
-              </ListItemText>
-              <ListItemText >
-                <Box ml={3}>
-                <Link href={"/contacts/add"}>
-                  Nieuw Contact
-                  </Link>
-                </Box>
-              </ListItemText>
-            </List> */}
           </Drawer>
         </div>
     )

@@ -46,8 +46,8 @@ export default function MyAppBar(props) {
       >
         <Toolbar>
            {loginLogoutControls}
-          <Typography variant="h6" noWrap className={classes.title}>
-          <Box textAlign="center" m={1}>Crispy</Box>
+          <Typography variant="h3" noWrap className={classes.title}>
+          <Box textAlign="center" m={1}><strong>Crispy</strong></Box>
           </Typography>
           <IconButton
             color="inherit"
