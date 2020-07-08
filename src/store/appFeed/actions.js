@@ -1,11 +1,6 @@
-import { apiUrl } from '../../config/constants'
+import { apiUrl, googleURL } from '../../config/constants'
 import axios from "axios";
-import {
-  appLoading,
-  appDoneLoading,
-  showMessageWithTimeout,
-  setMessage
-} from "../appState/actions";
+import { setMessage } from "../appState/actions";
 
 export function startLoading(data) {
   return (
@@ -82,10 +77,16 @@ export function addLead(company_name, associated_company_name,
   company_phone, company_address, company_email, supplier, contactId) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoading(true))
+    const res1 = await axios({method: 'post',
+                              address: company_address,
+                              key: 'AIzaSyCgd3nADhrBS1P9lgYAmynWTW7rJc-2XMs',
+                              url: `${googleURL}`
+                              })
+    console.log(res1)
     const state = getState()
     const token = state.user.token 
     const userId = state.user.id
-    const res = await axios({method: 'post',
+    const res2 = await axios({method: 'post',
                               url: `${apiUrl}/leads`,
                               data: {
                                 company_name, associated_company_name, 
@@ -95,7 +96,7 @@ export function addLead(company_name, associated_company_name,
                               },
                               headers: {'Authorization': `Bearer ${token}`}
                             })       
-    dispatch(storeNewLead(res.data))
+    dispatch(storeNewLead(res2.data))
     dispatch(setMessage("succes", true, "Nieuwe Lead, laat de ballen maar rollen"))
   }
 }
@@ -156,16 +157,4 @@ export function createAction(leadId, action, date, note) {
     dispatch(storeNewAction(res.data))
   }
 }
-// export function storeReportUserName(data) {
-//   return {
-//     type: "STORE_REPORT_USER_NAME", payload: data
-//   }
-// }
 
-// export function fetchUserById(id) {
-//   return async function thunk(dispatch, getState) {
-//     const res = await axios.get(`/users/${id}`)
-//     dispatch(storeReportUserName(res.data))
-//     console.log(res.data)
-//   }
-// } 

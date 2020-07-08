@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import { fetchLeads } from '../store/appFeed/actions'
-import { selectLeads, selectAppFeedState} from "../store/appFeed/selectors"
+import { selectLeads } from "../store/appFeed/selectors"
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Paper, Box, Typography} from '@material-ui/core'
 import SmallLeadCard from '../Components/SmallLeadCard'
@@ -17,18 +17,21 @@ export default function Homepage() {
     const leads_cold = leads.filter(lead => {
         return lead.salesCyclePhase.id === 1
     })
+
     const leads_made_contact = leads.filter(lead => {
         return lead.salesCyclePhase.id === 2
     })
+
     const leads_tasting = leads.filter(lead => {
         return lead.salesCyclePhase.id === 3
     })
+    
     const leads_deal_closed = leads.filter(lead => {
         return lead.salesCyclePhase.id === 4
     })
-    const leads_rejected = leads.filter(lead => {
-        return lead.salesCyclePhase.id === 5
-    })
+    // const leads_rejected = leads.filter(lead => {
+    //     return lead.salesCyclePhase.id === 5
+    // })
 
     return <>
         <Box mt={15}>

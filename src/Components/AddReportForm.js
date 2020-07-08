@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { Container, CardHeader, TextField, Button, Card, Box } from '@material-ui/core'
+import { CardHeader, TextField, Button, Card, Box } from '@material-ui/core'
 import { addNewReport } from '../store/appFeed/actions'
 
 export default function AddReportForm(props) {

@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import { selectToken } from "../store/user/selectors";
 import { selectContacts } from '../store/appFeed/selectors';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import { addLead, fetchContacts } from "../store/appFeed/actions";
 import { addContact } from '../store/appFeed/actions'
