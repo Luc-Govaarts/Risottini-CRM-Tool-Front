@@ -10,7 +10,7 @@ export default function ReportCard(props) {
             <CardContent>
                 <Typography variant="body1"><strong>Notitie: </strong> {props.note}</Typography>
                 <Box textAlign='right'>
-                    <Typography textAlign='right' variant="captiontext"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY, hh:mm a")}</Typography>
+                    <Typography variant="caption"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY, hh:mm a")}</Typography>
                 </Box>
             </CardContent>
         </Card>

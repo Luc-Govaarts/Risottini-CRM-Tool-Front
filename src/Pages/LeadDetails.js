@@ -11,6 +11,7 @@ import PhaseCard from '../Components/PhaseCard'
 import PlanActionForm from '../Components/PlanActionForm'
 import MyTimeline from '../Components/Timeline/MyTimeline'
 import ContactCard from '../Components/ContactCard';
+import LeafletMap from '../Components/LeafletMap';
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -39,15 +40,13 @@ export default function LeadDetails() {
                     <Grid 
                         container
                         direction="row"
-                        justify="flex-start"
-                        alignItems="start">
+                        justify="flex-start">
                             <Grid xs={5} item> 
                                 <Box mr={12}> 
                                     <Grid
                                     container           
                                     direction="column"
                                     justify="flex-start"
-                                    alignItems="start"
                                     flex-wrap="wrap">                                         
                                         <Grid item>
                                             <Box mt={4}>
@@ -87,6 +86,9 @@ export default function LeadDetails() {
                                     </Box>
                                     <Box mt={3}>
                                         <Card style={{width: "1000px", height: "500px"}}>
+                                            <LeafletMap id={lead.id}
+                                                        lat={lead.lat}
+                                                        lng={lead.lng}/>
                                         </Card>
                                     </Box>
                                 </Box>
@@ -97,15 +99,13 @@ export default function LeadDetails() {
                     <Grid 
                     container
                     direction="row"
-                    justify="flex-start"
-                    alignItems="start">
+                    justify="flex-start">
                         <Grid xs={3} item>
                             <Box ml={3}>
                                 <Grid 
                                     container           
                                     direction="column"
-                                    justify="flex-start"
-                                    alignItems="start">                                                         
+                                    justify="flex-start">                                                         
                                     <Grid item> 
                                         <Box mt={3}>
                                             <Box>
@@ -127,7 +127,8 @@ export default function LeadDetails() {
                                             <AddReportForm leadId={leadId}/>
                                         </Box>
                                         {reports.map(report => {
-                                            return <Box mt={3}>
+                                            return <Box key={report.id}
+                                                        mt={3}>
                                                     <ReportCard
                                                         key={report.id}
                                                         lead={lead.company_name}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {  Container, Box, Card, CardHeader, CardContent, Button, TextField} from '@material-ui/core'
+import { Box, Card, CardHeader, CardContent, Button, TextField} from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import { createAction } from '../store/appFeed/actions'
 
@@ -24,7 +24,6 @@ export default function PlanActionForm(props) {
     }
     
     return (
-        <Container component="main">
             <Card style={{ minWidth: "500px"}}>
                 <Box m={3}>
                     <CardHeader title="Plan een actie"/>
@@ -70,6 +69,5 @@ export default function PlanActionForm(props) {
                     </CardContent>
                 </Box>
             </Card>
-        </Container>
     )
 }

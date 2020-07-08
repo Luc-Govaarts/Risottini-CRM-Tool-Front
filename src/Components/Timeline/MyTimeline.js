@@ -21,14 +21,12 @@ export default function MyTimeline(props) {
     const timelineObjects = reports.concat(actions).concat(today)
     const sortedTimelineObjects = [...timelineObjects].sort(compareDates)
 
-    console.log(sortedTimelineObjects)
-
     return (
         <Box>
             <Timeline align="alternate">
                 {[...sortedTimelineObjects].map((timelineObject, index) => {
                     if(timelineObject.hasOwnProperty("note") === false) {
-                        return <Today/>
+                        return <Today key={index}/>
                     } else if(timelineObject.hasOwnProperty("due_date")){
                         return <ActionTimelineItem
                                     key={index}

@@ -1,4 +1,4 @@
-import { apiUrl, googleURL } from '../../config/constants'
+import { apiUrl } from '../../config/constants'
 import axios from "axios";
 import { setMessage } from "../appState/actions";
 

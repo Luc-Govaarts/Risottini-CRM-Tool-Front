@@ -11,12 +11,10 @@ export default function LoggedIn() {
   
   return (
     <>
-      <Avatar><PersonOutlineRoundedIcon /></Avatar>
-      <Typography>
+      <Avatar><PersonOutlineRoundedIcon /></Avatar>      
         <Box textAlign="center" m={3}>
-        {user.name}
+          <Typography>{user.name}</Typography>
         </Box>
-      </Typography>
       <Box textAlign="center" m={2}>
         <Button variant="contained" onClick={() => dispatch(logOut())}>Logout</Button>
       </Box>
