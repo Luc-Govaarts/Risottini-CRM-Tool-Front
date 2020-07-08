@@ -10,6 +10,7 @@ import { useHistory, Link } from "react-router-dom";
 import { Col } from "react-bootstrap";
 import { addLead, fetchContacts } from "../store/appFeed/actions";
 import { addContact } from '../store/appFeed/actions'
+import SnackBar from "../Components/Timeline/SnackBar";
 
 export default function AddProspect() {
     const [contact_name, set_contact_name] = useState("")
@@ -68,6 +69,7 @@ export default function AddProspect() {
     if (contact_toggle) {
       return (
           <Container>
+            <SnackBar/>
             <Box mt={15}>
               <Form as={Col} md={{ span: 6, offset: 3 }}>
                   <h1 className="mt-3 mb-3">Niew Contact Persoon</h1>
@@ -116,6 +118,7 @@ export default function AddProspect() {
     } else {
     return (
     <Container>
+      <SnackBar/>
       <Box mt={15}>
         <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3">
             <h1 className="mt-5 mb-3">Niewe lead</h1>

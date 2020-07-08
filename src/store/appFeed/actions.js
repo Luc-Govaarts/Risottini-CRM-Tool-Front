@@ -1,5 +1,11 @@
-import { apiUrl }from '../../config/constants'
+import { apiUrl } from '../../config/constants'
 import axios from "axios";
+import {
+  appLoading,
+  appDoneLoading,
+  showMessageWithTimeout,
+  setMessage
+} from "../appState/actions";
 
 export function startLoading(data) {
   return (
@@ -90,6 +96,7 @@ export function addLead(company_name, associated_company_name,
                               headers: {'Authorization': `Bearer ${token}`}
                             })       
     dispatch(storeNewLead(res.data))
+    dispatch(setMessage("succes", true, "Nieuwe Lead, laat de ballen maar rollen"))
   }
 }
 
@@ -103,7 +110,8 @@ export function addContact(contact_name, contact_email, contact_phone) {
                               data: {contact_name, contact_email, contact_phone},
                               headers: {'Authorization': `Bearer ${token}`}})
     console.log(res.data)
-    dispatch(storeNewContact(res.data)) 
+    dispatch(storeNewContact(res.data))
+    dispatch(setMessage("succes", true, "Nieuw contact toegevoegd!"))
   }
 }
 

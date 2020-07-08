@@ -19,10 +19,12 @@ const loginSuccess = userWithToken => {
   };
 };
 
-const tokenStillValid = userWithoutToken => ({
+const tokenStillValid = userWithoutToken => {
+  return {
   type: TOKEN_STILL_VALID,
   payload: userWithoutToken
-});
+  };
+};
 
 export const logOut = () => ({ type: LOG_OUT });
 
@@ -38,7 +40,7 @@ export const signUp = (name, email, password, phone) => {
       });
 
       dispatch(loginSuccess(response.data));
-      dispatch(showMessageWithTimeout("success", true, "account created"));
+      dispatch(showMessageWithTimeout("success", true, "Account aangemaakt"));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {
@@ -63,7 +65,7 @@ export const login = (email, password) => {
       });
 
       dispatch(loginSuccess(response.data));
-      dispatch(showMessageWithTimeout("success", false, "welcome back!", 1500));
+      dispatch(showMessageWithTimeout("success", false, "Welkom terug", 1500));
       dispatch(appDoneLoading());
     } catch (error) {
       if (error.response) {

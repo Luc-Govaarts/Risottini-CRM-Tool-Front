@@ -27,7 +27,7 @@ export const showMessageWithTimeout = (
   timeOutMilliSeconds
 ) => {
   return dispatch => {
-    dispatch(setMessage(variant, dismissable, text));
+    dispatch(setMessage(variant, dismissable, text, timeOutMilliSeconds));
 
     const timeout = timeOutMilliSeconds || DEFAULT_MESSAGE_TIMEOUT;
 

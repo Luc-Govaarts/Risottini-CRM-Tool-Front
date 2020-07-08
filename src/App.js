@@ -10,6 +10,7 @@ import { selectToken } from "./store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserWithStoredToken } from "./store/user/actions";
 import AddContactForm from "./Components/AddContactForm";
+import SnackBar from './Components/Timeline/SnackBar';
 
 function App() {
   const dispatch = useDispatch();
@@ -23,10 +24,11 @@ function App() {
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
-  
+
   return (
     <div className="App">
       <NavDrawer/>
+      <SnackBar/>
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>

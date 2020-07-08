@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Grid, Paper, Box, Typography} from '@material-ui/core'
 import SmallLeadCard from '../Components/SmallLeadCard'
 
+
 export default function Homepage() {
     const dispatch = useDispatch()
     const leads = useSelector(selectLeads)
-    // const loading = useSelector(selectAppFeedState)
 
     useEffect(() => {
         dispatch(fetchLeads);
