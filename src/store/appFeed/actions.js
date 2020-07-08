@@ -73,25 +73,26 @@ export async function fetchContacts(dispatch, getState) {
   dispatch(storeContacts(contacts))
 }  
 
-export function addLead(company_name, associated_company_name, 
-  company_phone, company_address, company_email, supplier, contactId) {
+export function addLead(company_name, 
+                        associated_company_name,
+                        company_phone, 
+                        company_address, 
+                        company_email, 
+                        supplier,
+                        contactId) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoading(true))
-    const res1 = await axios({method: 'post',
-                              address: company_address,
-                              key: 'AIzaSyCgd3nADhrBS1P9lgYAmynWTW7rJc-2XMs',
-                              url: `${googleURL}`
-                              })
-    console.log(res1)
+
     const state = getState()
     const token = state.user.token 
     const userId = state.user.id
+    console.log("phone:", company_phone)
     const res2 = await axios({method: 'post',
                               url: `${apiUrl}/leads`,
                               data: {
                                 company_name, associated_company_name, 
                                 company_phone, company_address, 
-                                company_email, supplier, 
+                                company_email, supplier,
                                 contactId, userId
                               },
                               headers: {'Authorization': `Bearer ${token}`}
@@ -110,7 +111,7 @@ export function addContact(contact_name, contact_email, contact_phone) {
                               url: `${apiUrl}/contacts`,
                               data: {contact_name, contact_email, contact_phone},
                               headers: {'Authorization': `Bearer ${token}`}})
-    console.log(res.data)
+  
     dispatch(storeNewContact(res.data))
     dispatch(setMessage("succes", true, "Nieuw contact toegevoegd!"))
   }

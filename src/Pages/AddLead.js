@@ -22,7 +22,7 @@ export default function AddProspect() {
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
-    const [contactId, set_contactId] = useState()
+    const [contactId, set_contactId] = useState(1)
     const [contact_toggle, set_contact_toggle] = useState(false)
     const dispatch = useDispatch();
     const token = useSelector(selectToken);
@@ -35,7 +35,7 @@ export default function AddProspect() {
         } 
         dispatch(fetchContacts)
       }, [token, history]);
-
+    console.log("Phone ", company_phone)
     const submitLeadForm = () => {
         dispatch(addLead(
           company_name, 
