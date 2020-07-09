@@ -30,12 +30,14 @@ export default function MyTimeline(props) {
                     } else if(timelineObject.hasOwnProperty("due_date")){
                         return <ActionTimelineItem
                                     key={index}
+                                    userId={timelineObject.userId}
                                     event={timelineObject.action}
                                     note={timelineObject.note}
                                     due_date={timelineObject.due_date}/> 
                     } else {
                         return <ReportTimelineItem
                                     key={index}
+                                    userId={timelineObject.userId}
                                     date={timelineObject.createdAt}
                                     note={timelineObject.note}/>
                     }

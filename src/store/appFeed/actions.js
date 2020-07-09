@@ -75,8 +75,7 @@ export async function fetchUsers(dispatch, getState) {
   const res = await axios({method: 'get',
                             url: `${apiUrl}/users`,
                             headers: {'Authorization': `Bearer ${token}`}})
-  const users = res.data  
-  console.log(users)                          
+  const users = res.data                        
   dispatch(storeUsers(users))
 }  
 
@@ -173,11 +172,11 @@ export function addNewReport(note, leadId) {
     dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
-    const name = state.user.name
+    const userId = state.user.id
 
     const res = await axios({ method: 'post',
                               url: `${apiUrl}/reports`,
-                              data: {name, note, leadId},
+                              data: {userId, note, leadId},
                               headers: {'Authorization': `Bearer ${token}`}})
     dispatch(storeNewReport(res.data))
   }

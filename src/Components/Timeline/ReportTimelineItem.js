@@ -1,4 +1,6 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles';
 import { TimelineItem, TimelineOppositeContent,
     TimelineSeparator, TimelineContent, TimelineConnector } from '@material-ui/lab'
@@ -29,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 export default function TimelineItemLeft(props) {
     const classes = useStyles();
     const date = moment(props.date).format("DD MMM YYYY, hh:mm a")
+    const user = useSelector(selectUser(props.userId))
+    const name = user.name
     return (
     <TimelineItem>
         <TimelineOppositeContent>
@@ -45,7 +49,7 @@ export default function TimelineItemLeft(props) {
         <TimelineContent>
             <Paper elevation={3}>
                 <Box className={classes.note}>
-                    {/* <Typography variant="h6" component="h1">{props.user}</Typography> */}
+                    <Typography variant="h6" >{name}</Typography>
                     <Typography>{props.note}</Typography>
                 </Box>
             </Paper>

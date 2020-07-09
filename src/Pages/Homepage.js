@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import { fetchLeads } from '../store/appFeed/actions'
+import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
 import { selectLeads } from "../store/appFeed/selectors"
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Paper, Box, Typography} from '@material-ui/core'
@@ -10,10 +10,9 @@ export default function Homepage() {
     const dispatch = useDispatch()
     const leads = useSelector(selectLeads)
 
-   
-
     useEffect(() => {
-        dispatch(fetchLeads);
+        dispatch(fetchLeads)
+        dispatch(fetchUsers);
     }, [dispatch]);
 
     const leads_cold = leads.filter(lead => {

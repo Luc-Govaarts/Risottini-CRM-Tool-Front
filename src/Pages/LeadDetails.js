@@ -1,9 +1,9 @@
 import React, { useEffect }from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLeads, fetchReportsById, fetchActionsById, fetchUsers } from '../store/appFeed/actions'
+import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
 import { selectLeadById} from '../store/appFeed/selectors'
-import { Box, Grid, Typography, Card } from'@material-ui/core'
+import { Box, Grid, Typography, Card, useScrollTrigger } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
 import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
@@ -21,15 +21,11 @@ export default function LeadDetails() {
     const reports = {...lead}.reports || []
     const contact = {...lead}.contact
 
-    console.log(lead)
-
     useEffect(() =>  {
         if(!lead) {
             dispatch(fetchLeads)
         } 
         dispatch(fetchUsers)
-        dispatch(fetchReportsById(leadId))
-        dispatch(fetchActionsById(leadId))
     }, [dispatch])
 
     console.log("LEAD:", lead)
@@ -61,6 +57,7 @@ export default function LeadDetails() {
                                             </Box>
                                             <Box mt={3} >
                                                 <LeadCard
+                                                    userId={lead.userId}
                                                     address={lead.company_address}
                                                     phone={lead.company_phone}
                                                     email={lead.company_email}
@@ -138,6 +135,7 @@ export default function LeadDetails() {
                                                         mt={3}>
                                                     <ReportCard
                                                         key={report.id}
+                                                        userId={report.userId}
                                                         lead={lead.company_name}
                                                         note={report.note}
                                                         createdAt={report.createdAt}/></Box>})}
