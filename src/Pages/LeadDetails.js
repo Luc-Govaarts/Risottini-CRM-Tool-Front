@@ -21,6 +21,8 @@ export default function LeadDetails() {
     const reports = {...lead}.reports || []
     const contact = {...lead}.contact
 
+    console.log(lead)
+
     useEffect(() =>  {
         if(!lead) {
             dispatch(fetchLeads)

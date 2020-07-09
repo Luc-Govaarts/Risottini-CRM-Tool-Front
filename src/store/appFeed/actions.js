@@ -62,6 +62,8 @@ export async function fetchLeads(dispatch, getState) {
   dispatch(storeLeads(leads))
 }   
 
+
+
 export async function fetchContacts(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
