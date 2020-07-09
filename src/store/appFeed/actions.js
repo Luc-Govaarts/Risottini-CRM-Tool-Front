@@ -25,6 +25,18 @@ export function storeContacts(data) {
   } 
 }
 
+export function storeReports(data) {
+  return {
+    type: "STORE_REPORTS", payload: data
+  }
+}
+ 
+export function storeActions(data) {
+  return {
+    type: "STORE_ACTIONS", payload: data
+  }
+}
+
 export function storeNewContact(data) {
   return {
     type: "STORE_NEW_CONTACT", payload: data
@@ -71,6 +83,32 @@ export async function fetchContacts(dispatch, getState) {
   const contacts = res.data                    
   dispatch(storeContacts(contacts))
 }  
+
+export function fetchReportsById(id) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({method: 'get',
+                              url: `${apiUrl}/reports/${id}`,
+                              headers: {'Authorization': `Bearer ${token}`}})
+    const contacts = res.data                    
+    dispatch(storeReports(res.data))
+  }  
+}
+
+export function fetchActionsById(id) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({method: 'get',
+                              url: `${apiUrl}/actions/${id}`,
+                              headers: {'Authorization': `Bearer ${token}`}})
+    const contacts = res.data                    
+    dispatch(storeActions(res.data))
+  }  
+}
 
 export function addLead(company_name, associated_company_name, 
   company_phone, company_address, company_email, supplier, contactId) {
