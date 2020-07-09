@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardHeader, IconButton } from '@material-ui/core';
+import { Card, CardHeader } from '@material-ui/core';
 import LeadMenu from './LeadMenu'
 
 const useStyles = makeStyles({
@@ -28,10 +28,8 @@ export default function SimpleCard(props) {
         <CardHeader 
         title={props.lead}
         subheader={props.partner}
-        action={
-          <IconButton aria-label="settings">
-            <LeadMenu leadId={props.leadId}/>
-          </IconButton>
+        action={ 
+            <LeadMenu leadId={props.leadId}/>    
         }/>
     </Card>
   );

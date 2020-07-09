@@ -1,5 +1,3 @@
-import { storeUpdatedLead } from "./actions";
-
 const initialState = {
   loading: true,
   leads: [],

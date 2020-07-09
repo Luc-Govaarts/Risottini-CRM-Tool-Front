@@ -109,8 +109,8 @@ export function fetchReportsById(id) {
     const res = await axios({method: 'get',
                               url: `${apiUrl}/reports/${id}`,
                               headers: {'Authorization': `Bearer ${token}`}})
-    const contacts = res.data                    
-    dispatch(storeReports(res.data))
+    const reports = res.data                    
+    dispatch(storeReports(reports))
   }  
 }
 
@@ -122,8 +122,8 @@ export function fetchActionsById(id) {
     const res = await axios({method: 'get',
                               url: `${apiUrl}/actions/${id}`,
                               headers: {'Authorization': `Bearer ${token}`}})
-    const contacts = res.data                    
-    dispatch(storeActions(res.data))
+    const actions = res.data                    
+    dispatch(storeActions(actions))
   }  
 }
 

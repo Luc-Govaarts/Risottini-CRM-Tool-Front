@@ -1,6 +1,5 @@
 import React from 'react'
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import { Icon } from 'leaflet'
+import { Map, Marker, TileLayer } from 'react-leaflet'
 
 export default function LeafletMap(props) {
     const lat = props.lat

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
 import { selectLeadById} from '../store/appFeed/selectors'
-import { Box, Grid, Typography, Card, useScrollTrigger } from'@material-ui/core'
+import { Box, Grid, Typography, Card } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
 import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
@@ -27,8 +27,6 @@ export default function LeadDetails() {
         } 
         dispatch(fetchUsers)
     }, [dispatch])
-
-    console.log("LEAD:", lead)
 
     if (!lead) {
         return "LOADING"

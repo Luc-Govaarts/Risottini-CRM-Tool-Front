@@ -4,7 +4,7 @@ import { selectLeads } from "../store/appFeed/selectors"
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Paper, Box, Typography} from '@material-ui/core'
 import SmallLeadCard from '../Components/SmallLeadCard'
-
+import HomePageMap from '../Components/HomePageMap'
 
 export default function Homepage() {
     const dispatch = useDispatch()
@@ -35,7 +35,10 @@ export default function Homepage() {
     // })
 
     return <>
-        <Box mt={15}>
+        <Box mt={8} width={1} height="550px">
+            <HomePageMap leads={leads}/>
+        </Box>
+        <Box mt={4}>
            <Grid 
                 container
                 direction="row"

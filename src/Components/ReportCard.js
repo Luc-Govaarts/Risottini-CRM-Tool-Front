@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../store/appFeed/selectors'
-import { fetchUsers } from '../store/appFeed/actions'
 import { Card, CardHeader,
     CardContent, Typography,
     Box } from '@material-ui/core'
