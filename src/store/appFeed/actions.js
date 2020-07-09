@@ -14,6 +14,12 @@ export function storeLeads(data) {
   } 
 }
 
+export function storeUsers(data) {
+  return {
+      type: "STORE_USERS", payload: data
+  } 
+}
+
 export function storeNewLead(data) {
   return {
       type: "STORE__NEW_LEAD", payload: data
@@ -61,6 +67,18 @@ export function storeNewAction(data) {
     type: "STORE_NEW_ACTION", payload: data
     }
 }
+
+export async function fetchUsers(dispatch, getState) {
+  dispatch(startLoading(true))
+  const state = getState()
+  const token = state.user.token 
+  const res = await axios({method: 'get',
+                            url: `${apiUrl}/users`,
+                            headers: {'Authorization': `Bearer ${token}`}})
+  const users = res.data  
+  console.log(users)                          
+  dispatch(storeUsers(users))
+}  
 
 export async function fetchLeads(dispatch, getState) {
   dispatch(startLoading(true))
@@ -130,7 +148,7 @@ export function addLead(company_name, associated_company_name,
                               headers: {'Authorization': `Bearer ${token}`}
                             })       
     dispatch(storeNewLead(res.data))
-    
+
     dispatch(setMessage("succes", true, "Nieuwe Lead, laat de ballen maar rollen"))
   }
 }

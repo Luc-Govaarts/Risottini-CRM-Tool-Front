@@ -1,7 +1,7 @@
 import React, { useEffect }from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLeads, fetchReportsById, fetchActionsById } from '../store/appFeed/actions'
+import { fetchLeads, fetchReportsById, fetchActionsById, fetchUsers } from '../store/appFeed/actions'
 import { selectLeadById} from '../store/appFeed/selectors'
 import { Box, Grid, Typography, Card } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
@@ -27,6 +27,7 @@ export default function LeadDetails() {
         if(!lead) {
             dispatch(fetchLeads)
         } 
+        dispatch(fetchUsers)
         dispatch(fetchReportsById(leadId))
         dispatch(fetchActionsById(leadId))
     }, [dispatch])

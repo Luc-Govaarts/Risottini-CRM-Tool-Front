@@ -5,6 +5,7 @@ const initialState = {
   leads: [],
   SalesCyclePhases: [],
   contacts: [],
+  users: []
 };
 
 export default (state = initialState, action) => {
@@ -34,6 +35,8 @@ export default (state = initialState, action) => {
     case "STORE_REPORTS":
       const newLeadArray5 = state.leads.map(lead => lead.is === action.payload.leadId ? { ...lead, reports: [...action.payload] } : lead)
       return {...state, leads: newLeadArray5, loading: false}
+    case "STORE_USERS":
+      return {...state, users: [...action.payload], loading: false} 
     default:
       return state;
   }
