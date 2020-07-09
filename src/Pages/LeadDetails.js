@@ -1,7 +1,7 @@
 import React, { useEffect }from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLeads } from '../store/appFeed/actions'
+import { fetchLeads, fetchReportsById, fetchActionsById } from '../store/appFeed/actions'
 import { selectLeadById} from '../store/appFeed/selectors'
 import { Box, Grid, Typography, Card } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
@@ -26,8 +26,12 @@ export default function LeadDetails() {
     useEffect(() =>  {
         if(!lead) {
             dispatch(fetchLeads)
-        }
+        } 
+        dispatch(fetchReportsById(leadId))
+        dispatch(fetchActionsById(leadId))
     }, [dispatch])
+
+    console.log("LEAD:", lead)
 
     if (!lead) {
         return "LOADING"

@@ -3,9 +3,9 @@ import axios from "axios";
 import { setMessage } from "../appState/actions";
 
 export function startLoading(data) {
-  return (
-      {type: "LOADING", payload: data}
-       )
+  return {
+    type: "LOADING", payload: data
+  }
 }
 
 export function storeLeads(data) {
@@ -26,6 +26,18 @@ export function storeContacts(data) {
   } 
 }
 
+export function storeReports(data) {
+  return {
+    type: "STORE_REPORTS", payload: data
+  }
+}
+ 
+export function storeActions(data) {
+  return {
+    type: "STORE_ACTIONS", payload: data
+  }
+}
+
 export function storeNewContact(data) {
   return {
     type: "STORE_NEW_CONTACT", payload: data
@@ -41,7 +53,7 @@ export function storeNewReport(data) {
 export function storeUpdatedLead(data) {
   return {
     type: "STORE_UPDATED_LEAD", payload: data
-    }
+  }
 }
 
 export function storeNewAction(data) {
@@ -49,7 +61,6 @@ export function storeNewAction(data) {
     type: "STORE_NEW_ACTION", payload: data
     }
 }
-
 
 export async function fetchLeads(dispatch, getState) {
   dispatch(startLoading(true))
@@ -62,8 +73,6 @@ export async function fetchLeads(dispatch, getState) {
   dispatch(storeLeads(leads))
 }   
 
-
-
 export async function fetchContacts(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -75,21 +84,42 @@ export async function fetchContacts(dispatch, getState) {
   dispatch(storeContacts(contacts))
 }  
 
-export function addLead(company_name, 
-                        associated_company_name,
-                        company_phone, 
-                        company_address, 
-                        company_email, 
-                        supplier,
-                        contactId) {
+export function fetchReportsById(id) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({method: 'get',
+                              url: `${apiUrl}/reports/${id}`,
+                              headers: {'Authorization': `Bearer ${token}`}})
+    const contacts = res.data                    
+    dispatch(storeReports(res.data))
+  }  
+}
 
+export function fetchActionsById(id) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({method: 'get',
+                              url: `${apiUrl}/actions/${id}`,
+                              headers: {'Authorization': `Bearer ${token}`}})
+    const contacts = res.data                    
+    dispatch(storeActions(res.data))
+  }  
+}
+
+export function addLead(company_name, associated_company_name,
+                        company_phone, company_address, 
+                        company_email, supplier, contactId) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
     const userId = state.user.id
-    console.log("phone:", company_phone)
-    const res2 = await axios({method: 'post',
+    
+    const res = await axios({method: 'post',
                               url: `${apiUrl}/leads`,
                               data: {
                                 company_name, associated_company_name, 
@@ -99,7 +129,8 @@ export function addLead(company_name,
                               },
                               headers: {'Authorization': `Bearer ${token}`}
                             })       
-    dispatch(storeNewLead(res2.data))
+    dispatch(storeNewLead(res.data))
+    
     dispatch(setMessage("succes", true, "Nieuwe Lead, laat de ballen maar rollen"))
   }
 }
