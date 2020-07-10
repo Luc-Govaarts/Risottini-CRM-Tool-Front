@@ -32,10 +32,6 @@ function App() {
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
-        {/* <Route path="/leads/add" component={() => {
-          console.log("ADD PAGE******")
-          return "ADD"
-        }}/> */}
         <Route path="/leads/add" component={AddLead}/>
         <Route path="/leads/:id" component={LeadDetails}/>
         <Route path="/contacts/add" components={AddContactForm}/>
