@@ -36,6 +36,7 @@ function App() {
           console.log("ADD PAGE******")
           return "ADD"
         }}/>
+        <Route path="/new" component={AddLead}/>
         <Route path="/leads/:id" component={LeadDetails}/>
         <Route path="/contacts/add" components={AddContactForm}/>
         <Route exact path="/" component={Homepage}/>

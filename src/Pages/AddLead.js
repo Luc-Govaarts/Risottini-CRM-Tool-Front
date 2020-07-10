@@ -31,13 +31,15 @@ export default function AddProspect() {
 
     useEffect(() => {
         if (!token) {
+          console.log("******REDIRECT*******")
           history.push("/");
         } 
         dispatch(fetchContacts)
       }, [token, history]);
 
-    const submitLeadForm = () => {
-        dispatch(addLead(
+    const submitLeadForm = (event) => {
+      event.preventDefault()  
+      dispatch(addLead(
           company_name, 
           associated_company_name,
           company_phone, 
@@ -55,6 +57,7 @@ export default function AddProspect() {
     }
 
     const submitContactForm = () => {
+      event.preventDefault()
       dispatch(addContact(
           contact_name,
           contact_email,
@@ -71,7 +74,7 @@ export default function AddProspect() {
           <Container>
             <SnackBar/>
             <Box mt={15}>
-              <Form as={Col} md={{ span: 6, offset: 3 }}>
+              <Form as={Col} md={{ span: 6, offset: 3 }} onSubmit={submitContactForm}>
                   <h1 className="mt-3 mb-3">Niew Contact Persoon</h1>
                   <Form.Group>
                       <Form.Label>Naam</Form.Label>
@@ -107,7 +110,7 @@ export default function AddProspect() {
                   </Form.Group>
   
                   <Form.Group className="mt-3">
-                      <Button variant="primary" type="submit" onClick={submitContactForm}>
+                      <Button variant="primary" type="submit">
                           Voeg contact toe
                       </Button>
                   </Form.Group>
@@ -120,7 +123,7 @@ export default function AddProspect() {
     <Container>
       <SnackBar/>
       <Box mt={15}>
-        <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3">
+        <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3" onSubmit={submitLeadForm}>
             <h1 className="mt-5 mb-3">Niewe lead</h1>
 
             <Form.Group controlId="formBasicCompanyName">
@@ -210,7 +213,7 @@ export default function AddProspect() {
                   value={true}
                   onClick={event => set_contact_toggle(event.target.value)}>Maak nieuw contact</Button>            
             <Form.Group className="mt-3">
-              <Button variant="primary" type="submit" onClick={submitLeadForm}>
+              <Button variant="primary" type="submit" >
                 Voeg lead toe
               </Button>
             </Form.Group>
