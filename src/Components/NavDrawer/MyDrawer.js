@@ -65,7 +65,7 @@ export default function MyDrawer(props) {
               </ListItemText>
               <ListItemText >
                 <Box ml={3}>
-                  <Link href={"/add"}>
+                  <Link href={"/leads/add"}>
                     <Typography variant="h5">Nieuwe Lead!!!!!</Typography>
                   </Link>
                 </Box>
