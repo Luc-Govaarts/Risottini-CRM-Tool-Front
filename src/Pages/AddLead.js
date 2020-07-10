@@ -35,7 +35,7 @@ export default function AddProspect() {
         } 
         dispatch(fetchContacts)
       }, [token, history]);
-    console.log("Phone ", company_phone)
+
     const submitLeadForm = () => {
         dispatch(addLead(
           company_name, 
@@ -51,7 +51,7 @@ export default function AddProspect() {
         set_company_address("")
         set_company_email("")
         set_supplier("")
-        set_contactId()
+        set_contactId(1)
     }
 
     const submitContactForm = () => {
