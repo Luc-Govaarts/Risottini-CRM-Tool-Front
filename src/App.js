@@ -32,11 +32,11 @@ function App() {
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/leads/add" component={() => {
+        {/* <Route path="/leads/add" component={() => {
           console.log("ADD PAGE******")
           return "ADD"
-        }}/>
-        <Route path="/new" component={AddLead}/>
+        }}/> */}
+        <Route path="/leads/add" component={AddLead}/>
         <Route path="/leads/:id" component={LeadDetails}/>
         <Route path="/contacts/add" components={AddContactForm}/>
         <Route exact path="/" component={Homepage}/>
