@@ -32,7 +32,7 @@ function App() {
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/leads/add" component={Login}/>
+        <Route path="/leads/add" component={() => "ADD"}/>
         <Route path="/leads/:id" component={LeadDetails}/>
         <Route path="/contacts/add" components={AddContactForm}/>
         <Route exact path="/" component={Homepage}/>
