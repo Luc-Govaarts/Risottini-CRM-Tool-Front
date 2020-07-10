@@ -110,7 +110,7 @@ export default function AddProspect() {
                   </Form.Group>
   
                   <Form.Group className="mt-3">
-                      <Button variant="primary" type="submit">
+                      <Button variant="primary" type="submit" onClick={submitContactForm}>
                           Voeg contact toe
                       </Button>
                   </Form.Group>
@@ -213,7 +213,7 @@ export default function AddProspect() {
                   value={true}
                   onClick={event => set_contact_toggle(event.target.value)}>Maak nieuw contact</Button>            
             <Form.Group className="mt-3">
-              <Button variant="primary" type="submit" >
+              <Button variant="primary" type="submit" onClick={submitLeadForm} >
                 Voeg lead toe
               </Button>
             </Form.Group>
