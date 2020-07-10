@@ -56,7 +56,7 @@ export default function AddProspect() {
         set_contactId(1)
     }
 
-    const submitContactForm = () => {
+    const submitContactForm = (event) => {
       event.preventDefault()
       dispatch(addContact(
           contact_name,
