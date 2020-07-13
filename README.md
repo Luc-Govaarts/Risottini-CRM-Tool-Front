@@ -21,10 +21,20 @@ I am Luc, part of class #40 from Codaisseur a 11 week JavaScript bootcamp.
 This project is a two week portfolio project assignment meant to test the theory and skills learned over the past seven weeks. 
 
 ### Table of contents
- 1. [`Technologies used`](#Technologies-used)
- 2. [`User stories`](#User-stories)
- 3. [Goals](#Goals-)
- 4. [Installation](#Installation-)
+ 1. [`Demo`](#Demo)
+ 2. [`Technologies used`](#Technologies-used)
+ 3. [`User stories`](#User-stories)
+ 4. [`Goals`](#Goals-)
+ 5. [`Wireframe`](#Wireframe)
+ 6. [`Installation`](#Installation)
+
+### Demo
+
+![Homepage](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2011.16.29.png)
+
+
+![Detailspage1](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2011.16.44.png)
+![Detailspage2](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2011.16.53.png)
 
 ### Technologies-used
 
@@ -35,7 +45,6 @@ This project is a two week portfolio project assignment meant to test the theory
  - Leaflet maps
  - Material UI
  - Bootstrap UI
-
 
 #### Back-end:
 
@@ -62,6 +71,11 @@ Server repository
 The repository for the backend can be found [here](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back)
 
 The server was build as a REST API with Express.
+
+### Wireframe
+
+![Wireframe](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/
+Schermafbeelding%2020-07-13%om 12.55.24)
 
 ### Installation
 
