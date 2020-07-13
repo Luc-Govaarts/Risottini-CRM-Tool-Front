@@ -67,15 +67,15 @@ The server was build as a REST API with Express.
 
 To install Crispy it is recommended to install the server first. check the server [here](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back)
 
-Clone the repo
-Install the dependencies by running npm install
-open the constants,js file in the config folder and add the loink to the server.
+1. Clone the repo
+2. Install the dependencies by running npm install
+3. open the constants,js file in the config folder and add the loink to the server.
 
 The server is set up with some dummy seed data.
 
-Sign up with:
+4. Sign up with:
     email: demo@demo.com 
     password: demo1234
 
-Check the existing leads on the home page or add new leads.
-add notes and plan activities on the lead details pages. 
+5. Check the existing leads on the home page or add new leads.
+6. add notes and plan activities on the lead details pages. 
