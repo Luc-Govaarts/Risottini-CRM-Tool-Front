@@ -21,17 +21,10 @@ I am Luc, part of class #40 from Codaisseur a 11 week JavaScript bootcamp.
 This project is a two week portfolio project assignment meant to test the theory and skills learned over the past seven weeks. 
 
 ### Table of contents
- 1. [`App-Demo`](#App-Demo)
- 2. [`Technologies used`](#Technologies-used)
- 3. [`User stories`](#User-stories)
- 4. [Goals](#Goals)
- 5. [Installation](#Installation)
-
-### App-Demo
-
-![Demo picture 1](./Demo/Schermafbeelding 2020-07-13 om 11.16.29.png)
-![Demo picture 2](./Demo/Schermafbeelding 2020-07-13 om 11.16.44.png)
-![Demo picture 3](./Demo/Schermafbeelding 2020-07-13 om 11.16.53.png)
+ 1. [`Technologies used`](#Technologies-used)
+ 2. [`User stories`](#User-stories)
+ 3. [Goals](#Goals-)
+ 4. [Installation](#Installation-)
 
 ### Technologies-used
 
