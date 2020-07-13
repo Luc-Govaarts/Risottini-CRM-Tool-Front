@@ -73,9 +73,10 @@ The repository for the backend can be found [here](https://github.com/Luc-Govaar
 The server was build as a REST API with Express.
 
 ### Wireframe
+Original first wireframe
 
-![Wireframe](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/
-Schermafbeelding%2020-07-13%om 12.55.24)
+
+![Wireframe](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2012.55.24.png)
 
 ### Installation
 
