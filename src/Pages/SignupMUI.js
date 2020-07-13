@@ -62,6 +62,19 @@ export default function SignUp() {
                     </Typography>
                     <form className={classes.form} noValidate>
                         <TextField
+                            onChange={event => set_name(event.target.value)}
+                            value={name}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="Naam"
+                            name="name"
+                            autoComplete="Name"
+                            autoFocus
+                        />  
+                        <TextField
                             onChange={event => set_email(event.target.value)}
                             value={email}
                             variant="outlined"
@@ -87,6 +100,18 @@ export default function SignUp() {
                             id="password"
                             autoComplete="current-password"
                         />
+                        <TextField
+                            value={code}
+                            onChange={event => set_code(event.target.value)}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="code"
+                            label="code"
+                            type="password"
+                            id="code"
+                        />
                         <Button
                             onClick={submitForm}
                             type="submit"
@@ -95,11 +120,11 @@ export default function SignUp() {
                             color="primary"
                             className={classes.submit}
                         >
-                            Log in
+                            Schrijf je in
                         </Button>
-                            <Link href="/signup" variant="body2">
-                                {"Nog geen account? Schrijf je in"}
-                            </Link>
+                            <Typography component="p" variant="caption">
+                                Code alleen beschikbaar via Klein en Kok
+                            </Typography>
                     </form>
                 </div>
             </Container>
