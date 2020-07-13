@@ -22,10 +22,11 @@ export default function SignUp() {
     if (token !== null) {
       history.push("/");
     }
+    console.log("****")
   }, [token, history]);
 
   function submitForm(event) {
-    event.preventDefault();
+    // event.preventDefault();
 
     dispatch(signUp(name, email, password, phone));
 

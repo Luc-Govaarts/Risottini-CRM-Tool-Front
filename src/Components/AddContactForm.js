@@ -7,13 +7,16 @@ export default function AddContactForm() {
     const [contact_name, set_contact_name] = useState("")
     const [contact_email, set_contact_email] = useState("")
     const [contact_phone, set_contact_phone] = useState("")
+    const [job_title, set_job_title] = useState("")
     const dispatch = useDispatch();
 
-    const submitContactForm = () => {
+    const submitContactForm = (event) => {
+        event.preventDefault()  
         dispatch(addContact(
             contact_name,
             contact_email,
-            contact_phone))
+            contact_phone,
+            job_title))
         
         set_contact_name("")
         set_contact_email("")
@@ -32,6 +35,16 @@ export default function AddContactForm() {
                         type="text"
                         placeholder="Voer de naam in van het contact persoon"
                         required
+                    />   
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Functie</Form.Label>
+                    <Form.Control
+                        value={job_title}
+                        onChange={event => set_job_title(event.target.value)}
+                        type="text"
+                        placeholder="Voer de functie in van het contact persoon"
                     />   
                 </Form.Group>
 

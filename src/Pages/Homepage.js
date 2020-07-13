@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react'
+import { useHistory } from "react-router-dom";
 import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
 import { selectLeads } from "../store/appFeed/selectors"
+import { selectToken } from "../store/user/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import { Grid, Paper, Box, Typography} from '@material-ui/core'
 import SmallLeadCard from '../Components/SmallLeadCard'
@@ -9,7 +11,13 @@ import HomePageMap from '../Components/HomePageMap'
 export default function Homepage() {
     const dispatch = useDispatch()
     const leads = useSelector(selectLeads)
+    const token = useSelector(selectToken)
+    const history = useHistory();
 
+    if(!token) {
+        history.push("/login")
+    }
+    
     useEffect(() => {
         dispatch(fetchLeads)
         dispatch(fetchUsers);

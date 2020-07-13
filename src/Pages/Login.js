@@ -1,73 +1,109 @@
 import React, { useState, useEffect }from 'react';
-import { Box } from '@material-ui/core'
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
 import { login } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
-import { useHistory, Link } from "react-router-dom";
-import { Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Avatar, Button, Container,
+  TextField, Link, Typography } from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
 
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export default function Login() {
-    const [email, set_email] = useState("")
-    const [password, set_password] = useState("")    
-    const dispatch = useDispatch();
-    const token = useSelector(selectToken);
-    const history = useHistory();
-    
-    useEffect(() => {
-        if (token !== null) {
-          history.push("/");
-        }
-      }, [token, history]);
-    
-    function submitForm(event) {
-        event.preventDefault();
-    
-        dispatch(login(email, password));
-    
-        set_email("");
-        set_password("");
+  const classes = useStyles();
+  const [email, set_email] = useState("")
+  const [password, set_password] = useState("")    
+  const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+  const history = useHistory();
+  
+  useEffect(() => {
+      if (token !== null) {
+        history.push("/");
       }
-    
-      return (
-        <Container>
-          <Box mt={15}>
-          <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-            <h1 className="mt-5 mb-5">Login</h1>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                value={email}
-                onChange={event => set_email(event.target.value)}
-                type="email"
-                placeholder="Enter email"
-                required
-              />
-            </Form.Group>
-    
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                value={password}
-                onChange={event => set_password(event.target.value)}
-                type="password"
-                placeholder="Password"
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mt-5">
-              <Button variant="primary" type="submit" onClick={submitForm}>
+    }, [token, history]);
+  
+  function submitForm(event) {
+      event.preventDefault();
+  
+      dispatch(login(email, password));
+  
+      set_email("");
+      set_password("");
+    }
+  
+  return (
+    <Box mt={12}>
+        <Container component="main" maxWidth="xs">
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
                 Log in
-              </Button>
-            </Form.Group>
-            <Link to="/signup" style={{ textAlign: "center" }}>
-              Click here to sign up
-            </Link>
-          </Form>
-          </Box>
+                </Typography>
+                <form className={classes.form} noValidate>
+                    <TextField
+                        onChange={event => set_email(event.target.value)}
+                        value={email}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                    />
+                    <TextField
+                        value={password}
+                        onChange={event => set_password(event.target.value)}
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Wachtwoord"
+                        type="password"
+                        id="password"
+                        autoComplete="current-password"
+                    />
+                    <Button
+                        onClick={submitForm}
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                    >
+                        Log in
+                    </Button>
+                        <Link href="/signup" variant="body2">
+                            {"Nog geen account? Schrijf je in"}
+                        </Link>
+                </form>
+            </div>
         </Container>
-        )
+    </Box>
+  );
 }
