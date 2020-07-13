@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import Homepage from './Pages/Homepage'
 import Login from './Pages/Login'
-import Signup from './Pages/Signup'
+import SignupMUI from './Pages/SignupMUI'
 import AddLead from './Pages/AddLead'
 import LeadDetails from './Pages/LeadDetails'
 import NavDrawer from "./Components/NavDrawer"
@@ -24,7 +24,7 @@ function App() {
       <SnackBar/>
       <Switch>
         <Route path="/login" component={Login}/>
-        <Route path="/signup" component={Signup}/>
+        <Route path="/signup" component={SignupMUI}/>
         <Route path="/leads/add" component={AddLead}/>
         <Route path="/leads/:id" component={LeadDetails}/>
         <Route path="/contacts/add" components={AddContactForm}/>
