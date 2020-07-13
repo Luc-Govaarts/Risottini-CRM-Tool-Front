@@ -1,6 +1,6 @@
 import React, { useState }from 'react';
 import { login } from "../store/user/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button, Container, Avatar,
   TextField, Link, Typography, Box } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
