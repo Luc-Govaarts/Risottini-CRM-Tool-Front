@@ -21,7 +21,6 @@ export default function LeadDetails() {
     const lead = useSelector(selectLeadById(leadId))
     const reports = {...lead}.reports || []
     const contact = {...lead}.contact
-    
     const token = useSelector(selectToken)
     const history = useHistory();
 
