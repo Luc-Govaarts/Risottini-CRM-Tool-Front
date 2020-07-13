@@ -1,6 +1,8 @@
 import React, { useState }from 'react';
+import { useHistory } from 'react-router-dom'
 import { login } from "../store/user/actions";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectToken } from "../store/user/selectors";
 import { Button, Container, Avatar,
   TextField, Link, Typography, Box } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -31,6 +33,13 @@ export default function Login() {
   const [email, set_email] = useState("")
   const [password, set_password] = useState("")    
   const dispatch = useDispatch();
+
+  const token = useSelector(selectToken)
+  const history = useHistory();
+
+  if(token) {
+      history.push("/")
+  }
 
   function submitForm(event) {
       event.preventDefault();

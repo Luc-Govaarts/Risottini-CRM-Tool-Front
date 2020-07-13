@@ -1,100 +1,142 @@
-import React, { useState, useEffect } from "react";
-import { Box } from '@material-ui/core'
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import { signUp } from "../store/user/actions";
+import React, { useState } from "react";
 import { selectToken } from "../store/user/selectors";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, Link } from "react-router-dom";
-import { Col } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from 'react-router-dom'
+import { Box, Button, Container, Avatar,
+    TextField, Typography } from '@material-ui/core';
+import { signUp } from "../store/user/actions";
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%',
+      marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
 
 export default function SignUp() {
-  const [name, set_name] = useState("");
-  const [email, set_email] = useState("");
-  const [password, set_password] = useState("");
-  const [phone, set_phone] = useState()
-  const dispatch = useDispatch();
-  const token = useSelector(selectToken);
-  const history = useHistory();
+    const classes = useStyles();
+    const [name, set_name] = useState("");
+    const [email, set_email] = useState("");
+    const [password, set_password] = useState("");
+    const [code, set_code] = useState("")
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (token !== null) {
-      history.push("/");
+    const token = useSelector(selectToken)
+    const history = useHistory();
+  
+    if(token) {
+        history.push("/")
     }
-    console.log("****")
-  }, [token, history]);
 
-  function submitForm(event) {
-    event.preventDefault();
-
-    dispatch(signUp(name, email, password, phone));
-
-    set_email("");
-    set_password("");
-    set_name("");
-    set_phone()
-  }
-
-  return (
-    <Container>
-      <Box mt={15}>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <h1 className="mt-5 mb-5">Signup</h1>
-        <Form.Group controlId="formBasicName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            value={name}
-            onChange={event => set_name(event.target.value)}
-            type="text"
-            placeholder="Enter name"
-            required
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            value={email}
-            onChange={event => set_email(event.target.value)}
-            type="email"
-            placeholder="Enter email"
-            required
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            value={password}
-            onChange={event => set_password(event.target.value)}
-            type="password"
-            placeholder="Password"
-            required
-          />
-        </Form.Group> 
-        
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Phone</Form.Label>
-          <Form.Control
-            value={phone}
-            onChange={event => set_phone(event.target.value)}
-            type="phone"
-            placeholder="Phone"
-            required
-          />
-        </Form.Group> 
-
-        <Form.Group className="mt-5">
-          <Button variant="primary" type="submit" onClick={submitForm}>
-            Sign up
-          </Button>
-        </Form.Group>
-        <Link to="/login">Click here to log in</Link>
-      </Form>
-      </Box>
-    </Container>
-  );
+    function submitForm(event) {
+        event.preventDefault();
+    
+        dispatch(signUp(
+            name, 
+            email, 
+            password,
+            code
+        ));
+    
+        set_email("");
+        set_password("");
+        set_name("");
+        set_code("")
+      }
+    
+    return (
+        <Box mt={12}>
+           <Container component="main" maxWidth="xs">
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                    Schrijf je in
+                    </Typography>
+                    <form className={classes.form} noValidate>
+                        <TextField
+                            onChange={event => set_name(event.target.value)}
+                            value={name}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="name"
+                            label="Naam"
+                            name="name"
+                            autoComplete="Name"
+                            autoFocus
+                        />  
+                        <TextField
+                            onChange={event => set_email(event.target.value)}
+                            value={email}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <TextField
+                            value={password}
+                            onChange={event => set_password(event.target.value)}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Wachtwoord"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <TextField
+                            value={code}
+                            onChange={event => set_code(event.target.value)}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="code"
+                            label="code"
+                            type="password"
+                            id="code"
+                        />
+                        <Button
+                            onClick={submitForm}
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Schrijf je in
+                        </Button>
+                            <Typography component="p" variant="caption">
+                                Code alleen beschikbaar via Klein en Kok
+                            </Typography>
+                    </form>
+                </div>
+            </Container>
+        </Box>
+    )
 }
