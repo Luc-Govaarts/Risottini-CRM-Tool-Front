@@ -24,10 +24,11 @@ export default function LeadDetails() {
     const token = useSelector(selectToken)
     const history = useHistory();
 
+    if(!token) {
+        history.push("/login")
+    }
+
     useEffect(() =>  {
-        if(!token) {
-            history.push("/login")
-        }
         if(!lead) {
             dispatch(fetchLeads)
         } 

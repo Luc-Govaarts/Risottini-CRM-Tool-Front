@@ -3,8 +3,8 @@ import { login } from "../store/user/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToken } from "../store/user/selectors";
 import { useHistory } from "react-router-dom";
-import { Avatar, Button, Container,
-  TextField, Link, Typography } from '@material-ui/core/Avatar';
+import { Button, Container, Avatar,
+  TextField, Link, Typography, Box } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
