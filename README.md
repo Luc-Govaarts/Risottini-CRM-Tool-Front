@@ -7,11 +7,11 @@ Crispy is a custom CRM tool made for Risottini, a company that sells crunchy ris
 
 Crispy was made to aid this company in selling their product to restaurants throughout The Netherlands.
 
-Interested? see there page [here]{https://www.risottini.com/}
+Interested? see there page [here](https://www.risottini.com/)
 
 Do you want to see a live version of Crispy with some demo data?
 
-[here]{https://ecstatic-rosalind-f39297.netlify.app/}
+[here](https://ecstatic-rosalind-f39297.netlify.app/)
 
 Log in with:
 Email: Demo@demo.com, password: demo1234
@@ -21,15 +21,19 @@ I am Luc, part of class #40 from Codaisseur a 11 week JavaScript bootcamp.
 This project is a two week portfolio project assignment meant to test the theory and skills learned over the past seven weeks. 
 
 ### Table of contents
-[App Demo]{#App Demo}
-[Technologies used]{#Technologies used}
-[User stories]{#User stories}
-[Goals]{#Goals}
-[Installation]{#Installatiom}
+ 1. [`App-Demo`](#App-Demo)
+ 2. [`Technologies used`](#Technologies-used)
+ 3. [`User stories`](#User-stories)
+ 4. [Goals](#Goals)
+ 5. [Installation](#Installation)
 
-### App Damo
+### App-Demo
 
-### Technologies used
+![Demo picture 1](./Demo/Schermafbeelding 2020-07-13 om 11.16.29.png)
+![Demo picture 2](./Demo/Schermafbeelding 2020-07-13 om 11.16.44.png)
+![Demo picture 3](./Demo/Schermafbeelding 2020-07-13 om 11.16.53.png)
+
+### Technologies-used
 
 #### Front-end:
 
@@ -48,7 +52,7 @@ This project is a two week portfolio project assignment meant to test the theory
  - Authorization middleware
  - Geolocation middleware
 
-### User stories
+### User-stories
 
 As a employee 
  - You can add potential new leads to the database and add contact details and contact info.
@@ -62,13 +66,13 @@ As a employee
 The goal of the project is to build a basic and functioning CRM tool that can be expanded on in a later phase. 
 
 Server repository
-The repository for the backend can be found [here]{https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back}
+The repository for the backend can be found [here](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back)
 
 The server was build as a REST API with Express.
 
 ### Installation
 
-To install Crispy it is recommended to install the server first. check the server [here]{https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back} 
+To install Crispy it is recommended to install the server first. check the server [here](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back)
 
 Clone the repo
 Install the dependencies by running npm install
