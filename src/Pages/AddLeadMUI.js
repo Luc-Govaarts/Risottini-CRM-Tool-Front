@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Avatar, FormControlLabel,
-    TextField, Link, Typography, Box, Switch } from '@material-ui/core';
+import { Button, Container, Avatar, 
+    FormControlLabel, TextField, Select, 
+    Typography, Box, Switch,
+    MenuItem, FormControl } from '@material-ui/core';
 import { selectToken } from "../store/user/selectors";
 import { selectContacts } from '../store/appFeed/selectors';
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +19,11 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+    }, 
+    formControl: {
+    minWidth: 395,
     },
+
     avatar: {
       margin: theme.spacing(1),
       backgroundColor: theme.palette.secondary.main,
@@ -33,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddProspect() {
     const classes = useStyles();
-    const [toggle_state, set_toggle_state] = useState({addContact: true,})
+    const [toggle_state, set_toggle_state] = useState({addContact: false, addNewContact: false})
     const [contact_name, set_contact_name] = useState("")
     const [contact_email, set_contact_email] = useState("")
     const [contact_phone, set_contact_phone] = useState("")
@@ -43,8 +49,7 @@ export default function AddProspect() {
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
-    const [contactId, set_contactId] = useState(1)
-    const [contact_toggle, set_contact_toggle] = useState(false)
+    const [contactId, set_contactId] = useState("")
     const [job_title, set_job_title] = useState("")
     const [add_contact, set_add_contact] = useState(false)
     const dispatch = useDispatch();
@@ -57,15 +62,15 @@ export default function AddProspect() {
     } 
 
     useEffect(() => {
-        if (!contacts) {
-        dispatch(fetchContacts)
+        if (!contacts || !contacts[0]) {
+            dispatch(fetchContacts)
         }
-    }, );
+    }, [contacts]);
 
 
     const submitLeadForm = (event) => {
-        console.log("******")
         event.preventDefault()
+
         dispatch(addLead(
           company_name, 
           associated_company_name,
@@ -85,6 +90,7 @@ export default function AddProspect() {
 
     const submitContactForm = (event) => {
       event.preventDefault()  
+
       dispatch(addContact(
           contact_name,
           contact_email,
@@ -100,7 +106,14 @@ export default function AddProspect() {
         set_toggle_state({ ...toggle_state, [event.target.name]: event.target.checked });
     }
 
-    console.log("COTAT TOGGLE STATE:", toggle_state)
+    const handleAddNewContact = (event) => {
+        if (toggle_state.addNewContact === false) {
+            set_toggle_state({ ...toggle_state, addNewContact: true})
+        } else {
+            set_toggle_state({ ...toggle_state, addNewContact: false})
+        }
+    }
+
 
     return (
         <Box mt={12}>
@@ -205,7 +218,35 @@ export default function AddProspect() {
                                 />}
                             label="Voeg contact toe"
                         />
-                        {toggle_state.addContact ? "hallo" : null}
+                        <Box>
+                            {toggle_state.addContact ? 
+                                <Box>
+                                    <FormControl className={classes.formControl}
+                                                margin="normal">
+                                        <Select
+                                            value={contactId}
+                                            onChange={event => set_contactId(event.target.value)}                                         
+                                            variant="outlined" 
+                                            label="Contact persoon"
+                                        >
+                                        {contacts.map(contact => {
+                                            return <MenuItem key={contact.id} value={contact.id}
+                                                >{contact.name}</MenuItem> 
+                                            })
+                                        }
+                                        </Select>
+                                    </FormControl>
+                                    <Button
+                                        onClick={handleAddNewContact}
+                                        name="addNewContact"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                    >Voeg nieuw contact toe
+                                    </Button>
+                                </Box>
+                                : null}
+                        </Box>
                         <Button
                             type="submit"
                             fullWidth
@@ -215,7 +256,6 @@ export default function AddProspect() {
                         >
                         Voeg lead toe
                         </Button>
-                        
                     </form>
                 </div>
             </Container>
