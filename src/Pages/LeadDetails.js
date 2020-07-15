@@ -68,6 +68,7 @@ export default function LeadDetails() {
                                         </Box>
                                     </Grid>
                                     <Grid item>
+                                        {contact ? 
                                         <Box mt={4} >
                                             <Box>
                                                 <Typography variant="h5">Contact</Typography>
@@ -79,8 +80,11 @@ export default function LeadDetails() {
                                                     email={contact.email}
                                                     phone={contact.phone}
                                                     createdAt={contact.createdAt}/>
-                                            </Box>
+                                            </Box> 
                                         </Box>
+                                        : <Box mt={4}>
+                                            <Typography>Voeg contact toe</Typography>
+                                        </Box>}     
                                     </Grid>                                 
                                 </Grid>
                             </Box>
