@@ -24,7 +24,7 @@ export default function SnackBar() {
                     severity={message.variant}
                     action={
                     <React.Fragment>
-                        <IconButton size="small" aria-label="close" c
+                        <IconButton size="small" aria-label="close"
                                     color="inherit" onClick={message.dismissable ? () => dispatch(clearMessage()) : null}>
                             <CloseIcon fontSize="small" />
                         </IconButton>
