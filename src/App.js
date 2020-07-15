@@ -3,8 +3,8 @@ import { Switch, Route } from "react-router-dom";
 import Homepage from './Pages/Homepage'
 import Login from './Pages/Login'
 import Signup from './Pages/Signup'
-import AddLeadMUI from './Pages/AddLeadMUI'
-import AddContactMUI from './Pages/AddContactMUI'
+import AddLead from './Pages/AddLead'
+import AddContact from './Pages/AddContact'
 import LeadDetails from './Pages/LeadDetails'
 import NavDrawer from "./Components/NavDrawer"
 import { useDispatch } from "react-redux";
@@ -25,8 +25,8 @@ function App() {
       <Switch>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={Signup}/>     
-        <Route path="/contacts/add" component={AddContactMUI}/>
-        <Route path="/leads/add" component={AddLeadMUI}/>
+        <Route path="/contacts/add" component={AddContact}/>
+        <Route path="/leads/add" component={AddLead}/>
         <Route path="/leads/:id" component={LeadDetails}/>
         <Route path="/" component={Homepage}/>
       </Switch>

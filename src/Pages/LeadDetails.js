@@ -13,6 +13,7 @@ import PlanActionForm from '../Components/PlanActionForm'
 import MyTimeline from '../Components/Timeline/MyTimeline'
 import ContactCard from '../Components/ContactCard';
 import LeafletMap from '../Components/LeafletMap';
+import { setMessage } from '../store/appState/actions';
 
 export default function LeadDetails() {
     const dispatch = useDispatch()
@@ -33,8 +34,12 @@ export default function LeadDetails() {
             dispatch(fetchLeads)
         } 
         dispatch(fetchUsers)
-    }, [dispatch])
+    }, [dispatch, lead])
 
+    if(!lead) {
+        setMessage("succes", true, "Pagina opnieuw laden")
+        return <></>
+    }
     return (
         <Box mt={15}>
             <Box ml={15}>
