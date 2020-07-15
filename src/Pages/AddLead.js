@@ -24,20 +24,21 @@ export default function AddProspect() {
     const [supplier, set_supplier] = useState("")
     const [contactId, set_contactId] = useState(1)
     const [contact_toggle, set_contact_toggle] = useState(false)
+    const [job_title, set_job_title] = useState("")
+    const [add_contact, set_add_contact] = useState(false)
     const dispatch = useDispatch();
     const token = useSelector(selectToken);
     const history = useHistory();
     const contacts = useSelector(selectContacts)
 
     useEffect(() => {
-        if (!token) {
-          history.push("/");
-        } 
         dispatch(fetchContacts)
       }, [token, history]);
-    console.log("Phone ", company_phone)
-    const submitLeadForm = () => {
-        dispatch(addLead(
+
+
+    const submitLeadForm = (event) => {
+      event.preventDefault()
+      dispatch(addLead(
           company_name, 
           associated_company_name,
           company_phone, 
@@ -54,16 +55,19 @@ export default function AddProspect() {
         set_contactId()
     }
 
-    const submitContactForm = () => {
+    console.log(add_contact)
+
+    const submitContactForm = (event) => {
+      event.preventDefault()  
       dispatch(addContact(
           contact_name,
           contact_email,
-          contact_phone))
+          contact_phone,
+          job_title))
       
       set_contact_name("")
       set_contact_email("")
-      set_contact_phone("")  
-      set_contact_toggle(false)   
+      set_contact_phone("")     
   }
 
     if (contact_toggle) {
@@ -83,7 +87,15 @@ export default function AddProspect() {
                           required
                       />   
                   </Form.Group>
-  
+                  <Form.Group>
+                      <Form.Label>Functie</Form.Label>
+                      <Form.Control
+                          value={job_title}
+                          onChange={event => set_job_title(event.target.value)}
+                          type="text"
+                          placeholder="Voer de functie in van het contact persoon"
+                      />   
+                  </Form.Group>
                   <Form.Group>
                       <Form.Label>Email</Form.Label>
                       <Form.Control
@@ -94,7 +106,6 @@ export default function AddProspect() {
                           required
                       />   
                   </Form.Group>
-  
                   <Form.Group>
                       <Form.Label>Telefoon</Form.Label>
                       <Form.Control
@@ -105,7 +116,6 @@ export default function AddProspect() {
                           required
                       />   
                   </Form.Group>
-  
                   <Form.Group className="mt-3">
                       <Button variant="primary" type="submit" onClick={submitContactForm}>
                           Voeg contact toe
@@ -115,7 +125,7 @@ export default function AddProspect() {
               </Box>
           </Container>
       )
-    } else {
+    } else if (add_contact){
     return (
     <Container>
       <SnackBar/>
@@ -186,6 +196,16 @@ export default function AddProspect() {
                 required
               />
             </Form.Group>
+            <Form.Group>
+              <Form.Label>Contact toevoegen</Form.Label>
+              <Form.Control
+                value={true || false}
+                onChange={event => set_add_contact(event.target.value)}
+                type="checkbox"
+                required
+              />
+            </Form.Group>
+          
             <Form.Group className="mt-3">
               <Form.Label>Selecteer een contact persoon</Form.Label>
               <Form.Control 
@@ -218,5 +238,95 @@ export default function AddProspect() {
       </Box>
     </Container>
     ) 
-}}
+    } else {
+    return (
+      <Box>
+        <SnackBar/>
+          <Box mt={15}>
+            <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3">
+                <h1 className="mt-5 mb-3">Niewe lead</h1>
+
+                <Form.Group controlId="formBasicCompanyName">
+                  <Form.Label>Bedrijfs naam</Form.Label>
+                  <Form.Control
+                    value={company_name}
+                    onChange={event => set_company_name(event.target.value)}
+                    type="text"
+                    placeholder="Voer de bedrijfsnaam in"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicAssociatedCompanyName">
+                  <Form.Label>Partners</Form.Label>
+                  <Form.Control
+                    value={associated_company_name}
+                    onChange={event => set_associated_company_name(event.target.value)}
+                    type="text"
+                    placeholder="Voeg partners toe. Bijvoorbeeld: Vermaat Groep"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicCompanyPhone">
+                  <Form.Label>Telefoon nummer</Form.Label>
+                  <Form.Control
+                    value={company_phone}
+                    onChange={event => set_company_phone(event.target.value)}
+                    type="text"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicCompanyEmailAddress">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    value={company_email}
+                    onChange={event => set_company_email(event.target.value)}
+                    type="text"
+                    placeholder="Voeg email toe"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicCompanyAddress">
+                  <Form.Label>Address</Form.Label>
+                  <Form.Control
+                    value={company_address}
+                    onChange={event => set_company_address(event.target.value)}
+                    type="text"
+                    placeholder="Voeg address gegevens toe"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formBasicCompanySupplier">
+                  <Form.Label>Leverancier</Form.Label>
+                  <Form.Control
+                    value={supplier}
+                    onChange={event => set_supplier(event.target.value)}
+                    type="text"
+                    placeholder="Voeg leverancier toe "
+                    required
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Contact toevoegen</Form.Label>
+                  <Form.Control
+                    value={add_contact}
+                    onChange={event => set_add_contact(event.target.value)}
+                    type="checkbox"
+                    required
+                  />
+                </Form.Group>          
+                <Form.Group className="mt-3">
+                  <Button variant="primary" type="submit" onClick={submitLeadForm}>
+                    Voeg lead toe
+                  </Button>
+                </Form.Group>
+          </Form>
+        </Box>
+      </Box>
+    )
+  }
+}
 
