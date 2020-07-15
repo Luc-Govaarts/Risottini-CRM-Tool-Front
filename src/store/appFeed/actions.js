@@ -89,6 +89,19 @@ export async function fetchLeads(dispatch, getState) {
   const leads = res.data                            
   dispatch(storeLeads(leads))
 }   
+export function updateContact(contactId, leadId) {
+  return async function updateContact(dispatch, getState) {
+    dispatch(startLoading(true))
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({ method: 'patch',
+                              url: `${apiUrl}/leads/${leadId}/contact`,
+                              data: {contactId},
+                              headers: {'Authorization': `Bearer ${token}`}})
+    const contacts = res.data                    
+    dispatch(storeUpdatedLead(res.data))
+  } 
+}
 
 export async function fetchContacts(dispatch, getState) {
   dispatch(startLoading(true))

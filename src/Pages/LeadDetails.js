@@ -1,10 +1,10 @@
-import React, { useEffect }from 'react'
+import React, { useState, useEffect }from 'react'
 import { useParams, useHistory} from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
-import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
-import { selectLeadById} from '../store/appFeed/selectors'
+import { fetchLeads, fetchUsers, fetchContacts, updateContact} from '../store/appFeed/actions'
+import { selectLeadById, selectContacts} from '../store/appFeed/selectors'
 import { selectToken } from "../store/user/selectors";
-import { Box, Grid, Typography, Card } from'@material-ui/core'
+import { Box, Grid, Typography, Card, Button, Select, MenuItem, FormControl } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
 import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
@@ -14,16 +14,34 @@ import MyTimeline from '../Components/Timeline/MyTimeline'
 import ContactCard from '../Components/ContactCard';
 import LeafletMap from '../Components/LeafletMap';
 import { setMessage } from '../store/appState/actions';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+        marginBottom: theme.spacing(1),
+        width: '100%',
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
 
 export default function LeadDetails() {
+    const classes = useStyles();
     const dispatch = useDispatch()
     const params = useParams()   
     const leadId = parseInt(params.id)
     const lead = useSelector(selectLeadById(leadId))
     const reports = {...lead}.reports || []
     const contact = {...lead}.contact
+    const contacts = useSelector(selectContacts)
     const token = useSelector(selectToken)
     const history = useHistory();
+    const [contactId, set_contactId] = useState(1)
 
     if(!token) {
         history.push("/login")
@@ -33,8 +51,18 @@ export default function LeadDetails() {
         if(!lead) {
             dispatch(fetchLeads)
         } 
+        dispatch(fetchContacts)
         dispatch(fetchUsers)
     }, [dispatch, lead])
+
+    const submitNewContact = (event) => {
+        event.preventDefault()
+
+        dispatch(updateContact(contactId, leadId))
+
+        set_contactId(null)
+    }
+
 
     if(!lead) {
         setMessage("succes", true, "Pagina opnieuw laden")
@@ -96,9 +124,47 @@ export default function LeadDetails() {
                                     createdAt={contact.createdAt}/>
                             </Box> 
                         </Box>
-                        : <Box mt={4}>
-                            <Typography>Voeg contact toe</Typography>
-                        </Box>}     
+                        :   <Box m={3}>
+                                <Box>
+                                    <Typography variant="h5">Contact</Typography>
+                                </Box>
+                                <Box mt={3}>
+                                    <Card>
+                                        <Typography variant="h5">Selecteer contact</Typography>
+                                        <Box>
+                                            <form className={classes.form} onSubmit={submitNewContact} noValidate>
+                                                <FormControl className={classes.formControl}>
+                                                    <Select
+                                                        value={contactId}
+                                                        onChange={event => set_contactId(event.target.value)}                                         
+                                                        variant="outlined" 
+                                                        label="Contact persoon"
+                                                    >
+                                                    {contacts.map(contact => {
+                                                        return <MenuItem key={contact.id} value={contact.id}
+                                                            >{contact.name}</MenuItem> 
+                                                        })
+                                                    }
+                                                    </Select>
+                                                </FormControl>
+                                                <Button
+                                                    type="submit"
+                                                    variant="contained"
+                                                    color="primary"
+                                                >Voeg geselecteerd contact toe
+                                                </Button>
+                                                <Button
+                                                    href="/contacts/add"
+                                                    name="addNewContact"
+                                                    variant="contained"
+                                                    color="primary"
+                                                >Voeg nieuw contact toe
+                                                </Button>
+                                            </form>
+                                        </Box>
+                                    </Card>
+                                </Box>
+                            </Box>}     
                     </Grid>                                 
                 </Grid>
             </Box>
