@@ -63,8 +63,6 @@ export default function AddContact() {
     set_job_title("")     
     }
     
-    console.log("*******")
-
     return (
         <Box mt={12}>
             <SnackBar/>

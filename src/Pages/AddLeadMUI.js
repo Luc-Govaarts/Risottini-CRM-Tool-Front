@@ -36,10 +36,9 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-
 export default function AddLeadMUI() {
     const classes = useStyles();
-    const [toggle_state, set_toggle_state] = useState(false)
+    const [toggle_state, set_toggle_state] = useState({addContact: false})
     const [company_name, set_company_name] = useState("")
     const [associated_company_name, set_associated_company_name] = useState("")
     const [company_phone, set_company_phone] = useState()
@@ -61,7 +60,6 @@ export default function AddLeadMUI() {
             dispatch(fetchContacts)
         }
     }, [contacts]);
-
 
     const submitLeadForm = (event) => {
         event.preventDefault()
@@ -135,18 +133,6 @@ export default function AddLeadMUI() {
                             autoFocus
                         />
                         <TextField
-                            onChange={event => set_company_phone(event.target.value)}
-                            value={company_phone}
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="company_phone"
-                            label="Telefoon nummer"
-                            name="company_phone"
-                            autoFocus
-                        />
-                        <TextField
                             onChange={event => set_company_email(event.target.value)}
                             value={company_email}
                             variant="outlined"
@@ -184,14 +170,14 @@ export default function AddLeadMUI() {
                         />
                         <FormControlLabel
                             control={<Switch 
-                                    checked={toggle_state.checkedA} 
-                                    onChange={handleContactToggle} 
-                                    name="addContact"
-                                />}
+                                        checked={toggle_state.addContact}
+                                        onChange={handleContactToggle}
+                                        name="addContact"
+                                    />}
                             label="Voeg contact toe"
                         />
                         <Box>
-                            {toggle_state ? 
+                            {toggle_state.addContact ? 
                                 <Box>
                                     <FormControl className={classes.formControl}>
                                         <Select
@@ -208,7 +194,7 @@ export default function AddLeadMUI() {
                                         </Select>
                                     </FormControl>
                                     <Button
-                                        onClick={history.push("/contacts/add")}
+                                        href="/contacts/add"
                                         name="addNewContact"
                                         fullWidth
                                         variant="contained"
