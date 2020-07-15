@@ -50,64 +50,56 @@ export default function LeadDetails() {
                 <Grid 
                     container
                     direction="row"
-                    justify="flex-start">
-                        <Grid xs={5} item> 
-                            <Box mr={12}> 
-                                <Grid
-                                container           
-                                direction="column"
-                                justify="flex-start"
-                                flex-wrap="wrap">                                         
-                                    <Grid item>
-                                        <Box mt={4}>
-                                            <Typography variant="h5">Details</Typography>
-                                        </Box>
-                                        <Box mt={3} >
-                                            <LeadCard
-                                                userId={lead.userId}
-                                                address={lead.company_address}
-                                                phone={lead.company_phone}
-                                                email={lead.company_email}
-                                                supplier={lead.supplier}
-                                                createdAt={lead.createdAt}/>
-                                        </Box>
-                                    </Grid>
-                                    <Grid item>
-                                        {contact ? 
-                                        <Box mt={4} >
-                                            <Box>
-                                                <Typography variant="h5">Contact</Typography>
-                                            </Box>
-                                            <Box mt={3}>
-                                                <ContactCard
-                                                    key={contact.id}
-                                                    name={contact.name}
-                                                    email={contact.email}
-                                                    phone={contact.phone}
-                                                    createdAt={contact.createdAt}/>
-                                            </Box> 
-                                        </Box>
-                                        : <Box mt={4}>
-                                            <Typography>Voeg contact toe</Typography>
-                                        </Box>}     
-                                    </Grid>                                 
-                                </Grid>
+                    justify="space-between"
+                >                                    
+                    <Grid item xs={4}>
+                        <Box m={3}>
+                            <Box >
+                                <Typography variant="h5">Details</Typography>
                             </Box>
-                        </Grid>
-                        <Grid xs={7} item>
-                            <Box mt={4}>
-                                <Box mt={4} >
-                                    <Typography variant="h5">Kaart</Typography>
-                                </Box>
-                                <Box mt={3}>
-                                    <Card style={{width: "1000px", height: "500px"}}>
-                                        <LeafletMap id={lead.id}
-                                                    lat={lead.lat}
-                                                    lng={lead.lng}/>
-                                    </Card>
-                                </Box>
+                            <Box mt={3}>
+                                <LeadCard
+                                    userId={lead.userId}
+                                    address={lead.company_address}
+                                    phone={lead.company_phone}
+                                    email={lead.company_email}
+                                    supplier={lead.supplier}
+                                    createdAt={lead.createdAt}/>
                             </Box>
-                        </Grid>    
+                        </Box>
+                    </Grid>
+                    <Grid item xs={3}> 
+                        <Box m={3}>
+                            <Box>
+                                <Typography variant="h5">Verkoop fase</Typography>
+                            </Box>
+                            <Box mt={3}>
+                                <PhaseCard 
+                                    phase={lead.salesCyclePhase.name}
+                                    phase_id={lead.salesCyclePhaseId}
+                                    leadId={leadId}/>
+                            </Box>
+                        </Box>
+                    </Grid>   
+                    <Grid item xs={4}>
+                        {contact ? 
+                        <Box m={3}>
+                            <Box>
+                                <Typography variant="h5">Contact</Typography>
+                            </Box>
+                            <Box mt={3}>
+                                <ContactCard
+                                    key={contact.id}
+                                    name={contact.name}
+                                    email={contact.email}
+                                    phone={contact.phone}
+                                    createdAt={contact.createdAt}/>
+                            </Box> 
+                        </Box>
+                        : <Box mt={4}>
+                            <Typography>Voeg contact toe</Typography>
+                        </Box>}     
+                    </Grid>                                 
                 </Grid>
             </Box>
             <Box>
@@ -121,19 +113,6 @@ export default function LeadDetails() {
                                 container           
                                 direction="column"
                                 justify="flex-start">                                                         
-                                <Grid item> 
-                                    <Box mt={3}>
-                                        <Box>
-                                            <Typography variant="h5">Verkoop fase</Typography>
-                                        </Box>
-                                        <Box mt={3}>
-                                            <PhaseCard 
-                                                phase={lead.salesCyclePhase.name}
-                                                phase_id={lead.salesCyclePhaseId}
-                                                leadId={leadId}/>
-                                        </Box>
-                                    </Box>
-                                </Grid>
                                 <Grid item>
                                     <Box mt={3}>
                                         <Typography variant="h5">Notities</Typography>
@@ -176,7 +155,22 @@ export default function LeadDetails() {
                     </Grid>
                 </Grid>
             </Box>
+            <Box mt={4} w={1} h={"500px"}>
+                <Box mt={4} >
+                    <Typography variant="h5">Kaart</Typography>
+                </Box>
+                <Box mt={3}>
+                    <Card style={{width: "1000px", height: "500px"}}>
+                        <LeafletMap id={lead.id}
+                                    lat={lead.lat}
+                                    lng={lead.lng}/>
+                    </Card>
+                </Box>
+            </Box>
         </Box>
+
+    
     )
 }  
+
 
