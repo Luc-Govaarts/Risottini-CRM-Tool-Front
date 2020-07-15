@@ -93,15 +93,13 @@ export default function LeadDetails() {
                                 <ContactCard
                                     key={contact.id}
                                     name={contact.name}
+                                    job_title={contact.job_title}
                                     email={contact.email}
                                     phone={contact.phone}
                                     createdAt={contact.createdAt}/>
                             </Box> 
                         </Box>
                         :   <Box m={3}>
-                                <Box>
-                                    <Typography variant="h5">Contact</Typography>
-                                </Box>
                                 <ConnectContactCard leadId={leadId}/>
                             </Box>}     
                     </Grid>                                 

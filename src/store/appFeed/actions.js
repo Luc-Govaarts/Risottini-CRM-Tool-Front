@@ -97,8 +97,7 @@ export function updateContact(contactId, leadId) {
     const res = await axios({ method: 'patch',
                               url: `${apiUrl}/leads/${leadId}/contact`,
                               data: {contactId},
-                              headers: {'Authorization': `Bearer ${token}`}})
-    const contacts = res.data                    
+                              headers: {'Authorization': `Bearer ${token}`}})             
     dispatch(storeUpdatedLead(res.data))
   } 
 }

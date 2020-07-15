@@ -4,7 +4,7 @@ import { updateContact } from '../store/appFeed/actions'
 import { selectContacts } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles';
 import { fetchContacts } from '../store/appFeed/actions';
-import { Box, Typography, Card, Button, Select, MenuItem, FormControl } from'@material-ui/core'
+import { Box, CardHeader, CardContent, Card, Button, Select, MenuItem, FormControl } from'@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -47,37 +47,41 @@ export default function ConnectContactCard(props) {
         <div>
             <Box mt={3}>
                 <Card>
-                    <Typography variant="h5">Selecteer contact</Typography>
-                    <Box>
-                        <form className={classes.form} onSubmit={submitNewContact} noValidate>
-                            <FormControl className={classes.formControl}>
-                                <Select
-                                    value={contactId}
-                                    onChange={event => set_contactId(event.target.value)}                                         
-                                    variant="outlined" 
-                                    label="Contact persoon"
-                                >
-                                {contacts.map(contact => {
-                                    return <MenuItem key={contact.id} value={contact.id}
-                                        >{contact.name}</MenuItem> 
-                                    })
-                                }
-                                </Select>
-                            </FormControl>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                            >Voeg geselecteerd contact toe
-                            </Button>
-                            <Button
-                                href="/contacts/add"
-                                name="addNewContact"
-                                variant="contained"
-                                color="primary"
-                            >Voeg nieuw contact toe
-                            </Button>
-                        </form>
+                    <Box m={3}>
+                        <CardHeader title="Selecteer een contact"/>
+                        <CardContent>
+                            <form className={classes.form} onSubmit={submitNewContact} noValidate>
+                                <FormControl className={classes.formControl}>
+                                    <Select
+                                        value={contactId}
+                                        onChange={event => set_contactId(event.target.value)}                                         
+                                        variant="outlined" 
+                                        label="Contact persoon"
+                                    >
+                                    {contacts.map(contact => {
+                                        return <MenuItem key={contact.id} value={contact.id}
+                                            >{contact.name}</MenuItem> 
+                                        })
+                                    }
+                                    </Select>
+                                </FormControl>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                >Voeg geselecteerd contact toe
+                                </Button>
+                                <Box m={1}>
+                                </Box>
+                                <Button
+                                    href="/contacts/add"
+                                    name="addNewContact"
+                                    variant="contained"
+                                    color="primary"
+                                >Voeg nieuw contact toe
+                                </Button>
+                            </form>
+                        </CardContent>
                     </Box>
                 </Card>
             </Box>
