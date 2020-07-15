@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Box, Card, CardHeader, CardContent, Button, TextField} from '@material-ui/core'
+import { Box, Card, CardHeader, CardContent, Button, TextField } from '@material-ui/core'
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker  } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 import { useDispatch } from 'react-redux'
 import { createAction } from '../store/appFeed/actions'
 
 export default function PlanActionForm(props) {
     const [action, set_action] = useState('')
     const [date, set_date] = useState()
+    const [time, set_time] = useState()
     const [note, set_note] = useState('')
     const leadId = props.leadId
     const dispatch= useDispatch()
@@ -15,6 +18,7 @@ export default function PlanActionForm(props) {
             leadId,
             action,
             date,
+            time,
             note
         ))
 
@@ -24,7 +28,8 @@ export default function PlanActionForm(props) {
     }
     
     return (
-            <Card style={{ minWidth: "500px"}}>
+            <Card>
+                <MuiPickersUtilsProvider utils={MomentUtils}>
                 <Box m={3}>
                     <CardHeader title="Plan een actie"/>
                     <CardContent>
@@ -38,16 +43,29 @@ export default function PlanActionForm(props) {
                             required
                             fullWidth
                             autoFocus/>
-                        <TextField
-                            onChange={e => {set_date(e.target.value)}}
+                         <KeyboardDatePicker
+                            disableToolbar
+                            variant="inline"
+                            format="dd/MM/yyyy"
+                            margin="normal"
+                            id="date-picker-inline"
+                            label="Date picker inline"
                             value={date}
-                            id="datetime-local"
-                            label="volgende Afspraak"
-                            type="datetime-local"
-                            defaultValue="2017-05-24T10:30"
-                            InputLabelProps={{
-                            shrink: true,
-                            }}/>
+                            onChange={e => set_date(e.target.action)}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date',
+                            }}
+                        />
+                        <KeyboardTimePicker
+                            margin="normal"
+                            id="time-picker"
+                            label="Time picker"
+                            value={time}
+                            onChange={e => set_time(e.target.value)}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change time',
+                            }}
+                        />
                         <TextField
                             onChange={e => {set_note(e.target.value)}}
                             value={note}
@@ -68,6 +86,7 @@ export default function PlanActionForm(props) {
                         </form>
                     </CardContent>
                 </Box>
+                </MuiPickersUtilsProvider>
             </Card>
     )
 }

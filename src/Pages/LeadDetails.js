@@ -6,7 +6,6 @@ import { selectLeadById } from '../store/appFeed/selectors'
 import { selectToken } from "../store/user/selectors";
 import { Box, Grid, Typography, Card } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
-import ReportCard from '../Components/ReportCard'
 import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'
 import PlanActionForm from '../Components/PlanActionForm'
@@ -22,7 +21,6 @@ export default function LeadDetails() {
     const params = useParams()   
     const leadId = parseInt(params.id)
     const lead = useSelector(selectLeadById(leadId))
-    const reports = {...lead}.reports || []
     const contact = {...lead}.contact
     const token = useSelector(selectToken)
     const history = useHistory();
@@ -48,11 +46,11 @@ export default function LeadDetails() {
                 <Typography variant="h3">{lead.company_name}</Typography>
                 <Typography variant="h4">{lead.associated_company_name}</Typography>
             </Box>
-            <Box ml={3}>
+            <Box>
                 <Grid 
                     container
                     direction="row"
-                    justify="space-between"
+                    justify="flex-start"
                 >                                    
                     <Grid item xs={4}>
                         <Box m={3}>
@@ -70,7 +68,7 @@ export default function LeadDetails() {
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid item xs={3}> 
+                    <Grid item xs={4}> 
                         <Box m={3}>
                             <Box>
                                 <Typography variant="h5">Verkoop fase</Typography>
@@ -110,34 +108,18 @@ export default function LeadDetails() {
                 container
                 direction="row"
                 justify="flex-start">
-                    <Grid xs={3} item>
-                        <Box ml={3}>
-                            <Grid 
-                                container           
-                                direction="column"
-                                justify="flex-start">                                                         
-                                <Grid item>
-                                    <Box mt={3}>
-                                        <Typography variant="h5">Notities</Typography>
-                                    </Box>
-                                    <Box mt={3}>
-                                        <AddReportForm leadId={leadId}/>
-                                    </Box>
-                                    {reports.map(report => {
-                                        return <Box key={report.id}
-                                                    mt={3}>
-                                                <ReportCard
-                                                    key={report.id}
-                                                    userId={report.userId}
-                                                    lead={lead.company_name}
-                                                    note={report.note}
-                                                    createdAt={report.createdAt}/></Box>})}
-                                </Grid>
-                            </Grid>
-                        </Box> 
+                    <Grid item xs={3}>
+                        <Box m={3}>
+                            <Box mt={3}>
+                                <Typography variant="h5">Notities</Typography>
+                            </Box>
+                            <Box mt={3}>
+                                <AddReportForm leadId={leadId}/>
+                            </Box>
+                        </Box>
                     </Grid>
-                    <Grid xs={5} item>
-                        <Box ml={4} mt={3}>
+                    <Grid item xs={5}>
+                        <Box mt={3}>
                             <Box ml={3}>
                                 <Typography variant="h5">Tijdlijn</Typography>
                             </Box>
@@ -146,8 +128,8 @@ export default function LeadDetails() {
                             </Box>
                         </Box>        
                     </Grid>
-                    <Grid xs={3} item>
-                        <Box ml={5}> 
+                    <Grid item xs={4}>
+                        <Box m={3}> 
                             <Box ml={3} mt={4}>
                                 <Typography variant="h5">Acties</Typography>
                             </Box>
@@ -171,8 +153,6 @@ export default function LeadDetails() {
                 </Box>
             </Box>
         </Box>
-
-    
     )
 }  
 
