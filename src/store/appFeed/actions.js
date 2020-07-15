@@ -152,14 +152,15 @@ export function addLead(company_name, associated_company_name,
   }
 }
 
-export function addContact(contact_name, contact_email, contact_phone) {
+export function addContact(contact_name, contact_email, contact_phone, job_title) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
     const res = await axios({method: 'post',
                               url: `${apiUrl}/contacts`,
-                              data: {contact_name, contact_email, contact_phone},
+                              data: {contact_name, contact_email, 
+                                    contact_phone, job_title},
                               headers: {'Authorization': `Bearer ${token}`}})
   
     dispatch(storeNewContact(res.data))

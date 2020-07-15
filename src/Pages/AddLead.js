@@ -1,45 +1,70 @@
 import React, { useState, useEffect } from "react";
-import { Box } from '@material-ui/core'
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
+import { Button, Container, Avatar, 
+    FormControlLabel, TextField, Select, 
+    Typography, Box, Switch,
+    MenuItem, FormControl } from '@material-ui/core';
 import { selectToken } from "../store/user/selectors";
 import { selectContacts } from '../store/appFeed/selectors';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Col } from "react-bootstrap";
 import { addLead, fetchContacts } from "../store/appFeed/actions";
-import { addContact } from '../store/appFeed/actions'
 import SnackBar from "../Components/NavDrawer/SnackBar";
+import  WorkIcon from '@material-ui/icons/Work';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function AddProspect() {
-    const [contact_name, set_contact_name] = useState("")
-    const [contact_email, set_contact_email] = useState("")
-    const [contact_phone, set_contact_phone] = useState("")
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    }, 
+    formControl: {
+        marginBottom: theme.spacing(1),
+        width: '100%',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%',
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+  }));
+
+export default function AddLeadMUI() {
+    const classes = useStyles();
+    const [toggle_state, set_toggle_state] = useState({addContact: false})
     const [company_name, set_company_name] = useState("")
     const [associated_company_name, set_associated_company_name] = useState("")
     const [company_phone, set_company_phone] = useState()
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
-    const [contactId, set_contactId] = useState(1)
-    const [contact_toggle, set_contact_toggle] = useState(false)
+    const [contactId, set_contactId] = useState("")
     const dispatch = useDispatch();
     const token = useSelector(selectToken);
     const history = useHistory();
     const contacts = useSelector(selectContacts)
 
+    if (!token) {
+      history.push("/");
+    } 
+
     useEffect(() => {
-        if (!token) {
-          console.log("******REDIRECT*******")
-          history.push("/");
-        } 
-        dispatch(fetchContacts)
-      }, [token, history]);
+        if (!contacts || !contacts[0]) {
+            dispatch(fetchContacts)
+        }
+    }, [contacts]);
 
     const submitLeadForm = (event) => {
-      event.preventDefault()  
-      dispatch(addLead(
+        event.preventDefault()
+
+        dispatch(addLead(
           company_name, 
           associated_company_name,
           company_phone, 
@@ -56,170 +81,141 @@ export default function AddProspect() {
         set_contactId(1)
     }
 
-    const submitContactForm = (event) => {
-      event.preventDefault()
-      dispatch(addContact(
-          contact_name,
-          contact_email,
-          contact_phone))
-      
-      set_contact_name("")
-      set_contact_email("")
-      set_contact_phone("")  
-      set_contact_toggle(false)   
-  }
+    const handleContactToggle = (event) => {
+        set_toggle_state({ ...toggle_state, [event.target.name]: event.target.checked });
+    }
 
-    if (contact_toggle) {
-      return (
-          <Container>
-            <SnackBar/>
-            <Box mt={15}>
-              <Form as={Col} md={{ span: 6, offset: 3 }} onSubmit={submitContactForm}>
-                  <h1 className="mt-3 mb-3">Niew Contact Persoon</h1>
-                  <Form.Group>
-                      <Form.Label>Naam</Form.Label>
-                      <Form.Control
-                          value={contact_name}
-                          onChange={event => set_contact_name(event.target.value)}
-                          type="text"
-                          placeholder="Voer de naam in van het contact persoon"
-                          required
-                      />   
-                  </Form.Group>
-  
-                  <Form.Group>
-                      <Form.Label>Email</Form.Label>
-                      <Form.Control
-                          value={contact_email}
-                          onChange={event => set_contact_email(event.target.value)}
-                          type="text"
-                          placeholder="Voer het email address in van het contact persoon"
-                          required
-                      />   
-                  </Form.Group>
-  
-                  <Form.Group>
-                      <Form.Label>Telefoon</Form.Label>
-                      <Form.Control
-                          value={contact_phone}
-                          onChange={event => set_contact_phone(event.target.value)}
-                          type="text"
-                          placeholder="Voer nummer in van het contact persoon"
-                          required
-                      />   
-                  </Form.Group>
-  
-                  <Form.Group className="mt-3">
-                      <Button variant="primary" type="submit" onClick={submitContactForm}>
-                          Voeg contact toe
-                      </Button>
-                  </Form.Group>
-              </Form>
-              </Box>
-          </Container>
-      )
-    } else {
     return (
-    <Container>
-      <SnackBar/>
-      <Box mt={15}>
-        <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-3" onSubmit={submitLeadForm}>
-            <h1 className="mt-5 mb-3">Niewe lead</h1>
-
-            <Form.Group controlId="formBasicCompanyName">
-              <Form.Label>Bedrijfs naam</Form.Label>
-              <Form.Control
-                value={company_name}
-                onChange={event => set_company_name(event.target.value)}
-                type="text"
-                placeholder="Voer de bedrijfsnaam in"
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicAssociatedCompanyName">
-              <Form.Label>Partners</Form.Label>
-              <Form.Control
-                value={associated_company_name}
-                onChange={event => set_associated_company_name(event.target.value)}
-                type="text"
-                placeholder="Voeg partners toe. Bijvoorbeeld: Vermaat Groep"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicCompanyPhone">
-              <Form.Label>Telefoon nummer</Form.Label>
-              <Form.Control
-                value={company_phone}
-                onChange={event => set_company_phone(event.target.value)}
-                type="text"
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicCompanyEmailAddress">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                value={company_email}
-                onChange={event => set_company_email(event.target.value)}
-                type="text"
-                placeholder="Voeg email toe"
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicCompanyAddress">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                value={company_address}
-                onChange={event => set_company_address(event.target.value)}
-                type="text"
-                placeholder="Voeg address gegevens toe"
-                required
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formBasicCompanySupplier">
-              <Form.Label>Leverancier</Form.Label>
-              <Form.Control
-                value={supplier}
-                onChange={event => set_supplier(event.target.value)}
-                type="text"
-                placeholder="Voeg leverancier toe "
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mt-3">
-              <Form.Label>Selecteer een contact persoon</Form.Label>
-              <Form.Control 
-                value={contactId}
-                onChange={event => set_contactId(event.target.value)}
-                as="select"
-                placeholder="Voeg contact persoon toe"
-                required>
-                  {contacts.map(contact => {
-                    return <option 
-                      key={contact.id}
-                      value={contact.id}>
-                      {contact.name}
-                      </option>
-                  })}
-                </Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Of maak een nieuw contact</Form.Label>
-            </Form.Group>
-                <Button variant="primary"
-                  value={true}
-                  onClick={event => set_contact_toggle(event.target.value)}>Maak nieuw contact</Button>            
-            <Form.Group className="mt-3">
-              <Button variant="primary" type="submit" onClick={submitLeadForm} >
-                Voeg lead toe
-              </Button>
-            </Form.Group>
-        </Form>
-      </Box>
-    </Container>
-    ) 
-}}
-
+        <Box mt={12}>
+            <SnackBar/>
+            <Container component="main" maxWidth="xs">
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <WorkIcon/>
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                    Voeg nieuwe lead toe 
+                    </Typography>
+                    <form className={classes.form} onSubmit={submitLeadForm} noValidate>
+                        <TextField
+                            onChange={event => set_company_name(event.target.value)}
+                            value={company_name}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="company_name"
+                            label="Voer de bedrijfsnaam in"
+                            name="company_name"
+                            autoFocus
+                        />
+                        <TextField
+                            onChange={event => set_associated_company_name(event.target.value)}
+                            value={associated_company_name}
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            id="associated_company_name"
+                            label="Voeg partners toe. Bijvoorbeeld: Vermaat Groep"
+                            name="associated_company_name"
+                            autoFocus
+                        />
+                        <TextField
+                            onChange={event => set_company_phone(event.target.value)}
+                            value={company_phone}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="company_phone"
+                            label="Telefoon nummer"
+                            name="company_phone"
+                            autoFocus
+                        />
+                        <TextField
+                            onChange={event => set_company_email(event.target.value)}
+                            value={company_email}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="company_email"
+                            label="Voeg email toe"
+                            name="company_email"
+                            autoFocus
+                        />
+                        <TextField
+                            onChange={event => set_company_address(event.target.value)}
+                            value={company_address}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="company_address"
+                            label="Voeg address toe"
+                            name="company_address"
+                            autoFocus
+                        />
+                        <TextField
+                            onChange={event => set_supplier(event.target.value)}
+                            value={supplier}
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="supplier"
+                            label="Leverancier"
+                            name="supplier"
+                            autoFocus
+                        />
+                        <FormControlLabel
+                            control={<Switch 
+                                        checked={toggle_state.addContact}
+                                        onChange={handleContactToggle}
+                                        name="addContact"
+                                    />}
+                            label="Voeg contact toe"
+                        />
+                        <Box>
+                            {toggle_state.addContact ? 
+                                <Box>
+                                    <FormControl className={classes.formControl}>
+                                        <Select
+                                            value={contactId}
+                                            onChange={event => set_contactId(event.target.value)}                                         
+                                            variant="outlined" 
+                                            label="Contact persoon"
+                                        >
+                                        {contacts.map(contact => {
+                                            return <MenuItem key={contact.id} value={contact.id}
+                                                >{contact.name}</MenuItem> 
+                                            })
+                                        }
+                                        </Select>
+                                    </FormControl>
+                                    <Button
+                                        href="/contacts/add"
+                                        name="addNewContact"
+                                        fullWidth
+                                        variant="contained"
+                                        color="primary"
+                                    >Voeg nieuw contact toe
+                                    </Button>
+                                </Box>
+                                : null}
+                        </Box>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                        Voeg lead toe
+                        </Button>
+                    </form>
+                </div>
+            </Container>
+        </Box>
+    )
+}
