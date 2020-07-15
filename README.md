@@ -14,7 +14,7 @@ Do you want to see a live version of Crispy with some demo data?
 [here](https://ecstatic-rosalind-f39297.netlify.app)
 
 Log in with:
-Email: Demo@demo.com, password: demo1234
+Email: Demo@demo.com, password: test1234
 
 ### Who am I?
 I am Luc, part of class #40 from Codaisseur a 11 week JavaScript bootcamp.
