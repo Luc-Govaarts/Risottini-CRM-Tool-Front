@@ -8,7 +8,7 @@ import LeadDetails from './Pages/LeadDetails'
 import NavDrawer from "./Components/NavDrawer"
 import { useDispatch } from "react-redux";
 import { getUserWithStoredToken } from "./store/user/actions";
-import AddContactForm from "./Components/AddContactForm";
+import AddContact from "./Pages/AddContact";
 import SnackBar from './Components/NavDrawer/SnackBar';
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
         <Route path="/signup" component={Signup}/>
         <Route path="/leads/add" component={AddLeadMUI}/>
         <Route path="/leads/:id" component={LeadDetails}/>
-        <Route path="/contacts/add" components={AddContactForm}/>
+        <Route path="/contacts/add" components={AddContact}/>
         <Route path="/" component={Homepage}/>
       </Switch>
     </div>

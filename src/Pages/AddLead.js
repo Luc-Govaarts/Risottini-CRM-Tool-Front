@@ -31,13 +31,9 @@ export default function AddProspect() {
     const history = useHistory();
     const contacts = useSelector(selectContacts)
 
-    if (!token) {
-      history.push("/");
-    } 
-
     useEffect(() => {
         dispatch(fetchContacts)
-      }, );
+      }, [token, history]);
 
 
     const submitLeadForm = (event) => {

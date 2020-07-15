@@ -8,41 +8,38 @@ import { selectContacts } from '../store/appFeed/selectors';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addLead, fetchContacts } from "../store/appFeed/actions";
-import { addContact } from '../store/appFeed/actions'
 import SnackBar from "../Components/NavDrawer/SnackBar";
-import WorkIcon from '@material-ui/icons/Work';
+import  WorkIcon from '@material-ui/icons/Work';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     }, 
     formControl: {
-    minWidth: 395,
+        marginBottom: theme.spacing(1),
+        width: '100%',
     },
-
     avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%',
-      marginTop: theme.spacing(1),
+        width: '100%',
+        marginTop: theme.spacing(1),
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
   }));
 
-export default function AddProspect() {
+
+export default function AddLeadMUI() {
     const classes = useStyles();
-    const [toggle_state, set_toggle_state] = useState({addContact: false, addNewContact: false})
-    const [contact_name, set_contact_name] = useState("")
-    const [contact_email, set_contact_email] = useState("")
-    const [contact_phone, set_contact_phone] = useState("")
+    const [toggle_state, set_toggle_state] = useState(false)
     const [company_name, set_company_name] = useState("")
     const [associated_company_name, set_associated_company_name] = useState("")
     const [company_phone, set_company_phone] = useState()
@@ -50,8 +47,6 @@ export default function AddProspect() {
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
     const [contactId, set_contactId] = useState("")
-    const [job_title, set_job_title] = useState("")
-    const [add_contact, set_add_contact] = useState(false)
     const dispatch = useDispatch();
     const token = useSelector(selectToken);
     const history = useHistory();
@@ -88,32 +83,9 @@ export default function AddProspect() {
         set_contactId()
     }
 
-    const submitContactForm = (event) => {
-      event.preventDefault()  
-
-      dispatch(addContact(
-          contact_name,
-          contact_email,
-          contact_phone,
-          job_title))
-      
-      set_contact_name("")
-      set_contact_email("")
-      set_contact_phone("")     
-    }
-
     const handleContactToggle = (event) => {
         set_toggle_state({ ...toggle_state, [event.target.name]: event.target.checked });
     }
-
-    const handleAddNewContact = (event) => {
-        if (toggle_state.addNewContact === false) {
-            set_toggle_state({ ...toggle_state, addNewContact: true})
-        } else {
-            set_toggle_state({ ...toggle_state, addNewContact: false})
-        }
-    }
-
 
     return (
         <Box mt={12}>
@@ -219,10 +191,9 @@ export default function AddProspect() {
                             label="Voeg contact toe"
                         />
                         <Box>
-                            {toggle_state.addContact ? 
+                            {toggle_state ? 
                                 <Box>
-                                    <FormControl className={classes.formControl}
-                                                margin="normal">
+                                    <FormControl className={classes.formControl}>
                                         <Select
                                             value={contactId}
                                             onChange={event => set_contactId(event.target.value)}                                         
@@ -237,7 +208,7 @@ export default function AddProspect() {
                                         </Select>
                                     </FormControl>
                                     <Button
-                                        onClick={handleAddNewContact}
+                                        onClick={history.push("/contacts/add")}
                                         name="addNewContact"
                                         fullWidth
                                         variant="contained"
