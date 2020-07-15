@@ -11,7 +11,7 @@ Interested? see there page [here](https://www.risottini.com/)
 
 Do you want to see a live version of Crispy with some demo data?
 
-[here](https://ecstatic-rosalind-f39297.netlify.app/)
+[here](https://ecstatic-rosalind-f39297.netlify.app)
 
 Log in with:
 Email: Demo@demo.com, password: demo1234
