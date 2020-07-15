@@ -78,7 +78,7 @@ export default function AddLeadMUI() {
         set_company_address("")
         set_company_email("")
         set_supplier("")
-        set_contactId()
+        set_contactId(1)
     }
 
     const handleContactToggle = (event) => {
