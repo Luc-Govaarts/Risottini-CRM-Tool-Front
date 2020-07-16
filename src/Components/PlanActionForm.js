@@ -1,34 +1,44 @@
 import React, { useState } from 'react'
-import { Box, Card, CardHeader, CardContent, Button, TextField} from '@material-ui/core'
+import { Box, Card, CardHeader, CardContent, Button, TextField } from '@material-ui/core'
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker  } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+import moment from 'moment'
 import { useDispatch } from 'react-redux'
 import { createAction } from '../store/appFeed/actions'
 
 export default function PlanActionForm(props) {
     const [action, set_action] = useState('')
-    const [date, set_date] = useState()
+    const [date, set_date] = useState(new Date())
+    const [time, set_time] = useState(new Date())
     const [note, set_note] = useState('')
     const leadId = props.leadId
     const dispatch= useDispatch()
 
-    const submitHandler = () => {
+    const due_date = `${moment(date).format('YYYY-MM-DD')} ${ moment(time).format('HH:mm:ss')}`
+
+    const submitHandler = (event) => {
+        event.preventDefault()
+        
         dispatch(createAction(
             leadId,
             action,
-            date,
+            due_date,
             note
         ))
 
         set_action('')
         set_date(new Date())
+        set_time(new Date())
         set_note('')
     }
-    
+
     return (
-            <Card style={{ minWidth: "500px"}}>
+            <Card>
+                
                 <Box m={3}>
                     <CardHeader title="Plan een actie"/>
                     <CardContent>
-                        <form>
+                        <form onSubmit={submitHandler}>
                         <TextField
                             onChange={e => {set_action(e.target.value)}}
                             value={action}
@@ -38,16 +48,31 @@ export default function PlanActionForm(props) {
                             required
                             fullWidth
                             autoFocus/>
-                        <TextField
-                            onChange={e => {set_date(e.target.value)}}
-                            value={date}
-                            id="datetime-local"
-                            label="volgende Afspraak"
-                            type="datetime-local"
-                            defaultValue="2017-05-24T10:30"
-                            InputLabelProps={{
-                            shrink: true,
-                            }}/>
+                        <MuiPickersUtilsProvider utils={MomentUtils}>
+                            <KeyboardDatePicker
+                                disableToolbar
+                                variant="inline"
+                                format="YYYY-MM-DD"
+                                margin="normal"
+                                id="date-picker-inline"
+                                label="Datum"
+                                value={date}
+                                onChange={date => set_date(date)}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                            <KeyboardTimePicker
+                                margin="normal"
+                                id="time-picker"
+                                label="Tijd"
+                                value={time}
+                                onChange={time => set_time(time)}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change time',
+                                }}
+                            />
+                        </MuiPickersUtilsProvider>
                         <TextField
                             onChange={e => {set_note(e.target.value)}}
                             value={note}
@@ -59,7 +84,6 @@ export default function PlanActionForm(props) {
                             label="Notitie"
                             autoFocus/>
                         <Button
-                            onClick={submitHandler}
                             type="submit"
                             variant="contained"
                             color="primary">
