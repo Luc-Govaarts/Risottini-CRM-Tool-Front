@@ -140,7 +140,7 @@ export default function LeadDetails() {
                     </Grid>
                 </Grid>
             </Box>
-            <Box mt={4} >
+            <Box>
                 <Box m={4} >
                     <Typography variant="h5">Kaart</Typography>
                 </Box>
