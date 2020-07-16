@@ -208,7 +208,7 @@ export function changePhaseTo(newPhaseId, id) {
   }
 }
 
-export function createAction(leadId, action, date, note) {
+export function createAction(leadId, action, due_date, note) {
   return async function thunk(dispatch, getState) {
     dispatch(startLoading(true))
     const state = getState()
@@ -216,7 +216,7 @@ export function createAction(leadId, action, date, note) {
     const userId = state.user.id
     const res = await axios({ method: 'post',
                               url: `${apiUrl}/actions`,
-                              data: {leadId, userId, action, date, note},
+                              data: {leadId, userId, action, due_date, note},
                               headers: {'Authorization': `Bearer ${token}`}})
     dispatch(storeNewAction(res.data))
   }
