@@ -52,7 +52,7 @@ export default function PlanActionForm(props) {
                             <KeyboardDatePicker
                                 disableToolbar
                                 variant="inline"
-                                format="dd/MM/yyyy"
+                                format="YYYY-MM-DD"
                                 margin="normal"
                                 id="date-picker-inline"
                                 label="Datum"
