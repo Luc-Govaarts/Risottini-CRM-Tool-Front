@@ -210,6 +210,7 @@ export function changePhaseTo(newPhaseId, id) {
 
 export function createAction(leadId, action, due_date, note) {
   return async function thunk(dispatch, getState) {
+    console.log(due_date)
     dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 

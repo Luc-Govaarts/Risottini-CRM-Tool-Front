@@ -118,7 +118,7 @@ export default function LeadDetails() {
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid item xs={5}>
+                    <Grid item xs={6}>
                         <Box mt={3}>
                             <Box ml={3}>
                                 <Typography variant="h5">Tijdlijn</Typography>
@@ -128,7 +128,7 @@ export default function LeadDetails() {
                             </Box>
                         </Box>        
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <Box m={3}> 
                             <Box ml={3} mt={4}>
                                 <Typography variant="h5">Acties</Typography>
@@ -140,20 +140,17 @@ export default function LeadDetails() {
                     </Grid>
                 </Grid>
             </Box>
-            <Box mt={4} w={1} h={"500px"}>
-                <Box mt={4} >
+            <Box mt={4} >
+                <Box m={4} >
                     <Typography variant="h5">Kaart</Typography>
                 </Box>
-                <Box mt={3}>
-                    <Card style={{width: "1000px", height: "500px"}}>
+                <Box mt={3} width={1} height={"600px"}>
                         <LeafletMap id={lead.id}
                                     lat={lead.lat}
-                                    lng={lead.lng}/>
-                    </Card>
+                                    lng={lead.lng}
+                        />
                 </Box>
             </Box>
         </Box>
     )
 }  
-
-

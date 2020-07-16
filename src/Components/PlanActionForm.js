@@ -10,16 +10,15 @@ export default function PlanActionForm(props) {
     const [action, set_action] = useState('')
     const [date, set_date] = useState(new Date())
     const [time, set_time] = useState(new Date())
-    const [due_date, set_due_date] = useState(new Date())
     const [note, set_note] = useState('')
     const leadId = props.leadId
     const dispatch= useDispatch()
 
-    
+    const due_date = `${moment(date).format('YYYY-MM-DD')} ${ moment(time).format('HH:mm:ss')}`
 
     const submitHandler = (event) => {
         event.preventDefault()
-        set_due_date(`${moment(date).format('YYYY-MM-DD')} ${ moment(time).format('HH:mm:ss')}.295+00`)
+        
         dispatch(createAction(
             leadId,
             action,
@@ -30,7 +29,6 @@ export default function PlanActionForm(props) {
         set_action('')
         set_date(new Date())
         set_time(new Date())
-        set_due_date(new Date())
         set_note('')
     }
 
