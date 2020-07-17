@@ -45,7 +45,7 @@ export default function AddLeadMUI() {
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
-    const [contactId, set_contactId] = useState("")
+    const [contactId, set_contactId] = useState()
     const dispatch = useDispatch();
     const token = useSelector(selectToken);
     const history = useHistory();
@@ -63,22 +63,33 @@ export default function AddLeadMUI() {
 
     const submitLeadForm = (event) => {
         event.preventDefault()
-
-        dispatch(addLead(
-          company_name, 
-          associated_company_name,
-          company_phone, 
-          company_address, 
-          company_email, 
-          supplier,
-          contactId)) 
+        if (!toggle_state.addContact) {
+            dispatch(addLead(
+                company_name, 
+                associated_company_name,
+                company_phone, 
+                company_address, 
+                company_email, 
+                supplier,
+            ))
+        } else {
+            dispatch(addLead(
+                company_name, 
+                associated_company_name,
+                company_phone, 
+                company_address, 
+                company_email, 
+                supplier,
+                contactId
+            ))
+        }
 
         set_associated_company_name("")
         set_company_phone()
         set_company_address("")
         set_company_email("")
         set_supplier("")
-        set_contactId(1)
+        set_contactId()
     }
 
     const handleContactToggle = (event) => {
