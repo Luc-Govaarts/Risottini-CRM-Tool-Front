@@ -11,16 +11,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-import { lightBlue, blue } from '@material-ui/core/colors';
+import { lightBlue, blue, lightGreen } from '@material-ui/core/colors';
 
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: lightBlue[500],
+      main: lightGreen[500],
     },
     secondary: {
-      main: blue[500],
+      main: lightGreen[500],
     },
   },
 });
