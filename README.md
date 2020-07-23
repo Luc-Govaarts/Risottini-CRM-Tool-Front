@@ -1,68 +1,96 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Crispy 
 
-In the project directory, you can run:
+What is Crispy?
 
-### `npm start`
+Crispy is a custom CRM tool made for Risottini, a company that sells crunchy risotto balls with mozarella cheese in them. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Crispy was made to aid this company in selling their product to restaurants throughout The Netherlands.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Interested? see there page [here](https://www.risottini.com/)
 
-### `npm test`
+Do you want to see a live version of Crispy with some demo data?
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[here](https://ecstatic-rosalind-f39297.netlify.app)
 
-### `npm run build`
+Log in with:
+Email: Demo@demo.com, password: test1234
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Who am I?
+I am Luc, part of class #40 from Codaisseur a 11 week JavaScript bootcamp.
+This project is a two week portfolio project assignment meant to test the theory and skills learned over the past seven weeks. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Table of contents
+ 1. [`Demo`](#Demo)
+ 2. [`Technologies used`](#Technologies-used)
+ 3. [`User stories`](#User-stories)
+ 4. [`Goals`](#Goals-)
+ 5. [`Wireframe`](#Wireframe)
+ 6. [`Installation`](#Installation)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Demo
 
-### `npm run eject`
+![Homepage](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2011.16.29.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![Detailspage1](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2011.16.44.png)
+![Detailspage2](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2011.16.53.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Technologies-used
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Front-end:
 
-## Learn More
+ - React
+ - Redux
+ - Leaflet maps
+ - Material UI
+ - Bootstrap UI
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Back-end:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+ - Sequelize
+ - PostgreSQL
+ - Server with Express
+ - Authorization middleware
+ - Geolocation middleware
 
-### Code Splitting
+### User-stories
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+As a employee 
+ - You can add potential new leads to the database and add contact details and contact info.
+ - It is possible to add notes and plan actions per lead to keep track of the sales activities.
+ - You can change the sales cycle phase when needed. 
+ - You can track all the leads on a map to see where they are located. 
+ - All notes and actvities are displayed on a timeline to see what other employees have done with that lead. 
 
-### Analyzing the Bundle Size
+### Goals
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+The goal of the project is to build a basic and functioning CRM tool that can be expanded on in a later phase. 
 
-### Making a Progressive Web App
+Server repository
+The repository for the backend can be found [here](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+The server was build as a REST API with Express.
 
-### Advanced Configuration
+### Wireframe
+Original first wireframe
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+![Wireframe](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Front/blob/master/Demo/Schermafbeelding%202020-07-13%20om%2012.55.24.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Installation
 
-### `npm run build` fails to minify
+To install Crispy it is recommended to install the server first. check the server [here](https://github.com/Luc-Govaarts/Risottini-CRM-Tool-Back)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+1. Clone the repo
+2. Install the dependencies by running npm install
+3. open the constants,js file in the config folder and add the loink to the server.
+
+The server is set up with some dummy seed data.
+
+4. Sign up with:
+    email: demo@demo.com 
+    password: demo1234
+
+5. Check the existing leads on the home page or add new leads.
+6. add notes and plan activities on the lead details pages. 
