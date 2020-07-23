@@ -10,8 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
-import { lightBlue, blue, lightGreen } from '@material-ui/core/colors';
+import { lightGreen } from '@material-ui/core/colors';
 
 
 const theme = createMuiTheme({
