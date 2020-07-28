@@ -222,3 +222,30 @@ export function createAction(leadId, action, due_date, note) {
   }
 }
 
+export function adjustReport(reportId, adjusted_note, userId, leadId) {
+  return async function(dispatch, getState) {
+    const upToDateReport = {
+      id: reportId,
+      note: adjusted_note,
+      userId: userId,
+      leadId: leadId
+    }
+    dispatch(storeAdjustedReport(upToDateReport))  
+    const state = getState()
+    const token = state.user.token 
+    const relatedLead = state.appFeed.leads.find(lead => lead.id === leadId)
+    const updatedReport = relatedLead.reports.find(report => report.id === reportId)
+    console.log("ADJUSTED REPORT IN THUNK: ", updatedReport)     
+    // const res = await axios({ method: 'patch',
+    //                           url: `${apiUrl}/reports/${reportId}`,
+    //                           data: updatedReport,
+    //                           headers: {'Authorization': `Bearer ${token}`}})   
+    
+  }
+}
+
+export function storeAdjustedReport(data) {
+  return {
+      type: "STORE_ADJUSTED_REPORT", payload: data
+  } 
+}

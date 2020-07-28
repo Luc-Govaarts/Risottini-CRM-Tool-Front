@@ -35,6 +35,9 @@ export default (state = initialState, action) => {
       return {...state, leads: newLeadArray5, loading: false}
     case "STORE_USERS":
       return {...state, users: [...action.payload], loading: false} 
+    case "STORE_ADJUSTED_REPORT":
+      console.log("ADJUSTED REPORT IN REDUCER: ", action.payload)
+      return state
     default:
       return state;
   }

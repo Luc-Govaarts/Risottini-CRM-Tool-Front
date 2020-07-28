@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { adjustReport } from '../../store/appFeed/actions'
 import { selectUserById  } from '../../store/appFeed/selectors'
 import { selectUser } from '../../store/user/selectors'
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
   
 export default function TimelineItemLeft(props) {
     const classes = useStyles();
+    const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
     const date = moment(props.date).format("DD MMM YYYY, hh:mm a")
     const author = useSelector(selectUserById(props.userId))
@@ -53,7 +55,14 @@ export default function TimelineItemLeft(props) {
     };
 
     const adjustNote = () => {
-        dispatch()
+        dispatch(adjustReport(
+            reportId,
+            adjusted_note,
+            userId,
+            leadId))
+
+        set_adjusted_note("")
+        handleClose()
     }
     
     if (open) {
