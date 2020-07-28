@@ -36,8 +36,25 @@ export default (state = initialState, action) => {
     case "STORE_USERS":
       return {...state, users: [...action.payload], loading: false} 
     case "STORE_ADJUSTED_REPORT":
-      console.log("ADJUSTED REPORT IN REDUCER: ", action.payload)
-      return state
+      const { id, note, userId, leadId } = action.payload
+      const newLeadArray6 = state.leads.map(lead => {
+        if (lead.id === leadId) {
+          lead.reports.map(report => {
+            if (report.id === id) {
+              report.note = note
+              report.userId = userId
+              report.leadId = leadId
+              return report
+            } else {
+              return report
+            }
+          })
+          return lead
+        } else {
+          return lead
+        }
+      })
+      return {...state, leads: newLeadArray6, loading: false}
     default:
       return state;
   }
