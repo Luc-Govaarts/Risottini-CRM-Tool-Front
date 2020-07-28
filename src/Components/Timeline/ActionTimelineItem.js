@@ -4,7 +4,7 @@ import { selectUser } from '../../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles';
 import { TimelineItem, TimelineOppositeContent,
     TimelineSeparator, TimelineContent, TimelineConnector } from '@material-ui/lab'
-import { Paper, Typography, Box, Avatar } from '@material-ui/core'
+import { Paper, Typography, Box, Avatar, Link } from '@material-ui/core'
 import EventIcon from '@material-ui/icons/Event';
 import { blue } from '@material-ui/core/colors';
 import moment from 'moment';
@@ -32,6 +32,12 @@ export default function TimelineItemLeft(props) {
     const due_date = moment(props.due_date).format("DD MMM YYYY, hh:mm a")
     const user = useSelector(selectUser(props.userId))
     const name = user.name
+    
+    const handleAdjust = () => {
+        console.log("BUTTON TEST")
+    }
+    
+    
     return (
         <TimelineItem>
             <TimelineOppositeContent>
@@ -39,6 +45,7 @@ export default function TimelineItemLeft(props) {
                     <Typography variant="body2" color="textSecondary">
                         {due_date}
                     </Typography>
+                    <Link variant="caption" component="button" onClick={handleAdjust}>Aanpassen</Link>
                 </Box>
             </TimelineOppositeContent>
             <TimelineSeparator>
