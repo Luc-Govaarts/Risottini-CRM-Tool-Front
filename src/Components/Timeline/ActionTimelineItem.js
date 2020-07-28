@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../store/appFeed/selectors'
+import { selectUserById } from '../../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles';
 import { TimelineItem, TimelineOppositeContent,
     TimelineSeparator, TimelineContent, TimelineConnector } from '@material-ui/lab'
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function TimelineItemLeft(props) {
     const classes = useStyles();
     const due_date = moment(props.due_date).format("DD MMM YYYY, hh:mm a")
-    const user = useSelector(selectUser(props.userId))
+    const user = useSelector(selectUserById(props.userId))
     const name = user.name
     
     const handleAdjust = () => {

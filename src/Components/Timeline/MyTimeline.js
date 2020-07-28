@@ -29,14 +29,18 @@ export default function MyTimeline(props) {
                         return <Today key={index}/>
                     } else if(timelineObject.hasOwnProperty("due_date")){
                         return <ActionTimelineItem
+                                    leadId={leadId}
                                     key={index}
+                                    id={timelineObject.id}
                                     userId={timelineObject.userId}
                                     event={timelineObject.action}
                                     note={timelineObject.note}
                                     due_date={timelineObject.due_date}/> 
                     } else {
                         return <ReportTimelineItem
+                                    leadId={leadId}
                                     key={index}
+                                    id={timelineObject.id}
                                     userId={timelineObject.userId}
                                     date={timelineObject.createdAt}
                                     note={timelineObject.note}/>

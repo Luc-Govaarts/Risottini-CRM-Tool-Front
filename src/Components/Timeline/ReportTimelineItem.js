@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../store/appFeed/selectors'
+import { selectUserById  } from '../../store/appFeed/selectors'
+import { selectUser } from '../../store/user/selectors'
 import { makeStyles } from '@material-ui/core/styles';
 import { TimelineItem, TimelineOppositeContent,
     TimelineSeparator, TimelineContent, TimelineConnector } from '@material-ui/lab'
-import { Paper, Typography, Box, Avatar, Link } from '@material-ui/core'
+import { Paper, Typography, Box, Avatar, Link,
+        Button, TextField, Dialog,
+        DialogActions, DialogContent, 
+        DialogContentText, DialogTitle } from '@material-ui/core'
 import CommentIcon from '@material-ui/icons/Comment';
 import { deepOrange } from '@material-ui/core/colors';
 import moment from 'moment';
@@ -30,12 +34,58 @@ const useStyles = makeStyles((theme) => ({
   
 export default function TimelineItemLeft(props) {
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
     const date = moment(props.date).format("DD MMM YYYY, hh:mm a")
-    const user = useSelector(selectUser(props.userId))
-    const name = user.name
-        
-    const handleAdjust = () => {
-        console.log("BUTTON TEST")
+    const author = useSelector(selectUserById(props.userId))
+    const name = author.name
+    const user = useSelector(selectUser)
+    const leadId = props.leadId
+    const userId = user.id
+    const reportId = props.id
+    const [adjusted_note, set_adjusted_note] = useState("")
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const adjustNote = () => {
+        dispatch()
+    }
+    
+    if (open) {
+        return (
+            <div>
+                <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>Notitie aanpassen</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                    Pas je notitie aan en klik op bevestigen
+                    </DialogContentText>
+                    <TextField
+                    autoFocus
+                    value={adjusted_note}
+                    onChange={e => {set_adjusted_note(e.target.value)}}
+                    margin="dense"
+                    label="Notitie"
+                    type="text"
+                    fullWidth
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                    Cancel
+                    </Button>
+                    <Button onClick={adjustNote} color="primary">
+                    bevestigen
+                    </Button>
+                </DialogActions>
+                </Dialog>
+            </div>
+        )
     }
     
     return (
@@ -45,7 +95,7 @@ export default function TimelineItemLeft(props) {
                 <Typography variant="body2" color="textSecondary">
                     {date}
                 </Typography>
-                <Link variant="caption" component="button" onClick={handleAdjust}>Aanpassen</Link>
+                <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>
             </Box>
         </TimelineOppositeContent>
         <TimelineSeparator>

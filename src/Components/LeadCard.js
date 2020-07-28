@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../store/appFeed/selectors'
+import { selectUserById } from '../store/appFeed/selectors'
 import { Card, Typography, CardContent, Box} from '@material-ui/core'
 import moment from 'moment';
 
 export default function LeadCard(props) {
-    const user = useSelector(selectUser(props.userId))
+    const user = useSelector(selectUserById(props.userId))
     const name = user.name
 
 

@@ -80,7 +80,7 @@ export default function PlanActionForm(props) {
                             margin="normal"
                             required
                             fullWidth
-                            id="note"
+                            id="noteAction"
                             label="Notitie"
                             autoFocus/>
                         <Button
