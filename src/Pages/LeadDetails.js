@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
 import { selectLeadById } from '../store/appFeed/selectors'
 import { selectToken } from "../store/user/selectors";
-import { Box, Grid, Typography, Card } from'@material-ui/core'
+import { Box, Grid, Typography } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
 import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'

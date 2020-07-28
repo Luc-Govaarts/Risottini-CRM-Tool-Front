@@ -236,17 +236,13 @@ export function adjustReport(reportId, adjusted_note, userId, leadId) {
       userId: userId,
       leadId: leadId
     }
-
-    dispatch(storeAdjustedReport(upToDateReport))  
     const state = getState()
     const token = state.user.token 
-    const relatedLead = state.appFeed.leads.find(lead => lead.id === leadId)
-    const updatedReport = relatedLead.reports.find(report => report.id === reportId)
-    
+
     const res = await axios({ method: 'patch',
                               url: `${apiUrl}/reports/${reportId}`,
-                              data: updatedReport,
+                              data: upToDateReport,
                               headers: {'Authorization': `Bearer ${token}`}})   
-    
+    dispatch(storeAdjustedReport(res.data))                         
   }
 }

@@ -36,20 +36,15 @@ export default (state = initialState, action) => {
     case "STORE_USERS":
       return {...state, users: [...action.payload], loading: false} 
     case "STORE_ADJUSTED_REPORT":
-      const { id, note, userId, leadId } = action.payload
       const newLeadArray6 = state.leads.map(lead => {
-        if (lead.id === leadId) {
-          lead.reports.map(report => {
-            if (report.id === id) {
-              report.note = note
-              report.userId = userId
-              report.leadId = leadId
-              return report
+        if (lead.id === action.payload.leadId) {
+          return lead.reports.map(report => {
+            if (report.id === action.payload.id) {
+              return action.payload
             } else {
               return report
             }
           })
-          return lead
         } else {
           return lead
         }
