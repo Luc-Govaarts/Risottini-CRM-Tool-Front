@@ -76,7 +76,7 @@ export default function TimelineItemLeft(props) {
     }
 
     const handleDelete = () => {
-        dispatch(deleteReport(reportId))
+        dispatch(deleteReport(reportId, leadId))
     }
 
     if (open_delete) {

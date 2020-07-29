@@ -282,13 +282,14 @@ export function adjustAction( actionId, adjusted_action,
   }
 }
 
-export function deleteReport(reportId) {
+export function deleteReport(reportId,leadId) {
   return async function(dispatch, getState) {
     const state = getState()
     const token = state.user.token 
     const res = await axios({ method: 'delete',
                               url: `${apiUrl}/reports/${reportId}`,
                               headers: {'Authorization': `Bearer ${token}`}})  
-    dispatch(removeReport(reportId))                          
+    console.log("TESTING RESPONSE: ", res.data)              
+    dispatch(removeReport({reportId: reportId, leadId: leadId}))                          
   }
 }
