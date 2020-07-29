@@ -78,9 +78,7 @@ export default (state = initialState, action) => {
           return {...lead, reports: newReportArray }
         } else {
           return lead
-        }
-
-        return lead
+        } 
       })
       return {...state, leads: newLeadArray8, loading: false}
     default:
