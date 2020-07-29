@@ -76,6 +76,10 @@ export default function TimelineItemLeft(props) {
         set_adjusted_note("")
         handleClose()
     }
+
+    const handleDelete = () => {
+        console.log("Delete button test")
+    }
     
     if (open) {
         return (
@@ -151,7 +155,8 @@ export default function TimelineItemLeft(props) {
                         <Typography variant="body2" color="textSecondary">
                             {due_date}
                         </Typography>
-                        <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>
+                        <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>{" || "}
+                    <Link variant="caption" component="button" color="error" onClick={handleDelete}>Verwijderen</Link>
                     </Box>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
