@@ -35,7 +35,9 @@ export default function MyTimeline(props) {
                                     userId={timelineObject.userId}
                                     event={timelineObject.action}
                                     note={timelineObject.note}
-                                    due_date={timelineObject.due_date}/> 
+                                    due_date={timelineObject.due_date}
+                                    dateCreated={timelineObject.createdAt}
+                                    dateUpdated={timelineObject.updatedAt}/> 
                     } else {
                         return <ReportTimelineItem
                                     leadId={leadId}

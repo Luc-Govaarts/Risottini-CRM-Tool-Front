@@ -74,6 +74,12 @@ export function storeAdjustedReport(data) {
   } 
 }
 
+export function storeAdjustedAction(data) {
+  return {
+      type: "STORE_ADJUSTED_ACTION", payload: data
+  } 
+}
+
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -244,5 +250,28 @@ export function adjustReport(reportId, adjusted_note, userId, leadId) {
                               data: upToDateReport,
                               headers: {'Authorization': `Bearer ${token}`}})   
     dispatch(storeAdjustedReport(res.data))                         
+  }
+}
+
+export function adjustAction( actionId, adjusted_action, 
+                              adjusted_due_date, adjusted_note,
+                              userId, leadId) {
+  return async function(dispatch, getState) {
+    const upToDateAction = {
+      id: actionId,
+      action: adjusted_action,
+      due_date: adjusted_due_date,
+      note: adjusted_note,
+      userId: userId,
+      leadId: leadId
+    }
+    const state = getState()
+    const token = state.user.token 
+
+    const res = await axios({ method: 'patch',
+                              url: `${apiUrl}/actionss/${actionId}`,
+                              data: upToDateAction,
+                              headers: {'Authorization': `Bearer ${token}`}})   
+    dispatch(storeAdjustedAction(res.data))                         
   }
 }

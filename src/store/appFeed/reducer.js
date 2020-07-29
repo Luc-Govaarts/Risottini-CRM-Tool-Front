@@ -50,6 +50,21 @@ export default (state = initialState, action) => {
         }
       })
       return {...state, leads: newLeadArray6, loading: false}
+    case "STORE_ADJUSTED_ACTION":
+      const newLeadArray7 = state.leads.map(lead => {
+        if (lead.id === action.payload.leadId) {
+          return lead.actions.map(action => {
+            if (action.id === action.payload.id) {
+              return action.payload
+            } else {
+              return action
+            }
+          })
+        } else {
+          return lead
+        }
+      })
+      return {...state, leads: newLeadArray7, loading: false}    
     default:
       return state;
   }
