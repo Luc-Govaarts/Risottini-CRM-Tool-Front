@@ -86,6 +86,12 @@ export function removeReport(data) {
   } 
 }
 
+export function removeAction(data) {
+  return {
+      type: "REMOVE_ACTION", payload: data
+  } 
+}
+
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -282,14 +288,24 @@ export function adjustAction( actionId, adjusted_action,
   }
 }
 
-export function deleteReport(reportId,leadId) {
+export function deleteReport(reportId, leadId) {
   return async function(dispatch, getState) {
     const state = getState()
     const token = state.user.token 
     const res = await axios({ method: 'delete',
                               url: `${apiUrl}/reports/${reportId}`,
-                              headers: {'Authorization': `Bearer ${token}`}})  
-    console.log("TESTING RESPONSE: ", res.data)              
+                              headers: {'Authorization': `Bearer ${token}`}})            
     dispatch(removeReport({reportId: reportId, leadId: leadId}))                          
+  }
+}
+
+export function deleteAction(actionId, leadId) {
+  return async function(dispatch, getState) {
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({ method: 'delete',
+                              url: `${apiUrl}/actions/${actionId}`,
+                              headers: {'Authorization': `Bearer ${token}`}})               
+    dispatch(removeAction({actionId: actionId, leadId: leadId}))                          
   }
 }

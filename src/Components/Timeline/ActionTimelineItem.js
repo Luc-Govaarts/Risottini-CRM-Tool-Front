@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { adjustAction } from '../../store/appFeed/actions'
+import { adjustAction, deleteAction } from '../../store/appFeed/actions'
 import { selectUserById } from '../../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles';
 import { selectUser } from '../../store/user/selectors'
@@ -87,7 +87,7 @@ export default function TimelineItemLeft(props) {
     }
 
     const handleDelete = () => {
-        console.log("Delete button test")
+        dispatch(deleteAction(actionId, leadId))
     }
 
     return (

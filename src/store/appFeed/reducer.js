@@ -81,7 +81,23 @@ export default (state = initialState, action) => {
         } 
       })
       return {...state, leads: newLeadArray8, loading: false}
-    default:
+    case "REMOVE_ACTION":
+      const newLeadArray9 = state.leads.map(lead => {
+        if (lead.id === action.payload.leadId) {
+          const newActionArray = lead.actions.map(leadAction => {
+            if (leadAction.id === action.payload.actionId) {
+              return {}
+            } else {
+              return leadAction
+            }
+          })
+          return {...lead, actions: newActionArray }
+        } else {
+          return lead
+        } 
+      })
+      return {...state, leads: newLeadArray9, loading: false}
+  default:
       return state;
   }
 };
