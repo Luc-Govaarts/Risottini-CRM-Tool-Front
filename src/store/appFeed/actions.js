@@ -269,7 +269,7 @@ export function adjustAction( actionId, adjusted_action,
     const token = state.user.token 
 
     const res = await axios({ method: 'patch',
-                              url: `${apiUrl}/actionss/${actionId}`,
+                              url: `${apiUrl}/actions/${actionId}`,
                               data: upToDateAction,
                               headers: {'Authorization': `Bearer ${token}`}})   
     dispatch(storeAdjustedAction(res.data))                         

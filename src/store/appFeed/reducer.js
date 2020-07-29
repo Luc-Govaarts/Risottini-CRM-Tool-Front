@@ -53,11 +53,11 @@ export default (state = initialState, action) => {
     case "STORE_ADJUSTED_ACTION":
       const newLeadArray7 = state.leads.map(lead => {
         if (lead.id === action.payload.leadId) {
-          return lead.actions.map(action => {
-            if (action.id === action.payload.id) {
+          return lead.actions.map(leadAction => {
+            if (leadAction.id === action.payload.id) {
               return action.payload
             } else {
-              return action
+              return leadAction
             }
           })
         } else {
