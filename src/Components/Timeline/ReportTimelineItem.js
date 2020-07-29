@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { adjustReport } from '../../store/appFeed/actions'
+import { adjustReport, deleteReport } from '../../store/appFeed/actions'
 import { selectUserById  } from '../../store/appFeed/selectors'
 import { selectUser } from '../../store/user/selectors'
 import { makeStyles } from '@material-ui/core/styles';
@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
 export default function TimelineItemLeft(props) {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const [open, setOpen] = useState(false);
+    const [open_adjust, set_adjust_open] = useState(false);
+    const [open_delete, set_delete_open] = useState(false);
     const dateCreated = moment(props.dateCreated).format("DD MMM YYYY, hh:mm a")
     const dateUpdated = moment(props.dateUpdated).format("DD MMM YYYY, hh:mm a")
     const author = useSelector(selectUserById(props.userId))
@@ -47,12 +48,20 @@ export default function TimelineItemLeft(props) {
     const reportId = props.id
     const [adjusted_note, set_adjusted_note] = useState("")
 
-    const handleClickOpen = () => {
-      setOpen(true);
+    const handleOpenAdjust = () => {
+        set_adjust_open(true);
     };
   
-    const handleClose = () => {
-      setOpen(false);
+    const handleCloseAdjust = () => {
+        set_adjust_open(false);
+    };
+
+    const handleOpenDelete = () => {
+        set_delete_open(true);
+    };
+  
+    const handleCloseDelete = () => {
+        set_delete_open(false);
     };
 
     const adjustNote = () => {
@@ -63,17 +72,37 @@ export default function TimelineItemLeft(props) {
             leadId))
 
         set_adjusted_note("")
-        handleClose()
+        handleCloseAdjust()
     }
 
     const handleDelete = () => {
-        console.log("Delete button test")
+        dispatch(deleteReport(reportId))
     }
-    
-    if (open) {
+
+    if (open_delete) {
+        return (
+            <Dialog open={open_delete} onClose={handleCloseDelete}>
+                <DialogTitle>Notitie Verwijderen</DialogTitle>
+                <DialogContent>
+                    Weet je zeker dat je deze notitie wil verwijderen?
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDelete} color="primary">
+                    Cancel
+                    </Button>
+                    <Button
+                        color="primary"
+                        onClick={handleDelete}
+                    >
+                    Bevestigen 
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        )
+    } else if (open_adjust) {
         return (
             <div>
-                <Dialog open={open} onClose={handleClose}>
+                <Dialog open={open_adjust} onClose={handleCloseAdjust}>
                     <DialogTitle>Notitie aanpassen</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
@@ -90,11 +119,10 @@ export default function TimelineItemLeft(props) {
                                 />
                         </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary">
+                                <Button onClick={handleCloseAdjust} color="primary">
                                 Cancel
                                 </Button>
                                 <Button
-                                    type="submit"
                                     color="primary"
                                     onClick={adjustNote}
                                 >
@@ -112,8 +140,8 @@ export default function TimelineItemLeft(props) {
                     <Typography variant="body2" color="textSecondary">
                         {dateCreated}
                     </Typography>
-                    <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>{" || "}
-                    <Link variant="caption" component="button" color="error" onClick={handleDelete}>Verwijderen</Link>
+                    <Link variant="caption" component="button" onClick={handleOpenAdjust}>Aanpassen</Link>{" || "}
+                    <Link variant="caption" component="button" color="error" onClick={handleOpenDelete}>Verwijderen</Link>
                 </Box>
             </TimelineOppositeContent>
             <TimelineSeparator>

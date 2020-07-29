@@ -65,6 +65,17 @@ export default (state = initialState, action) => {
         }
       })
       return {...state, leads: newLeadArray7, loading: false}    
+    case "REMOVE_REPORT":
+      const newLeadArray8 = state.leads.map(lead => {
+        return lead.reports.map(report => {
+          if (report.id === action.payload) {
+            return null
+          } else {
+            return report
+          }
+        })
+      })
+      return {...state, leads: newLeadArray8, loading: false}
     default:
       return state;
   }

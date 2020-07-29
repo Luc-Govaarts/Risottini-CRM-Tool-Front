@@ -80,6 +80,12 @@ export function storeAdjustedAction(data) {
   } 
 }
 
+export function removeReport(data) {
+  return {
+      type: "REMOVE_REPORT", payload: data
+  } 
+}
+
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -273,5 +279,16 @@ export function adjustAction( actionId, adjusted_action,
                               data: upToDateAction,
                               headers: {'Authorization': `Bearer ${token}`}})   
     dispatch(storeAdjustedAction(res.data))                         
+  }
+}
+
+export function deleteReport(reportId) {
+  return async function(dispatch, getState) {
+    const state = getState()
+    const token = state.user.token 
+    const res = await axios({ method: 'delete',
+                              url: `${apiUrl}/reports/${reportId}`,
+                              headers: {'Authorization': `Bearer ${token}`}})  
+    dispatch(removeReport(reportId))                          
   }
 }
