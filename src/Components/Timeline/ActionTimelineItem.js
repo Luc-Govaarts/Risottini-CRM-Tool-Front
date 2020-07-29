@@ -163,9 +163,10 @@ export default function TimelineItemLeft(props) {
                         <Box className={classes.action}>
                             <Typography variant="h6">{props.event}</Typography>
                             <Typography>{props.note}</Typography>
-                            <Box textAlign='right'>
-                                <Typography variant="caption"><em>Door:</em> {name}</Typography>
-                                {dateUpdated !== dateCreated? <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
+                            <Typography variant="caption"><em>Door:</em> {name}</Typography>
+                            <Box>
+                                {dateUpdated !== dateCreated? 
+                                <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
                                 {dateUpdated}</Typography> : null}
                             </Box>
                         </Box>
