@@ -42,7 +42,8 @@ export default function MyTimeline(props) {
                                     key={index}
                                     id={timelineObject.id}
                                     userId={timelineObject.userId}
-                                    date={timelineObject.createdAt}
+                                    dateCreated={timelineObject.createdAt}
+                                    dateUpdated={timelineObject.updatedAt}
                                     note={timelineObject.note}/>
                     }
                 })}

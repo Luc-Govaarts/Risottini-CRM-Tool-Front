@@ -37,7 +37,8 @@ export default function TimelineItemLeft(props) {
     const classes = useStyles();
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false);
-    const date = moment(props.date).format("DD MMM YYYY, hh:mm a")
+    const dateCreated = moment(props.dateCreated).format("DD MMM YYYY, hh:mm a")
+    const dateUpdated = moment(props.dateUpdated).format("DD MMM YYYY, hh:mm a")
     const author = useSelector(selectUserById(props.userId))
     const name = author.name
     const user = useSelector(selectUser)
@@ -69,56 +70,62 @@ export default function TimelineItemLeft(props) {
         return (
             <div>
                 <Dialog open={open} onClose={handleClose}>
-                <DialogTitle>Notitie aanpassen</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                    Pas je notitie aan en klik op bevestigen
-                    </DialogContentText>
-                    <TextField
-                    autoFocus
-                    value={adjusted_note}
-                    onChange={e => {set_adjusted_note(e.target.value)}}
-                    margin="dense"
-                    label="Notitie"
-                    type="text"
-                    fullWidth
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                    Cancel
-                    </Button>
-                    <Button onClick={adjustNote} color="primary">
-                    bevestigen
-                    </Button>
-                </DialogActions>
+                    <DialogTitle>Notitie aanpassen</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                            Pas je notitie aan en klik op bevestigen
+                            </DialogContentText>
+                                <TextField
+                                autoFocus
+                                value={adjusted_note}
+                                onChange={e => {set_adjusted_note(e.target.value)}}
+                                margin="dense"
+                                label="Notitie"
+                                type="text"
+                                fullWidth
+                                />
+                        </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleClose} color="primary">
+                                Cancel
+                                </Button>
+                                <Button
+                                    type="submit"
+                                    color="primary"
+                                    onClick={adjustNote}
+                                >
+                                Bevestigen 
+                                </Button>
+                            </DialogActions>
                 </Dialog>
             </div>
         )
-    }
-    
-    return (
-    <TimelineItem>
-        <TimelineOppositeContent>
-            <Box>
-                <Typography variant="body2" color="textSecondary">
-                    {date}
-                </Typography>
-                <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>
-            </Box>
-        </TimelineOppositeContent>
-        <TimelineSeparator>
-                <Avatar className={classes.orange}><CommentIcon/></Avatar>
-            <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>
-            <Paper elevation={3}>
-                <Box className={classes.note}>
-                    <Typography variant="h6" >{name}</Typography>
-                    <Typography>{props.note}</Typography>
+    } else {
+        return (
+        <TimelineItem>
+            <TimelineOppositeContent>
+                <Box>
+                    <Typography variant="body2" color="textSecondary">
+                        {dateCreated}
+                    </Typography>
+                    <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>
                 </Box>
-            </Paper>
-        </TimelineContent>
-    </TimelineItem>
-    )
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+                    <Avatar className={classes.orange}><CommentIcon/></Avatar>
+                <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>
+                <Paper elevation={3}>
+                    <Box className={classes.note}>
+                        <Typography variant="h6" >{name}</Typography>
+                        <Typography>{props.note}</Typography>
+                        {dateUpdated !== dateCreated? <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
+                        {dateUpdated}</Typography> : null}
+                    </Box>
+                </Paper>
+            </TimelineContent>
+        </TimelineItem>
+        )
+    }
 }
