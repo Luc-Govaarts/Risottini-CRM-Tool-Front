@@ -17,15 +17,17 @@ export default function MyTimeline(props) {
     const lead = useSelector(selectLeadById(leadId))
     const reports = lead.reports
     const actions = lead.actions
-    const today = {createdAt: moment()}
+    const today = {createdAt: moment(), today: true}
     const timelineObjects = reports.concat(actions).concat(today)
     const sortedTimelineObjects = [...timelineObjects].sort(compareDates)
+
+    console.log(sortedTimelineObjects)
 
     return (
         <Box>
             <Timeline align="alternate">
                 {[...sortedTimelineObjects].map((timelineObject, index) => {
-                    if(timelineObject.hasOwnProperty("note") === false) {
+                    if(timelineObject.hasOwnProperty("today")) {
                         return <Today key={index}/>
                     } else if(timelineObject.hasOwnProperty("due_date")){
                         return <ActionTimelineItem

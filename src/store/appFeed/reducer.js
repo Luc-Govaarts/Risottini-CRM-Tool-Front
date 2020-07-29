@@ -68,12 +68,8 @@ export default (state = initialState, action) => {
     case "REMOVE_REPORT":
       const newLeadArray8 = state.leads.map(lead => {
         if (lead.id === action.payload.leadId) {
-          const newReportArray = lead.reports.map(report => {
-            if (report.id === action.payload.reportId) {
-              return {}
-            } else {
-              return report
-            }
+          const newReportArray = lead.reports.filter(report => {
+            return report.id !== action.payload.reportId
           })
           return {...lead, reports: newReportArray }
         } else {
@@ -84,12 +80,8 @@ export default (state = initialState, action) => {
     case "REMOVE_ACTION":
       const newLeadArray9 = state.leads.map(lead => {
         if (lead.id === action.payload.leadId) {
-          const newActionArray = lead.actions.map(leadAction => {
-            if (leadAction.id === action.payload.actionId) {
-              return {}
-            } else {
-              return leadAction
-            }
+          const newActionArray = lead.actions.filter(leadAction => {
+            return leadAction.id !== action.payload.actionId 
           })
           return {...lead, actions: newActionArray }
         } else {
@@ -98,6 +90,6 @@ export default (state = initialState, action) => {
       })
       return {...state, leads: newLeadArray9, loading: false}
   default:
-      return state;
+      return state
   }
 };
