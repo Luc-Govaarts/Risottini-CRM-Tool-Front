@@ -80,7 +80,6 @@ export default function TimelineItemLeft(props) {
     }
 
     return (
-        <div>
             <TimelineItem>
                 <TimelineOppositeContent>
                     <Box>
@@ -105,56 +104,55 @@ export default function TimelineItemLeft(props) {
                         </Box>
                     </Paper>
                 </TimelineContent>
-            </TimelineItem>
-            {open_adjust ? <div>
-                <Dialog open={open_adjust} onClose={handleCloseAdjust}>
-                    <DialogTitle>Notitie aanpassen</DialogTitle>
+                {open_adjust ? <div>
+                    <Dialog open={open_adjust} onClose={handleCloseAdjust}>
+                        <DialogTitle>Notitie aanpassen</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>
+                                Pas je notitie aan en klik op bevestigen
+                                </DialogContentText>
+                                    <TextField
+                                    autoFocus
+                                    value={adjusted_note}
+                                    onChange={e => {set_adjusted_note(e.target.value)}}
+                                    margin="dense"
+                                    label="Notitie"
+                                    type="text"
+                                    fullWidth
+                                    />
+                            </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleCloseAdjust} color="primary">
+                                    Cancel
+                                    </Button>
+                                    <Button
+                                        color="primary"
+                                        onClick={adjustNote}
+                                    >
+                                    Bevestigen 
+                                    </Button>
+                                </DialogActions>
+                    </Dialog>
+                </div> : null }
+                {open_delete ? <div>
+                    <Dialog open={open_delete} onClose={handleCloseDelete}>
+                        <DialogTitle>Notitie Verwijderen</DialogTitle>
                         <DialogContent>
-                            <DialogContentText>
-                            Pas je notitie aan en klik op bevestigen
-                            </DialogContentText>
-                                <TextField
-                                autoFocus
-                                value={adjusted_note}
-                                onChange={e => {set_adjusted_note(e.target.value)}}
-                                margin="dense"
-                                label="Notitie"
-                                type="text"
-                                fullWidth
-                                />
+                            Weet je zeker dat je deze notitie wil verwijderen?
                         </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleCloseAdjust} color="primary">
-                                Cancel
-                                </Button>
-                                <Button
-                                    color="primary"
-                                    onClick={adjustNote}
-                                >
-                                Bevestigen 
-                                </Button>
-                            </DialogActions>
-                </Dialog>
-            </div> : null }
-            {open_delete ? <div>
-                <Dialog open={open_delete} onClose={handleCloseDelete}>
-                    <DialogTitle>Notitie Verwijderen</DialogTitle>
-                    <DialogContent>
-                        Weet je zeker dat je deze notitie wil verwijderen?
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleCloseDelete} color="primary">
-                        Cancel
-                        </Button>
-                        <Button
-                            color="primary"
-                            onClick={handleDelete}
-                        >
-                        Bevestigen 
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </div> : null }
-        </div>
+                        <DialogActions>
+                            <Button onClick={handleCloseDelete} color="primary">
+                            Cancel
+                            </Button>
+                            <Button
+                                color="primary"
+                                onClick={handleDelete}
+                            >
+                            Bevestigen 
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+                </div> : null }
+            </TimelineItem>
     )
 }

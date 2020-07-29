@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
 export default function TimelineItemLeft(props) {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const [open, setOpen] = useState(false);
+    const [open_adjust, set_adjust_open] = useState(false);
+    const [open_delete, set_delete_open] = useState(false);
     const [adjusted_action, set_adjusted_action] = useState("")
     const [adjusted_date, set_adjusted_date] = useState(new Date())
     const [adjusted_time, set_adjusted_time] = useState(new Date())
@@ -53,13 +54,21 @@ export default function TimelineItemLeft(props) {
     const actionId = props.id
     const leadId = props.leadId
 
-    const handleClickOpen = () => {
-        setOpen(true);
-      };
-    
-      const handleClose = () => {
-        setOpen(false);
-      };  
+    const handleOpenAdjust = () => {
+        set_adjust_open(true);
+    };
+  
+    const handleCloseAdjust = () => {
+        set_adjust_open(false);
+    };
+
+    const handleOpenDelete = () => {
+        set_delete_open(true);
+    };
+  
+    const handleCloseDelete = () => {
+        set_delete_open(false);
+    };
 
     const handleAdjust = () => {
         dispatch(adjustAction(
@@ -74,21 +83,48 @@ export default function TimelineItemLeft(props) {
         set_adjusted_date(new Date())
         set_adjusted_time(new Date())    
         set_adjusted_note("")
-        handleClose()
+        handleCloseAdjust()
     }
 
     const handleDelete = () => {
         console.log("Delete button test")
     }
-    
-    if (open) {
-        return (
-            <div>
-                <Dialog open={open} onClose={handleClose}>
-                    <DialogTitle>Notitie aanpassen</DialogTitle>
+
+    return (
+        <TimelineItem>
+            <TimelineOppositeContent>
+                <Box>
+                    <Typography variant="body2" color="textSecondary">
+                        {due_date}
+                    </Typography>
+                    <Link variant="caption" component="button" onClick={handleOpenAdjust}>Aanpassen</Link>{" || "}
+                <Link variant="caption" component="button" color="error" onClick={handleOpenDelete}>Verwijderen</Link>
+                </Box>
+            </TimelineOppositeContent>
+            <TimelineSeparator>
+                    <Avatar className={classes.blue}><EventIcon/></Avatar>
+                <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>
+                <Paper elevation={3}>
+                    <Box className={classes.action}>
+                        <Typography variant="h6">{props.event}</Typography>
+                        <Typography>{props.note}</Typography>
+                        <Typography variant="caption"><em>Door:</em> {name}</Typography>
+                        <Box>
+                            {dateUpdated !== dateCreated? 
+                            <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
+                            {dateUpdated}</Typography> : null}
+                        </Box>
+                    </Box>
+                </Paper>
+            </TimelineContent>
+            {open_adjust ? <div>
+                <Dialog open={open_adjust} onClose={handleCloseAdjust}>
+                    <DialogTitle>Actie aanpassen</DialogTitle>
                         <DialogContent>
                             <DialogContentText>
-                            Pas je notitie aan en klik op bevestigen
+                            Pas je actie aan en klik op bevestigen
                             </DialogContentText>
                                 <TextField
                                 autoFocus
@@ -133,7 +169,7 @@ export default function TimelineItemLeft(props) {
                                 autoFocus/>
                         </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary">
+                                <Button onClick={handleCloseAdjust} color="primary">
                                 Cancel
                                 </Button>
                                 <Button
@@ -145,39 +181,26 @@ export default function TimelineItemLeft(props) {
                                 </Button>
                             </DialogActions>
                 </Dialog>
-            </div>
-        )
-    } else {
-        return (
-            <TimelineItem>
-                <TimelineOppositeContent>
-                    <Box>
-                        <Typography variant="body2" color="textSecondary">
-                            {due_date}
-                        </Typography>
-                        <Link variant="caption" component="button" onClick={handleClickOpen}>Aanpassen</Link>{" || "}
-                    <Link variant="caption" component="button" color="error" onClick={handleDelete}>Verwijderen</Link>
-                    </Box>
-                </TimelineOppositeContent>
-                <TimelineSeparator>
-                        <Avatar className={classes.blue}><EventIcon/></Avatar>
-                    <TimelineConnector />
-                </TimelineSeparator>
-                <TimelineContent>
-                    <Paper elevation={3}>
-                        <Box className={classes.action}>
-                            <Typography variant="h6">{props.event}</Typography>
-                            <Typography>{props.note}</Typography>
-                            <Typography variant="caption"><em>Door:</em> {name}</Typography>
-                            <Box>
-                                {dateUpdated !== dateCreated? 
-                                <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
-                                {dateUpdated}</Typography> : null}
-                            </Box>
-                        </Box>
-                    </Paper>
-                </TimelineContent>
-            </TimelineItem>
-        )
-    }
+            </div> : null} 
+            {open_delete ? <div>
+                <Dialog open={open_delete} onClose={handleCloseDelete}>
+                    <DialogTitle>Actie Verwijderen</DialogTitle>
+                    <DialogContent>
+                        Weet je zeker dat je deze actie wil verwijderen?
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseDelete} color="primary">
+                        Cancel
+                        </Button>
+                        <Button
+                            color="primary"
+                            onClick={handleDelete}
+                        >
+                        Bevestigen 
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div> : null }
+        </TimelineItem>
+    )
 }
