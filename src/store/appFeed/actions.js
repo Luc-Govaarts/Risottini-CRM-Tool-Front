@@ -92,11 +92,6 @@ export function removeAction(data) {
   } 
 }
 
-export function storeAdjustedLead(data) {
-  return {
-    type: "ADJUST_LEAD", payload: data
-  }
-}
 
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
@@ -335,7 +330,9 @@ export function adjustLead(leadId, company_name, associated_company_name,
     const res = await axios({ method: 'patch',
                               url: `${apiUrl}/leads/${leadId}`,
                               data: upToDateLead,
-                              headers: {'Authorization': `Bearer ${token}`}})   
-    dispatch(storeAdjustedLead(res.data))                         
+                              headers: {'Authorization': `Bearer ${token}`}})  
+                        console.log(res.data)    
+    dispatch(storeUpdatedLead(res.data))
+                      
   }
 }

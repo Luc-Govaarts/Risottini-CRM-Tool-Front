@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { selectUserById } from '../store/appFeed/selectors'
 import { Typography, Container, Box, Avatar, Link,
     Button, TextField, Dialog, Card, CardContent, 
-    DialogActions, DialogContent, DialogTitle } from '@material-ui/core'
+    DialogActions, DialogContent, DialogTitle, DialogContentText} from '@material-ui/core'
 import moment from 'moment';
 import { useDispatch } from "react-redux";
 import { adjustLead } from "../store/appFeed/actions";
@@ -41,7 +41,7 @@ export default function LeadCard(props) {
     const [open_delete, set_delete_open] = useState(false);
     const [company_name, set_company_name] = useState("")
     const [associated_company_name, set_associated_company_name] = useState("")
-    const [company_phone, set_company_phone] = useState()
+    const [company_phone, set_company_phone] = useState("")
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
@@ -75,11 +75,13 @@ export default function LeadCard(props) {
                 supplier
             ))
 
+        set_company_name("")
         set_associated_company_name("")
-        set_company_phone()
+        set_company_phone("")
         set_company_address("")
         set_company_email("")
         set_supplier("")
+        handleCloseAdjust()
     }
 
     const handleDelete = () => {
@@ -122,13 +124,15 @@ export default function LeadCard(props) {
                             Pas lead info aan
                             </Typography>
                         <DialogContent>
+                            <DialogContentText>
+                                Geen enkel veld is verplicht, vul alleen de velden in die je wilt aanpassen
+                            </DialogContentText>
                             <form className={classes.form} onSubmit={adjustLeadForm}>
                                 <TextField
                                     onChange={event => set_company_name(event.target.value)}
                                     value={company_name}
                                     variant="outlined"
                                     margin="normal"
-                                    required
                                     fullWidth
                                     id="company_name"
                                     label="Voer de bedrijfsnaam in"
@@ -173,7 +177,6 @@ export default function LeadCard(props) {
                                     value={company_address}
                                     variant="outlined"
                                     margin="normal"
-                                    required
                                     fullWidth
                                     id="company_address"
                                     label="Voeg address toe"
