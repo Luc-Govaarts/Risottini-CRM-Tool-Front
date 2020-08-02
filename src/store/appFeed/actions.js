@@ -92,6 +92,12 @@ export function removeAction(data) {
   } 
 }
 
+export function storeAdjustedLead(data) {
+  return {
+    type: "ADJUST_LEAD", payload: data
+  }
+}
+
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -307,5 +313,29 @@ export function deleteAction(actionId, leadId) {
                               url: `${apiUrl}/actions/${actionId}`,
                               headers: {'Authorization': `Bearer ${token}`}})               
     dispatch(removeAction({actionId: actionId, leadId: leadId}))                          
+  }
+}
+
+export function adjustLead(leadId, company_name, associated_company_name,
+                              company_phone, company_address, 
+                              company_email, supplier) {
+  return async function(dispatch, getState) {
+    const upToDateLead = {
+      id: leadId,
+      company_name: company_name, 
+      associated_company_name: associated_company_name,
+      company_phone: company_phone, 
+      company_address: company_address, 
+      company_email: company_email, 
+      supplier: supplier
+    }
+    const state = getState()
+    const token = state.user.token 
+
+    const res = await axios({ method: 'patch',
+                              url: `${apiUrl}/leads/${leadId}`,
+                              data: upToDateLead,
+                              headers: {'Authorization': `Bearer ${token}`}})   
+    dispatch(storeAdjustedLead(res.data))                         
   }
 }

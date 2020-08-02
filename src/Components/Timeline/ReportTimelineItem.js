@@ -121,17 +121,17 @@ export default function TimelineItemLeft(props) {
                                     fullWidth
                                     />
                             </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleCloseAdjust} color="primary">
-                                    Cancel
-                                    </Button>
-                                    <Button
-                                        color="primary"
-                                        onClick={adjustNote}
-                                    >
-                                    Bevestigen 
-                                    </Button>
-                                </DialogActions>
+                            <DialogActions>
+                                <Button onClick={handleCloseAdjust} color="primary">
+                                Cancel
+                                </Button>
+                                <Button
+                                    color="primary"
+                                    onClick={adjustNote}
+                                >
+                                Bevestigen 
+                                </Button>
+                            </DialogActions>
                     </Dialog>
                 </div> : null }
                 {open_delete ? <div>

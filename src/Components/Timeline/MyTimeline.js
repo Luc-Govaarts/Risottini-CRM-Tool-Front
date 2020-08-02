@@ -21,8 +21,6 @@ export default function MyTimeline(props) {
     const timelineObjects = reports.concat(actions).concat(today)
     const sortedTimelineObjects = [...timelineObjects].sort(compareDates)
 
-    console.log(sortedTimelineObjects)
-
     return (
         <Box>
             <Timeline align="alternate">

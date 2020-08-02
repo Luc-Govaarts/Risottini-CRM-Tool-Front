@@ -60,6 +60,7 @@ export default function LeadDetails() {
                             <Box mt={3}>
                                 <LeadCard
                                     userId={lead.userId}
+                                    leadId={lead.id}
                                     address={lead.company_address}
                                     phone={lead.company_phone}
                                     email={lead.company_email}

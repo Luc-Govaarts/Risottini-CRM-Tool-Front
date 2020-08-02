@@ -89,6 +89,9 @@ export default (state = initialState, action) => {
         } 
       })
       return {...state, leads: newLeadArray9, loading: false}
+    case "ADJUST_LEAD": 
+    console.log(action.payload)
+    return state
   default:
       return state
   }
