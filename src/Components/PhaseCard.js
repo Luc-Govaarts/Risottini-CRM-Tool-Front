@@ -32,7 +32,7 @@ export default function PhaseCard(props) {
                     alignItems="center">
                     <Grid item>
                         <CardContent>
-                            <Typography><strong>{props.phase}</strong></Typography>
+                            <Typography variant="h5"><strong>{props.phase}</strong></Typography>
                         </CardContent>
                     </Grid>
                     <Grid item>
@@ -59,7 +59,7 @@ export default function PhaseCard(props) {
                 alignItems="center">
                     <Grid item>
                         <CardContent>
-                            <Typography><strong>{props.phase}</strong></Typography>
+                            <Typography variant="h5"><strong>{props.phase}</strong></Typography>
                         </CardContent>
                     </Grid>
                     <Grid item>
@@ -85,11 +85,11 @@ export default function PhaseCard(props) {
                 alignItems="center">
                     <Grid item>
                         <CardContent>
-                            <Typography><strong>{props.phase}</strong></Typography>
+                            <Typography variant="h5"><strong>{props.phase}</strong></Typography>
                         </CardContent>
                     </Grid>
                     <Grid item>
-                        <Box m={3}>
+                        <Box m={1}>
                             <Box display="inline" m={1}> 
                                 <Button 
                                     size="small"
