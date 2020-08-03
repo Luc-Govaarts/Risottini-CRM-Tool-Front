@@ -60,7 +60,7 @@ export default function ContactCard(props) {
     const handleDeleteContact = (event) => {
         event.preventDefault()
 
-        dispatch(removeRelatedContact(leadId, contactId))
+        dispatch(updateContact(null, leadId))
     }
 
 

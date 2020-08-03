@@ -98,12 +98,6 @@ export function removeLead(data) {
   } 
 }
 
-export function removeContactId(data) {
-  return {
-    type: "REMOVE_CONTACT_ID", payload: data
-  }
-}
-
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
   const state = getState()
@@ -355,16 +349,5 @@ export function deleteLead(leadId) {
                   url: `${apiUrl}/leads/${leadId}`,
                   headers: {'Authorization': `Bearer ${token}`}})            
     dispatch(removeLead(leadId))                          
-  }
-}
-
-export function removeRelatedContact(leadId, contactId) {
-  return async function thunk(dispatch, getState) {
-    const state = getState()
-    const token = state.user.token 
-    await axios({ method: 'patch',
-                  url: `${apiUrl}/leads/${leadId}/contacts/${contactId}`,
-                  headers: {'Authorization': `Bearer ${token}`}})
-   dispatch(removeContactId({leadId: leadId, contactId: contactId}))               
   }
 }
