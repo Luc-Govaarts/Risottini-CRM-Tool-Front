@@ -27,17 +27,18 @@ export default function PhaseCard(props) {
             <Card>
                 <Grid
                     container
-                    direction="column"
+                    direction="row"
                     justify="space-evenly"
                     alignItems="center">
                     <Grid item>
                         <CardContent>
-                            <Typography variant="h4">{props.phase}</Typography>
+                            <Typography><strong>{props.phase}</strong></Typography>
                         </CardContent>
                     </Grid>
                     <Grid item>
-                        <Box m={3}> 
+                        <Box m={1}> 
                             <Button 
+                                size="small"
                                 variant="contained" 
                                 color="primary"
                                 onClick={handleReset}>Reset
@@ -53,17 +54,18 @@ export default function PhaseCard(props) {
             <Card>
                 <Grid
                 container
-                direction="column"
+                direction="row"
                 justify="space-evenly"
                 alignItems="center">
                     <Grid item>
                         <CardContent>
-                            <Typography variant="h4">{props.phase}</Typography>
+                            <Typography><strong>{props.phase}</strong></Typography>
                         </CardContent>
                     </Grid>
                     <Grid item>
-                        <Box m={3}> 
-                            <Button 
+                        <Box m={1}> 
+                            <Button
+                                size="small"
                                 variant="contained" 
                                 color="primary"
                                 onClick={handlePlus}>+
@@ -78,25 +80,27 @@ export default function PhaseCard(props) {
             <Card>
                 <Grid
                 container
-                direction="column"
+                direction="row"
                 justify="space-evenly"
                 alignItems="center">
                     <Grid item>
                         <CardContent>
-                            <Typography variant="h4">{props.phase}</Typography>
+                            <Typography><strong>{props.phase}</strong></Typography>
                         </CardContent>
                     </Grid>
                     <Grid item>
                         <Box m={3}>
-                            <Box display="inline" m={3}> 
+                            <Box display="inline" m={1}> 
                                 <Button 
+                                    size="small"
                                     variant="contained" 
                                     color="primary"
                                     onClick={handleMin}>-
                                 </Button>
                             </Box>
-                            <Box display="inline" m={3}> 
+                            <Box display="inline" m={1}> 
                                 <Button 
+                                    size="small"
                                     variant="contained" 
                                     color="primary"
                                     onClick={handlePlus}>+
