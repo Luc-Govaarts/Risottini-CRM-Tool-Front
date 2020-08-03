@@ -1,12 +1,13 @@
 import React, { useState }from 'react'
 import { useSelector } from 'react-redux'
 import { selectUserById } from '../store/appFeed/selectors'
+import { useHistory } from 'react-router-dom'
 import { Typography, Container, Box, Avatar, Link,
     Button, TextField, Dialog, Card, CardContent, 
     DialogActions, DialogContent, DialogTitle, DialogContentText} from '@material-ui/core'
 import moment from 'moment';
 import { useDispatch } from "react-redux";
-import { adjustLead } from "../store/appFeed/actions";
+import { adjustLead, deleteLead } from "../store/appFeed/actions";
 import  WorkIcon from '@material-ui/icons/Work';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -45,6 +46,7 @@ export default function LeadCard(props) {
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
+    const history = useHistory();
     const dispatch = useDispatch();
 
     const handleOpenAdjust = () => {
@@ -84,8 +86,10 @@ export default function LeadCard(props) {
         handleCloseAdjust()
     }
 
-    const handleDelete = () => {
-        console.log("^^^^^^^6")
+    const handleDelete = (event) => {
+        event.preventDefault()
+        dispatch(deleteLead(leadId))
+        history.push("/")
     }
     
     return (
@@ -215,7 +219,8 @@ export default function LeadCard(props) {
                 <Dialog open={open_delete} onClose={handleCloseDelete}>
                     <DialogTitle>Lead Verwijderen</DialogTitle>
                     <DialogContent>
-                        Weet je zeker dat je deze notitie wil verwijderen?
+                        Weet je zeker dat je deze lead wil verwijderen?
+                        alle informatie zal dan verloren gaan
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseDelete} color="primary">

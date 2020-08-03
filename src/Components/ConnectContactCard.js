@@ -33,7 +33,6 @@ export default function ConnectContactCard(props) {
         }
     }, [contacts])
 
-    console.log(contacts)
 
     const submitNewContact = (event) => {
         event.preventDefault()
@@ -66,6 +65,7 @@ export default function ConnectContactCard(props) {
                                     </Select>
                                 </FormControl>
                                 <Button
+                                    fullWidth
                                     type="submit"
                                     variant="contained"
                                     color="primary"
@@ -74,6 +74,7 @@ export default function ConnectContactCard(props) {
                                 <Box m={1}>
                                 </Box>
                                 <Button
+                                    fullWidth
                                     href="/contacts/add"
                                     name="addNewContact"
                                     variant="contained"

@@ -89,9 +89,14 @@ export default (state = initialState, action) => {
         } 
       })
       return {...state, leads: newLeadArray9, loading: false}
-    case "ADJUST_LEAD": 
-    
-    return state
+    case "REMOVE_LEAD": 
+    const newLeadArray10 = state.leads.filter(lead => {
+      return lead.id !== action.payload
+    })
+    return {...state, leads: newLeadArray10, loading: false}
+    case "REMOVE_CONTACT_ID":
+      const newLeadArray11 = state.leads.map(lead => lead.id === action.payload.leadId ? {...lead, contactId: null} : lead )
+      return {...state, leads: newLeadArray11, loading: false}
   default:
       return state
   }

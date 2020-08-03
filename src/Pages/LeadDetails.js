@@ -91,6 +91,7 @@ export default function LeadDetails() {
                             <Box mt={3}>
                                 <ContactCard
                                     key={contact.id}
+                                    leadId={leadId}
                                     name={contact.name}
                                     job_title={contact.job_title}
                                     email={contact.email}

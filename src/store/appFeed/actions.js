@@ -92,6 +92,17 @@ export function removeAction(data) {
   } 
 }
 
+export function removeLead(data) {
+  return {
+      type: "REMOVE_LEAD", payload: data
+  } 
+}
+
+export function removeContactId(data) {
+  return {
+    type: "REMOVE_CONTACT_ID", payload: data
+  }
+}
 
 export async function fetchUsers(dispatch, getState) {
   dispatch(startLoading(true))
@@ -293,9 +304,9 @@ export function deleteReport(reportId, leadId) {
   return async function(dispatch, getState) {
     const state = getState()
     const token = state.user.token 
-    const res = await axios({ method: 'delete',
-                              url: `${apiUrl}/reports/${reportId}`,
-                              headers: {'Authorization': `Bearer ${token}`}})            
+    await axios({ method: 'delete',
+                  url: `${apiUrl}/reports/${reportId}`,
+                  headers: {'Authorization': `Bearer ${token}`}})            
     dispatch(removeReport({reportId: reportId, leadId: leadId}))                          
   }
 }
@@ -304,9 +315,9 @@ export function deleteAction(actionId, leadId) {
   return async function(dispatch, getState) {
     const state = getState()
     const token = state.user.token 
-    const res = await axios({ method: 'delete',
-                              url: `${apiUrl}/actions/${actionId}`,
-                              headers: {'Authorization': `Bearer ${token}`}})               
+    await axios({ method: 'delete',
+                  url: `${apiUrl}/actions/${actionId}`,
+                  headers: {'Authorization': `Bearer ${token}`}})               
     dispatch(removeAction({actionId: actionId, leadId: leadId}))                          
   }
 }
@@ -332,7 +343,28 @@ export function adjustLead(leadId, company_name, associated_company_name,
                               data: upToDateLead,
                               headers: {'Authorization': `Bearer ${token}`}})  
                         console.log(res.data)    
-    dispatch(storeUpdatedLead(res.data))
-                      
+    dispatch(storeUpdatedLead(res.data))          
+  }
+}
+
+export function deleteLead(leadId) {
+  return async function(dispatch, getState) {
+    const state = getState()
+    const token = state.user.token 
+    await axios({ method: 'delete',
+                  url: `${apiUrl}/leads/${leadId}`,
+                  headers: {'Authorization': `Bearer ${token}`}})            
+    dispatch(removeLead(leadId))                          
+  }
+}
+
+export function removeRelatedContact(leadId, contactId) {
+  return async function thunk(dispatch, getState) {
+    const state = getState()
+    const token = state.user.token 
+    await axios({ method: 'patch',
+                  url: `${apiUrl}/leads/${leadId}/contacts/${contactId}`,
+                  headers: {'Authorization': `Bearer ${token}`}})
+   dispatch(removeContactId({leadId: leadId, contactId: contactId}))               
   }
 }
