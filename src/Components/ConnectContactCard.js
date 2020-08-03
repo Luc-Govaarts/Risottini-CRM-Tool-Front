@@ -39,7 +39,7 @@ export default function ConnectContactCard(props) {
 
         dispatch(updateContact(contactId, leadId))
 
-        set_contactId(null)
+        set_contactId(1)
     }
 
     return (
