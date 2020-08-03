@@ -21,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
 export default function ContactCard(props) {
     const classes = useStyles();
     const dispatch = useDispatch()
+    const dateUpdated = moment(props.updatedAt).format("DD MMM YYYY, hh:mm a")
+    const dateCreated = moment(props.createdAt).format("DD MMM YYYY, hh:mm a")
     const [open_adjust, set_adjust_open] = useState(false);
     const [open_delete, set_delete_open] = useState(false);
     const contacts = useSelector(selectContacts)
@@ -76,17 +78,15 @@ export default function ContactCard(props) {
                 subheader={props.function}
             />
             <CardContent>
-                <Typography variant="h6" component="p">
+                <Typography>
+                    <strong>Functie: </strong> {props.job_title}
+                </Typography>
+                <Typography >
                     <strong>Email: </strong>{props.email}
                 </Typography>
-                <Typography variant="h6" component="p">
+                <Typography>
                     <strong>Telefoon: </strong> {props.phone}
                 </Typography>
-                <Box textAlign='right'>
-                    <Typography variant="caption">
-                        <em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}
-                    </Typography>
-                </Box>
                 <Link variant="caption" component="button" onClick={handleOpenAdjust}>Aanpassen</Link>{" || "}
                 <Link variant="caption" component="button" color="error" onClick={handleOpenDelete}>Verwijderen</Link>
             </CardContent>

@@ -96,7 +96,8 @@ export default function LeadDetails() {
                                     job_title={contact.job_title}
                                     email={contact.email}
                                     phone={contact.phone}
-                                    createdAt={contact.createdAt}/>
+                                    createdAt={contact.createdAt}
+                                    updatedAt={contact.updatedAt}/>
                             </Box> 
                         </Box>
                         :   <Box m={3}>

@@ -96,18 +96,12 @@ export default function LeadCard(props) {
     <div>
         <Card>
             <CardContent>
-            <Typography variant="h6" 
-                        component="p"><strong>Address: </strong>{props.address}</Typography>
-            <Typography variant="h6" 
-                        component="p"><strong>Telefoon: </strong> {props.phone}</Typography>
-            <Typography variant="h6" 
-                        component="p"><strong>Email: </strong>{props.email}</Typography>
-            <Typography variant="h6" 
-                        component="p"><strong>Leverancier: </strong>{props.supplier}</Typography>
+            <Typography ><strong>Address: </strong>{props.address}</Typography>
+            <Typography ><strong>Telefoon: </strong> {props.phone}</Typography>
+            <Typography ><strong>Email: </strong>{props.email}</Typography>
+            <Typography ><strong>Leverancier: </strong>{props.supplier}</Typography>
             <Box textAlign='right'>
-                <Typography variant="caption"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>
-            </Box>
-            <Box textAlign='right'>
+                <Typography variant="caption"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>{", "}
                 <Typography variant="caption"><em>Door:</em> {name}</Typography>
             </Box>
             <Box textAlign="right">
