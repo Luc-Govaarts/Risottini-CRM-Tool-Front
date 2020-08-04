@@ -17,7 +17,7 @@ export default function MyTimeline(props) {
     const lead = useSelector(selectLeadById(leadId))
     const reports = lead.reports
     const actions = lead.actions
-    const today = {createdAt: moment()}
+    const today = {createdAt: moment(), today: true}
     const timelineObjects = reports.concat(actions).concat(today)
     const sortedTimelineObjects = [...timelineObjects].sort(compareDates)
 
@@ -25,20 +25,27 @@ export default function MyTimeline(props) {
         <Box>
             <Timeline align="alternate">
                 {[...sortedTimelineObjects].map((timelineObject, index) => {
-                    if(timelineObject.hasOwnProperty("note") === false) {
+                    if(timelineObject.hasOwnProperty("today")) {
                         return <Today key={index}/>
                     } else if(timelineObject.hasOwnProperty("due_date")){
                         return <ActionTimelineItem
+                                    leadId={leadId}
                                     key={index}
+                                    id={timelineObject.id}
                                     userId={timelineObject.userId}
                                     event={timelineObject.action}
                                     note={timelineObject.note}
-                                    due_date={timelineObject.due_date}/> 
+                                    due_date={timelineObject.due_date}
+                                    dateCreated={timelineObject.createdAt}
+                                    dateUpdated={timelineObject.updatedAt}/> 
                     } else {
                         return <ReportTimelineItem
+                                    leadId={leadId}
                                     key={index}
+                                    id={timelineObject.id}
                                     userId={timelineObject.userId}
-                                    date={timelineObject.createdAt}
+                                    dateCreated={timelineObject.createdAt}
+                                    dateUpdated={timelineObject.updatedAt}
                                     note={timelineObject.note}/>
                     }
                 })}
