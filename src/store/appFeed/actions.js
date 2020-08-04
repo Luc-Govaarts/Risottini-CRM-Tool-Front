@@ -129,6 +129,7 @@ export function updateContact(contactId, leadId) {
                               data: {contactId},
                               headers: {'Authorization': `Bearer ${token}`}})             
     dispatch(storeUpdatedLead(res.data))
+    dispatch(setMessage("success", true, "Contact updated succesfully"))
   } 
 }
 
@@ -190,7 +191,7 @@ export function addLead(company_name, associated_company_name,
                             })       
     dispatch(storeNewLead(res.data))
 
-    dispatch(setMessage("succes", true, "Nieuwe Lead, laat de ballen maar rollen"))
+    dispatch(setMessage("success", true, "Added new lead succesfully"))
   }
 }
 
@@ -206,7 +207,7 @@ export function addContact(contact_name, contact_email, contact_phone, job_title
                               headers: {'Authorization': `Bearer ${token}`}})
   
     dispatch(storeNewContact(res.data))
-    dispatch(setMessage("succes", true, "Nieuw contact toegevoegd!"))
+    dispatch(setMessage("success", true, "New contact added succesfully"))
   }
 }
 
@@ -222,6 +223,7 @@ export function addNewReport(note, leadId) {
                               data: {userId, note, leadId},
                               headers: {'Authorization': `Bearer ${token}`}})
     dispatch(storeNewReport(res.data))
+    dispatch(setMessage("success", true, "new report added succesfully"))
   }
 }
 
@@ -235,6 +237,7 @@ export function changePhaseTo(newPhaseId, id) {
                               data: {newPhaseId},
                               headers: {'Authorization': `Bearer ${token}`}})
     dispatch(storeUpdatedLead(res.data))
+    dispatch(setMessage("info", true, "The sales cycle phase was adjusted, great work champ!"))
   }
 }
 
@@ -249,11 +252,13 @@ export function createAction(leadId, action, due_date, note) {
                               data: {leadId, userId, action, due_date, note},
                               headers: {'Authorization': `Bearer ${token}`}})
     dispatch(storeNewAction(res.data))
+    dispatch(setMessage("success", true, "Created a new action, go get them!"))
   }
 }
 
 export function adjustReport(reportId, adjusted_note, userId, leadId) {
   return async function(dispatch, getState) {
+    dispatch(startLoading(true))
     const upToDateReport = {
       id: reportId,
       note: adjusted_note,
@@ -267,7 +272,8 @@ export function adjustReport(reportId, adjusted_note, userId, leadId) {
                               url: `${apiUrl}/reports/${reportId}`,
                               data: upToDateReport,
                               headers: {'Authorization': `Bearer ${token}`}})   
-    dispatch(storeAdjustedReport(res.data))                         
+    dispatch(storeAdjustedReport(res.data))  
+    dispatch(setMessage("info", true, "The report was adjusted"))                       
   }
 }
 
@@ -275,6 +281,7 @@ export function adjustAction( actionId, adjusted_action,
                               adjusted_due_date, adjusted_note,
                               userId, leadId) {
   return async function(dispatch, getState) {
+    dispatch(startLoading(true))
     const upToDateAction = {
       id: actionId,
       action: adjusted_action,
@@ -290,29 +297,34 @@ export function adjustAction( actionId, adjusted_action,
                               url: `${apiUrl}/actions/${actionId}`,
                               data: upToDateAction,
                               headers: {'Authorization': `Bearer ${token}`}})   
-    dispatch(storeAdjustedAction(res.data))                         
+    dispatch(storeAdjustedAction(res.data))
+    dispatch(setMessage("info", true, "The report was adjusted"))                             
   }
 }
 
 export function deleteReport(reportId, leadId) {
   return async function(dispatch, getState) {
+    dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
     await axios({ method: 'delete',
                   url: `${apiUrl}/reports/${reportId}`,
                   headers: {'Authorization': `Bearer ${token}`}})            
-    dispatch(removeReport({reportId: reportId, leadId: leadId}))                          
+    dispatch(removeReport({reportId: reportId, leadId: leadId}))  
+    dispatch(setMessage("info", true, "The report was deleted"))                         
   }
 }
 
 export function deleteAction(actionId, leadId) {
   return async function(dispatch, getState) {
+    dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
     await axios({ method: 'delete',
                   url: `${apiUrl}/actions/${actionId}`,
                   headers: {'Authorization': `Bearer ${token}`}})               
-    dispatch(removeAction({actionId: actionId, leadId: leadId}))                          
+    dispatch(removeAction({actionId: actionId, leadId: leadId}))  
+    dispatch(setMessage("info", true, "The action was deleted"))                                  
   }
 }
 
@@ -320,6 +332,7 @@ export function adjustLead(leadId, company_name, associated_company_name,
                               company_phone, company_address, 
                               company_email, supplier) {
   return async function(dispatch, getState) {
+    dispatch(startLoading(true))
     const upToDateLead = {
       id: leadId,
       company_name: company_name, 
@@ -337,17 +350,20 @@ export function adjustLead(leadId, company_name, associated_company_name,
                               data: upToDateLead,
                               headers: {'Authorization': `Bearer ${token}`}})  
                         console.log(res.data)    
-    dispatch(storeUpdatedLead(res.data))          
+    dispatch(storeUpdatedLead(res.data))   
+    dispatch(setMessage("info", true, "The lead info was adjusted succesfully!"))                 
   }
 }
 
 export function deleteLead(leadId) {
   return async function(dispatch, getState) {
+    dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
     await axios({ method: 'delete',
                   url: `${apiUrl}/leads/${leadId}`,
                   headers: {'Authorization': `Bearer ${token}`}})            
-    dispatch(removeLead(leadId))                          
+    dispatch(removeLead(leadId))   
+    dispatch(setMessage("error", true, "The lead has been deleted!"))                                
   }
 }
