@@ -2,9 +2,10 @@ import React, { useState }from 'react'
 import { useSelector } from 'react-redux'
 import { selectUserById } from '../store/appFeed/selectors'
 import { useHistory } from 'react-router-dom'
-import { Typography, Container, Box, Avatar, Link,
-    Button, TextField, Dialog, Card, CardContent, CardHeader, 
-    DialogActions, DialogContent, DialogTitle, DialogContentText, CardActions} from '@material-ui/core'
+import { Typography, Container, Box, Avatar, Button, 
+    TextField, Dialog, Card, CardContent, CardHeader, 
+    DialogActions, DialogContent, DialogTitle, 
+    DialogContentText, CardActions} from '@material-ui/core'
 import moment from 'moment';
 import { useDispatch } from "react-redux";
 import { adjustLead, deleteLead } from "../store/appFeed/actions";
