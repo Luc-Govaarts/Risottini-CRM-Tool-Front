@@ -14,6 +14,6 @@ export function selectContacts(state) {
     return state.appFeed.contacts
 }
 
-export const selectUser = (id) => (state) => {
+export const selectUserById = (id) => (state) => {
     return state.appFeed.users.find(user => user.id === id)
 }
