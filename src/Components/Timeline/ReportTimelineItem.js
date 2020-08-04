@@ -86,8 +86,6 @@ export default function TimelineItemLeft(props) {
                         <Typography variant="body2" color="textSecondary">
                             {dateCreated}
                         </Typography>
-                        <Link variant="caption" component="button" onClick={handleOpenAdjust}>Aanpassen</Link>{" || "}
-                        <Link variant="caption" component="button" color="error" onClick={handleOpenDelete}>Verwijderen</Link>
                     </Box>
                 </TimelineOppositeContent>
                 <TimelineSeparator>
@@ -101,6 +99,8 @@ export default function TimelineItemLeft(props) {
                             <Typography>{props.note}</Typography>
                             {dateUpdated !== dateCreated? <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
                             {dateUpdated}</Typography> : null}
+                            <Button onClick={handleOpenAdjust} color="primary" size="small" >Aanpassen</Button>
+                            <Button onClick={handleOpenDelete} color="red" size="small" >Verwijderen</Button>
                         </Box>
                     </Paper>
                 </TimelineContent>
