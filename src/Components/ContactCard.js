@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateContact, fetchContacts, removeRelatedContact} from '../store/appFeed/actions'
+import { updateContact, fetchContacts } from '../store/appFeed/actions'
 import { selectContacts } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Box, Avatar, Link, Button, FormControl,
-    Dialog, Card, CardHeader,CardContent, DialogActions, Select,
+import { Typography, Avatar, Button, FormControl, CardActions, 
+    Dialog, Card, CardHeader, CardContent, DialogActions, Select,
     DialogContent, DialogTitle, DialogContentText, MenuItem} from '@material-ui/core'
 import moment from 'moment';
 import { red } from '@material-ui/core/colors';
@@ -87,9 +87,13 @@ export default function ContactCard(props) {
                 <Typography>
                     <strong>Telefoon: </strong> {props.phone}
                 </Typography>
-                <Link variant="caption" component="button" onClick={handleOpenAdjust}>Aanpassen</Link>{" || "}
-                <Link variant="caption" component="button" color="error" onClick={handleOpenDelete}>Verwijderen</Link>
+                {dateUpdated !== dateCreated? <Typography variant="caption" color="textSecondary">{"Aangepast op: "}
+                {dateUpdated}</Typography> : null}
             </CardContent>
+            <CardActions>
+                <Button onClick={handleOpenAdjust} color="primary" size="small" >Aanpassen</Button>
+                <Button onClick={handleOpenDelete} color="red">Verwijderen</Button>
+            </CardActions>
             {open_adjust ? <div>
                 <Dialog open={open_adjust} onClose={handleCloseAdjust}>
                     <DialogTitle>Contact aanpassen</DialogTitle>
