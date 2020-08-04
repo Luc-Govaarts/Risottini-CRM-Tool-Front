@@ -1,14 +1,10 @@
-import React, { useState }from 'react'
-import { useSelector } from 'react-redux'
-import { selectUserById } from '../store/appFeed/selectors'
-import { useHistory } from 'react-router-dom'
-import { Typography, Container, Box, Avatar, Button, 
-    TextField, Dialog, Card, CardContent, CardHeader, 
-    DialogActions, DialogContent, DialogTitle, 
-    DialogContentText, CardActions} from '@material-ui/core'
-import moment from 'moment';
+import React, { useState } from "react";
+import { Button, Container, Avatar, 
+    TextField, Typography, Box, 
+    DialogContent, Dialog,
+    DialogActions, DialogTitle} from '@material-ui/core';
 import { useDispatch } from "react-redux";
-import { adjustLead, deleteLead } from "../store/appFeed/actions";
+import { adjustLead } from "../store/appFeed/actions";
 import  WorkIcon from '@material-ui/icons/Work';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -31,40 +27,21 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         marginTop: theme.spacing(1),
     },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
   }));
 
-
-export default function LeadCard(props) {
+export default function AdjustLeadDialog(props) {
     const classes = useStyles();
-    const user = useSelector(selectUserById(props.userId))
-    const name = user.name
     const leadId = props.leadId
-    const [open_adjust, set_adjust_open] = useState(false);
-    const [open_delete, set_delete_open] = useState(false);
     const [company_name, set_company_name] = useState("")
     const [associated_company_name, set_associated_company_name] = useState("")
-    const [company_phone, set_company_phone] = useState("")
+    const [company_phone, set_company_phone] = useState()
     const [company_address, set_company_address] = useState("")
     const [company_email, set_company_email] = useState("")
     const [supplier, set_supplier] = useState("")
-    const history = useHistory();
     const dispatch = useDispatch();
-
-    const handleOpenAdjust = () => {
-        set_adjust_open(true);
-    };
-  
-    const handleCloseAdjust = () => {
-        set_adjust_open(false);
-    };
-
-    const handleOpenDelete = () => {
-        set_delete_open(true);
-    };
-  
-    const handleCloseDelete = () => {
-        set_delete_open(false);
-    };
 
     const adjustLeadForm = (event) => {
         event.preventDefault()    
@@ -78,64 +55,34 @@ export default function LeadCard(props) {
                 supplier
             ))
 
-        set_company_name("")
         set_associated_company_name("")
-        set_company_phone("")
+        set_company_phone()
         set_company_address("")
         set_company_email("")
         set_supplier("")
-        handleCloseAdjust()
-    }
-
-    const handleDelete = (event) => {
-        event.preventDefault()
-        dispatch(deleteLead(leadId))
-        history.push("/")
     }
     
     return (
-    <div>
-        <Card>
-            <CardHeader
-                title={props.lead}
-                subtitle={props.associated_company_name}>
-            </CardHeader>
-            <CardContent>
-                <Typography ><strong>Address: </strong>{props.address}</Typography>
-                <Typography ><strong>Telefoon: </strong> {props.phone}</Typography>
-                <Typography ><strong>Email: </strong>{props.email}</Typography>
-                <Typography ><strong>Leverancier: </strong>{props.supplier}</Typography>
-                <Box>
-                    <Typography variant="caption"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>{", "}
-                    <Typography variant="caption"><em>Door:</em> {name}</Typography>
-                </Box>
-            </CardContent>
-            <CardActions>
-                <Button onClick={handleOpenAdjust} color="primary" size="small" >Aanpassen</Button>
-                <Button onClick={handleOpenDelete} color="red">Verwijderen</Button>
-            </CardActions>
-        </Card>
-        {open_adjust ? 
         <Dialog open={open_adjust} onClose={handleCloseAdjust}>
             <Box>
-                <Container component="main">
+                <Container component="main" maxWidth="xs">
                     <div className={classes.paper}>
                         <Avatar className={classes.avatar}>
                             <WorkIcon/>
                         </Avatar>                       
-                            <Typography variant="h5">
+                        <DialogTitle>
+                            <Typography component="h1" variant="h5">
                             Pas lead info aan
                             </Typography>
+                        </DialogTitle>
                         <DialogContent>
-                            <DialogContentText>
-                                Geen enkel veld is verplicht, vul alleen de velden in die je wilt aanpassen
-                            </DialogContentText>
                             <form className={classes.form} onSubmit={adjustLeadForm}>
                                 <TextField
                                     onChange={event => set_company_name(event.target.value)}
                                     value={company_name}
                                     variant="outlined"
                                     margin="normal"
+                                    required
                                     fullWidth
                                     id="company_name"
                                     label="Voer de bedrijfsnaam in"
@@ -158,6 +105,7 @@ export default function LeadCard(props) {
                                     value={company_phone}
                                     variant="outlined"
                                     margin="normal"
+                                    required
                                     fullWidth
                                     id="company_phone"
                                     label="Telefoon nummer"
@@ -169,6 +117,7 @@ export default function LeadCard(props) {
                                     value={company_email}
                                     variant="outlined"
                                     margin="normal"
+                                    required
                                     fullWidth
                                     id="company_email"
                                     label="Voeg email toe"
@@ -180,6 +129,7 @@ export default function LeadCard(props) {
                                     value={company_address}
                                     variant="outlined"
                                     margin="normal"
+                                    required
                                     fullWidth
                                     id="company_address"
                                     label="Voeg address toe"
@@ -191,6 +141,7 @@ export default function LeadCard(props) {
                                     value={supplier}
                                     variant="outlined"
                                     margin="normal"
+                                    required
                                     fullWidth
                                     id="supplier"
                                     label="Leverancier"
@@ -203,7 +154,10 @@ export default function LeadCard(props) {
                                     </Button>
                                     <Button
                                         type="submit"
+                                        fullWidth
+                                        variant="contained"
                                         color="primary"
+                                        className={classes.submit}
                                     >
                                     Pas lead aan
                                     </Button>
@@ -213,27 +167,6 @@ export default function LeadCard(props) {
                     </div>
                 </Container>
             </Box>
-        </Dialog> : null}
-        {open_delete ? <div>
-                <Dialog open={open_delete} onClose={handleCloseDelete}>
-                    <DialogTitle>Lead Verwijderen</DialogTitle>
-                    <DialogContent>
-                        Weet je zeker dat je deze lead wil verwijderen?
-                        alle informatie zal dan verloren gaan
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleCloseDelete} color="primary">
-                        Cancel
-                        </Button>
-                        <Button
-                            color="primary"
-                            onClick={handleDelete}
-                        >
-                        Bevestigen 
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </div> : null}
-    </div>
+        </Dialog>
     )
 }
