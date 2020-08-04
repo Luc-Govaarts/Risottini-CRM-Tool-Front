@@ -42,10 +42,6 @@ export default function LeadDetails() {
     }
     return (
         <Box mt={15}>
-            <Box ml={15}>
-                <Typography variant="h3">{lead.company_name}</Typography>
-                <Typography variant="h4">{lead.associated_company_name}</Typography>
-            </Box>
             <Grid 
                 container
                 direction="row"
@@ -64,6 +60,8 @@ export default function LeadDetails() {
                                     <LeadCard
                                         userId={lead.userId}
                                         leadId={lead.id}
+                                        lead={lead.company_name}
+                                        associated_company_name={lead.associated_company_name}
                                         address={lead.company_address}
                                         phone={lead.company_phone}
                                         email={lead.company_email}

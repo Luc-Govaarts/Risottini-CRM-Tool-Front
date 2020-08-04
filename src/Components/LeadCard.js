@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 import { selectUserById } from '../store/appFeed/selectors'
 import { useHistory } from 'react-router-dom'
 import { Typography, Container, Box, Avatar, Link,
-    Button, TextField, Dialog, Card, CardContent, 
-    DialogActions, DialogContent, DialogTitle, DialogContentText} from '@material-ui/core'
+    Button, TextField, Dialog, Card, CardContent, CardHeader, 
+    DialogActions, DialogContent, DialogTitle, DialogContentText, CardActions} from '@material-ui/core'
 import moment from 'moment';
 import { useDispatch } from "react-redux";
 import { adjustLead, deleteLead } from "../store/appFeed/actions";
@@ -95,20 +95,24 @@ export default function LeadCard(props) {
     return (
     <div>
         <Card>
+            <CardHeader
+                title={props.lead}
+                subtitle={props.associated_company_name}>
+            </CardHeader>
             <CardContent>
-            <Typography ><strong>Address: </strong>{props.address}</Typography>
-            <Typography ><strong>Telefoon: </strong> {props.phone}</Typography>
-            <Typography ><strong>Email: </strong>{props.email}</Typography>
-            <Typography ><strong>Leverancier: </strong>{props.supplier}</Typography>
-            <Box textAlign='right'>
-                <Typography variant="caption"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>{", "}
-                <Typography variant="caption"><em>Door:</em> {name}</Typography>
-            </Box>
-            <Box textAlign="right">
-                <Link variant="caption" component="button" onClick={handleOpenAdjust}>Aanpassen</Link>{" || "}
-                <Link variant="caption" component="button" color="error" onClick={handleOpenDelete}>Verwijderen</Link>
-            </Box>
+                <Typography ><strong>Address: </strong>{props.address}</Typography>
+                <Typography ><strong>Telefoon: </strong> {props.phone}</Typography>
+                <Typography ><strong>Email: </strong>{props.email}</Typography>
+                <Typography ><strong>Leverancier: </strong>{props.supplier}</Typography>
+                <Box>
+                    <Typography variant="caption"><em>Gecreëerd:</em> {moment(props.createdAt).format("DD MMM YYYY")}</Typography>{", "}
+                    <Typography variant="caption"><em>Door:</em> {name}</Typography>
+                </Box>
             </CardContent>
+            <CardActions>
+                <Button onClick={handleOpenAdjust} color="primary" size="small" >Aanpassen</Button>
+                <Button onClick={handleOpenDelete} color="red">Verwijderen</Button>
+            </CardActions>
         </Card>
         {open_adjust ? 
         <Dialog open={open_adjust} onClose={handleCloseAdjust}>
