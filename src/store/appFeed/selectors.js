@@ -17,3 +17,8 @@ export function selectContacts(state) {
 export const selectUserById = (id) => (state) => {
     return state.appFeed.users.find(user => user.id === id)
 }
+
+export const selectContactNameById = (id) => (state) => {
+    const contact = state.appFeed.contacts.find(contact => contact.id === id)
+    return contact.name
+}
