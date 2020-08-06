@@ -47,7 +47,7 @@ export default function StickyHeadTable(props) {
     
     useEffect(() => {
         dispatch(fetchLeads)
-    }, [dispatch]);
+    }, [dispatch]);     
 
     const rows = leads.map(lead => createRow(lead))
 

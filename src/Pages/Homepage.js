@@ -48,79 +48,11 @@ export default function Homepage() {
     })
 
     return <>
-        <Box my={12} mx={5}>
-            <LeadsTable leads={leads}/>
-        </Box>
-        <Box mt={8} width={1} height="550px">
+        <Box mt={12} mx={25} height="450px">
             <HomePageMap leads={leads}/>
         </Box>
-        <Box mt={4}>
-           <Grid 
-                container
-                direction="row"
-                justify="center"
-                alignItems="flex-start">
-                <Grid xs={3} item>
-                    <Box m={3}>
-                        <Box m={3}>
-                            <Typography variant="h5"> Nieuwe Leads</Typography>
-                        </Box>
-                        <Paper>
-                            {leads_cold.map(lead => {
-                                return <SmallLeadCard
-                                            key={lead.id}
-                                            leadId={lead.id}
-                                            lead={lead.company_name}
-                                            partner={lead.associated_company_name}/>})}
-                        </Paper>
-                    </Box>
-                </Grid>
-                <Grid xs={3} item>
-                    <Box m={3}>
-                        <Box m={3}>
-                            <Typography variant="h5"> Contact Gemaakt </Typography>
-                        </Box>
-                        <Paper>
-                            {leads_made_contact.map(lead => {
-                                return <SmallLeadCard
-                                            key={lead.id}
-                                            leadId={lead.id}
-                                            lead={lead.company_name}
-                                            partner={lead.associated_company_name}/>})}
-                        </Paper>
-                    </Box>
-                </Grid>
-                <Grid xs={3} item>
-                    <Box m={3}> 
-                        <Box m={3}>
-                            <Typography variant="h5"> Ballen Proeven </Typography>
-                        </Box>
-                        <Paper>
-                            {leads_tasting.map(lead => {
-                                return <SmallLeadCard
-                                            key={lead.id}
-                                            leadId={lead.id}
-                                            lead={lead.company_name}
-                                            partner={lead.associated_company_name}/>})}
-                        </Paper>
-                    </Box>
-                </Grid>
-                <Grid xs={3} item>
-                    <Box m={3}>
-                        <Box m={3}>
-                            <Typography variant="h5"> Gesloten Deals </Typography>
-                        </Box>
-                        <Paper>
-                            {leads_deal_closed.map(lead => {
-                                return <SmallLeadCard
-                                            key={lead.id}
-                                            leadId={lead.id}
-                                            lead={lead.company_name}
-                                            partner={lead.associated_company_name}/>})}
-                        </Paper>
-                    </Box>
-                </Grid>
-            </Grid>
+        <Box mx={25}>
+            <LeadsTable leads={leads}/>
         </Box>
     </>
 }
