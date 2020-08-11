@@ -10,17 +10,17 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles';
-import { lightGreen } from '@material-ui/core/colors';
+import { lightGreen, lightBlue } from '@material-ui/core/colors';
 
 
 const theme = createMuiTheme({
   spacing: 8,
   palette: {
     primary: {
-      main: lightGreen[500],
+      main: lightGreen[300],
     },
     secondary: {
-      main: lightGreen[500],
+      main: lightBlue[300],
     },
   },
 });

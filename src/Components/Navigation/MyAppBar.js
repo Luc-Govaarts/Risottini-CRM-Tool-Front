@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Box } from '@material-ui/core'
+import { AppBar, Toolbar, Box, IconButton} from '@material-ui/core'
 import WorkIcon from '@material-ui/icons/WorkOutlineOutlined';
 import ContactPhoneIcon from '@material-ui/icons/ContactPhoneOutlined';
 import EventIcon from '@material-ui/icons/EventOutlined';
@@ -16,8 +16,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   icon: {
-    fontSize: 35,
-    margin: theme.spacing('auto', 3)
+    margin: theme.spacing('auto', 1),
+    color: theme.palette.secondary
   }
   }));
 
@@ -31,16 +31,15 @@ export default function MyAppBar(props) {
         <Toolbar className={classes.Toolbar}>
           {loginLogoutControls}
           <Box>
-            <WorkIcon className={classes.icon}>
-
-            </WorkIcon>
-            
-            <EventIcon className={classes.icon}>
-
-            </EventIcon>
-            <ContactPhoneIcon className={classes.icon}>
-
-            </ContactPhoneIcon>
+            <IconButton href="/"> 
+              <WorkIcon className={classes.icon}></WorkIcon>
+            </IconButton>
+            <IconButton href="/actions">
+              <EventIcon className={classes.icon}></EventIcon>
+            </IconButton>
+            <IconButton href="/contacts">
+              <ContactPhoneIcon className={classes.icon}></ContactPhoneIcon>
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
