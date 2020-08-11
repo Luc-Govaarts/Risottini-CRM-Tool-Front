@@ -8,7 +8,7 @@ import { selectContacts } from '../store/appFeed/selectors';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addLead, fetchContacts } from "../store/appFeed/actions";
-import SnackBar from "../Components/NavDrawer/SnackBar";
+import SnackBar from "../Components/Navigation/SnackBar";
 import  WorkIcon from '@material-ui/icons/Work';
 import { makeStyles } from '@material-ui/core/styles';
 

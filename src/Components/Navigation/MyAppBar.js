@@ -11,15 +11,13 @@ import LoggedOut from './LoggedOut'
 
 const useStyles = makeStyles((theme) => ({
   Toolbar: {
-    display: 'flex',
     width: '100%',
     position: 'fixed',
     backgroundColor: theme.palette.primary.main,
-    justifyContent: 'flex-start'
   },
   icon: {
-    fontSize: 30,
-    margin: theme.spacing('auto', 15)
+    fontSize: 35,
+    margin: theme.spacing('auto', 3)
   }
   }));
 
@@ -43,9 +41,6 @@ export default function MyAppBar(props) {
             <ContactPhoneIcon className={classes.icon}>
 
             </ContactPhoneIcon>
-            {/* <Box>
-              <Typography variant="h5">Crispy</Typography>
-            </Box> */}
           </Box>
         </Toolbar>
       </AppBar>
