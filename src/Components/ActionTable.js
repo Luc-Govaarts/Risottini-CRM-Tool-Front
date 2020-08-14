@@ -52,11 +52,13 @@ const columns = [
 ]
 
 const createRow = (lead) => {
-    const actionTitle = action.action
-    const due_date = action.due_date
-    const note = action.note
-    const leadName = action.leadId
-    const userName = action.userId
+	const actionTitle = action.action
+	const due_date = action.due_date
+	const note = action.note
+	const leadName = action.leadId
+	const userName = action.userId
+
+	return { actionTitle, due_date, note, leadName, userName }
 }
 
 const MyTableHead = (props) => {
@@ -148,5 +150,43 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
-	{!actions ? null : <div></div>}
+	{
+		!actions ? null : (
+			<Paper className={classes.root}>
+				<TableContainer className={classes.container}>
+					<Table>
+						<MyTableHead
+							classes={classes}
+							order={order}
+							orderBy={orderBy}
+							onRequestSort={handleRequestSort}
+						/>
+                        <TableBody>
+							{stableSort(rows, getComparator(order, orderBy))
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.map((row, index) => {
+									return (
+										<TableRow hover tabIndex={-1} key={row.company_name}>
+											{columns.map((column) => {
+												const value = row[column.id]
+												return <TableCell key={column.id}>{value}</TableCell>
+											})}
+										</TableRow>
+									)
+								})}
+						</TableBody>
+					</Table>
+				</TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[5, 10, 25, 50]}
+					component='div'
+					count={rows.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onChangePage={handleChangePage}
+					onChangeRowsPerPage={handleChangeRowsPerPage}
+				/>
+			</Paper>
+		)
+	}
 }
