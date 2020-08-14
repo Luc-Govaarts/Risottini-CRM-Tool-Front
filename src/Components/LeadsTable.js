@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 import { fetchLeads } from '../store/appFeed/actions'
 import { selectLeads } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
@@ -44,13 +44,13 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-	{ id: 'company_name', label: 'Lead', minWidth: 100 },
-	{ id: 'salesCyclePhase', label: 'Verkoop fase', minWidth: 100 },
+	{ id: 'company_name', label: 'Lead', minWidth: 120 },
+	{ id: 'salesCyclePhase', label: 'Verkoop fase', minWidth: 120 },
 	{ id: 'company_phone', label: 'Telefoon', minWidth: 100 },
 	{ id: 'company_email', label: 'Email', minWidth: 100 },
 	{ id: 'supplier', label: 'Leverancier', minWidth: 100 },
-	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 100 },
-	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 100 },
+	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 120 },
+	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 120 },
 ]
 
 const createRow = (lead) => {
@@ -167,7 +167,6 @@ export default function StickyHeadTable(props) {
 	} else {
 		return (
 			<Paper className={classes.root}>
-        
 				<TableContainer className={classes.container}>
 					<Table>
 						<MyTableHead
