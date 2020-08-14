@@ -17,10 +17,10 @@ const theme = createMuiTheme({
   spacing: 8,
   palette: {
     primary: {
-      main: lightGreen[300],
+      main: lightGreen[400],
     },
     secondary: {
-      main: lightBlue[300],
+      main: lightBlue[400],
     },
   },
 });
