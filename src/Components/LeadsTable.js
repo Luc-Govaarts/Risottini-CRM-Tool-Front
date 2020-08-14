@@ -18,6 +18,10 @@ import {
 import moment from 'moment'
 
 function descendingComparator(a, b, orderBy) {
+	if(orderBy === 'createdAt' || orderBy === 'updatedAt'){
+        return new Date(a[orderBy]) - new Date(b[orderBy])
+    }
+
 	if (b[orderBy] < a[orderBy]) {
 		return -1
 	}

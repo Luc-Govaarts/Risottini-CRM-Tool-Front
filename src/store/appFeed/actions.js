@@ -157,18 +157,16 @@ export function fetchReportsById(id) {
   }  
 }
 
-export function fetchActionsById(id) {
-  return async function thunk(dispatch, getState) {
+export async function fetchActions(dispatch, getState) {
     dispatch(startLoading(true))
     const state = getState()
     const token = state.user.token 
     const res = await axios({method: 'get',
-                              url: `${apiUrl}/actions/${id}`,
+                              url: `${apiUrl}/actions`,
                               headers: {'Authorization': `Bearer ${token}`}})
     const actions = res.data                    
     dispatch(storeActions(actions))
-  }  
-}
+}  
 
 export function addLead(company_name, associated_company_name,
                         company_phone, company_address, 

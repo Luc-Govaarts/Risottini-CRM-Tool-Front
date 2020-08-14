@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchLeads } from '../store/appFeed/actions'
-import { selectLeads } from '../store/appFeed/selectors'
+import { fetchActions } from '../store/appFeed/actions'
+import { selectActions } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
 import {
 	Paper,
@@ -18,6 +18,10 @@ import {
 import moment from 'moment'
 
 function descendingComparator(a, b, orderBy) {
+    if(orderBy === 'due_date' || orderBy === 'createdAt' || orderBy === 'updatedAt'){
+        return new Date(a[orderBy]) - new Date(b[orderBy])
+    }
+
 	if (b[orderBy] < a[orderBy]) {
 		return -1
 	}
@@ -45,20 +49,24 @@ function stableSort(array, comparator) {
 
 const columns = [
 	{ id: 'actionTitle', label: 'Actie', minWidth: 120 },
-	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 120 },
-	{ id: 'note ', label: 'Notitie', minWidth: 250 },
+    { id: 'due_date', label: 'Datum en Tijd', minWidth: 120 },
+	{ id: 'note', label: 'Notitie', minWidth: 250 },
 	{ id: 'leadName', label: 'Lead', minWidth: 120 },
-	{ id: 'userName', label: 'Gebruiker', minWidth: 120 },
+    { id: 'userName', label: 'Gebruiker', minWidth: 120 },
+    { id: 'createdAt', label: 'Gecreëerd op', minWidth: 120 },
+	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 120 },
 ]
 
-const createRow = (lead) => {
+const createRow = (action) => {
 	const actionTitle = action.action
-	const due_date = action.due_date
+    const due_date = moment(action.due_date).format('DD MMM YYYY')
 	const note = action.note
-	const leadName = action.leadId
-	const userName = action.userId
+	const leadName = action.lead.company_name
+    const userName = action.user.name
+    const createdAt = moment(action.createdAt).format('DD MMM YYYY')
+	const updatedAt = moment(action.updatedAt).format('DD MMM YYYY')
 
-	return { actionTitle, due_date, note, leadName, userName }
+	return { actionTitle, due_date, note, leadName, userName, createdAt, updatedAt }
 }
 
 const MyTableHead = (props) => {
@@ -139,7 +147,7 @@ export default function ActionTable() {
 		dispatch(fetchActions)
 	}, [dispatch])
 
-	const rows = leads.map((lead) => createRow(lead))
+	const rows = actions.map((action) => createRow(action))
 
 	const handleChangePage = (event, newPage) => {
 		setPage(newPage)
@@ -150,8 +158,10 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
-	{
-		!actions ? null : (
+	if (!actions) {
+		return null
+	} else {
+		return (
 			<Paper className={classes.root}>
 				<TableContainer className={classes.container}>
 					<Table>
@@ -161,12 +171,12 @@ export default function ActionTable() {
 							orderBy={orderBy}
 							onRequestSort={handleRequestSort}
 						/>
-                        <TableBody>
+						<TableBody>
 							{stableSort(rows, getComparator(order, orderBy))
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									return (
-										<TableRow hover tabIndex={-1} key={row.company_name}>
+										<TableRow hover tabIndex={-1} key={index}>
 											{columns.map((column) => {
 												const value = row[column.id]
 												return <TableCell key={column.id}>{value}</TableCell>

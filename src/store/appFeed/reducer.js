@@ -3,6 +3,7 @@ const initialState = {
   leads: [],
   SalesCyclePhases: [],
   contacts: [],
+  actions: [],
   users: []
 };
 
@@ -21,8 +22,7 @@ export default (state = initialState, action) => {
       const newLeadsArray2 = state.leads.map(lead => lead.id === action.payload.leadId ? { ...lead, actions: [...lead.actions, action.payload] } : lead)
       return {...state, leads: newLeadsArray2, loading: false}
     case "STORE_ACTIONS":
-      const newLeadArray3 = state.leads.map(lead => lead.is === action.payload.leadId ? { ...lead, actions: [...action.payload] } : lead)
-      return {...state, leads: newLeadArray3, loading: false}
+      return {...state, actions: [...action.payload], loading: false}
     case "STORE_CONTACTS":
       return {...state, contacts: [...action.payload], loading: false}
     case "STORE_NEW_CONTACT":
