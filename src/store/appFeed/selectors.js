@@ -10,13 +10,14 @@ export function selectActions(state) {
     return state.appFeed.actions
 }
 
+export function selectContacts(state) {
+    return state.appFeed.contacts
+}
+
 export const selectLeadById = (id) => (state) => {
     return state.appFeed.leads.find(lead => lead.id === id)
 }
 
-export function selectContacts(state) {
-    return state.appFeed.contacts
-}
 
 export const selectUserById = (id) => (state) => {
     return state.appFeed.users.find(user => user.id === id)
@@ -27,3 +28,7 @@ export const selectContactNameById = (id) => (state) => {
     return contact.name
 }
 
+export const selectLeadIdByName = (name) => (state) => {
+    const lead = state.appFeed.leads.find(lead => lead.company_name === name)
+    return lead.id
+}

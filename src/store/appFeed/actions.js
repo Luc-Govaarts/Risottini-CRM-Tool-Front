@@ -1,6 +1,7 @@
 import { apiUrl } from '../../config/constants'
 import axios from "axios";
 import { setMessage } from "../appState/actions";
+import { Paper } from '@material-ui/core';
 
 export function startLoading(data) {
   return {
@@ -365,3 +366,21 @@ export function deleteLead(leadId) {
     dispatch(setMessage("error", true, "The lead has been deleted!"))                                
   }
 }
+
+export function actionStatusChange(actionId) {
+  return async function thunk(dispatch, getState) {
+    dispatch(startLoading(true))   
+    const state = getState()
+    const token = state.user.token
+    const action = state.appFeed.actions.find(action => action.id === actionId)
+    const status = action.done 
+    console.log("*******STATUS*******", status)
+    const res = await axios({ method: 'patch',
+                              url: `${apiUrl}/actions/${actionId}/status`,
+                              data: status,
+                              headers: {'Authorization': `Bearer ${token}`}})
+                              console.log(res.data)
+    dispatch(storeAdjustedAction(res.data))
+    dispatch(setMessage("succes", true, "The action status was updated succesfully!"))    
+  }
+}    

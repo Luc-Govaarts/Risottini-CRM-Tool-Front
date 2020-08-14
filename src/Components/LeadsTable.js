@@ -76,7 +76,6 @@ const createRow = (lead) => {
 		updatedAt,
 	}
 }
-
 const MyTableHead = (props) => {
 	const { classes, order, orderBy, onRequestSort } = props
 	const createSortHandler = (property) => (event) => {
