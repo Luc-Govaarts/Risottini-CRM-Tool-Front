@@ -167,6 +167,7 @@ export default function StickyHeadTable(props) {
 	} else {
 		return (
 			<Paper className={classes.root}>
+        
 				<TableContainer className={classes.container}>
 					<Table>
 						<MyTableHead
