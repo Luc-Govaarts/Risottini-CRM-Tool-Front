@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectMessage } from '../../store/appState/selectors'
 import Snackbar from '@material-ui/core/Snackbar';

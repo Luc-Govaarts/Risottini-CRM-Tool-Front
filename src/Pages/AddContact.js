@@ -5,7 +5,7 @@ import { selectToken } from "../store/user/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addContact } from '../store/appFeed/actions'
-import SnackBar from "../Components/NavDrawer/SnackBar";
+import SnackBar from "../Components/Navigation/SnackBar";
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone';
 import { makeStyles } from '@material-ui/core/styles';
 

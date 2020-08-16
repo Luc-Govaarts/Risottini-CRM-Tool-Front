@@ -7,7 +7,7 @@ import { selectUser } from '../../store/user/selectors'
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker  } from '@material-ui/pickers';
 import { TimelineItem, TimelineOppositeContent,
     TimelineSeparator, TimelineContent, TimelineConnector } from '@material-ui/lab'
-    import { Paper, Typography, Box, Avatar, Link,
+    import { Paper, Typography, Box, Avatar,
         Button, TextField, Dialog,
         DialogActions, DialogContent, 
         DialogContentText, DialogTitle } from '@material-ui/core'
