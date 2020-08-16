@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import StatusSwitch from './StatusSwitch'
 import {
 	FormControlLabel,
+	Typography, 
 	Switch,
 	Paper,
 	Table,
@@ -57,19 +58,19 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-	{ id: 'actionTitle', label: 'Actie', minWidth: 120 },
-	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 120 },
-	{ id: 'note', label: 'Notitie', minWidth: 250 },
+	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 140 },
 	{ id: 'leadName', label: 'Lead', minWidth: 120 },
-	{ id: 'userName', label: 'Gebruiker', minWidth: 120 },
-	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 120 },
-	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 120 },
-	{ id: 'done', label: 'Afgerond', minWidth: 100 },
+	{ id: 'actionTitle', label: 'Actie', minWidth: 100 },
+	{ id: 'note', label: 'Notitie', minWidth: 150 },
+	{ id: 'userName', label: 'Gebruiker', minWidth: 75 },
+	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 75 },
+	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 75 },
+	{ id: 'done', label: 'Afgerond', minWidth: 75 },
 ]
 
 const createRow = (action) => {
 	const actionTitle = action.action
-	const due_date = moment(action.due_date).format('DD MMM YYYY')
+	const due_date = moment(action.due_date).format('DD MMM YYYY hh:mm')
 	const note = action.note
 	const leadName = action.lead.company_name
 	const userName = action.user.name
@@ -214,6 +215,7 @@ export default function ActionTable() {
 		return (
 			<Paper className={classes.root}>
 				<Box className={classes.switches}>
+				<Typography variant='h3'> Acties </Typography>
 					<FormControlLabel
 						control={
 							<Switch
@@ -225,7 +227,7 @@ export default function ActionTable() {
 					/>
 				</Box>
 				<TableContainer className={classes.container}>
-					<Table>
+					<Table size='small'>
 						<MyTableHead
 							classes={classes}
 							order={order}
@@ -242,7 +244,10 @@ export default function ActionTable() {
 												const value = row[column.id]
 												if (column.id === 'done') {
 													return (
-														<StatusSwitch key={row.actionId} actionId={row.actionId}/>
+														<StatusSwitch
+															key={row.actionId}
+															actionId={row.actionId}
+														/>
 													)
 												} else {
 													return <TableCell key={column.id}>{value}</TableCell>

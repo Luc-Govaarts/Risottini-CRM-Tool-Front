@@ -25,12 +25,8 @@ export default (state = initialState, action) => {
 				loading: false,
 			}
 		case 'STORE_NEW_ACTION':
-			const newLeadsArray2 = state.leads.map((lead) =>
-				lead.id === action.payload.leadId
-					? { ...lead, actions: [...lead.actions, action.payload] }
-					: lead
-			)
-			return { ...state, leads: newLeadsArray2, loading: false }
+			console.log("RESPONSE IN REDUCER CHECK: ", action.payload)
+			return { ...state, actions: [...state.actions, action.payload],loading: false }
 		case 'STORE_ACTIONS':
 			return { ...state, actions: [...action.payload], loading: false }
 		case 'UPDATE_ACTION':
