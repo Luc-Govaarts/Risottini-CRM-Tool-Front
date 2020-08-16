@@ -58,14 +58,14 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 140 },
-	{ id: 'leadName', label: 'Lead', minWidth: 120 },
-	{ id: 'actionTitle', label: 'Actie', minWidth: 100 },
-	{ id: 'note', label: 'Notitie', minWidth: 150 },
-	{ id: 'userName', label: 'Gebruiker', minWidth: 75 },
-	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 75 },
-	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 75 },
-	{ id: 'done', label: 'Afgerond', minWidth: 75 },
+	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 130 },
+	{ id: 'leadName', label: 'Lead', minWidth: 80 },
+	{ id: 'actionTitle', label: 'Actie', minWidth: 80 },
+	{ id: 'note', label: 'Notitie', minWidth: 140 },
+	{ id: 'userName', label: 'Gebruiker', minWidth: 65 },
+	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 65 },
+	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 65 },
+	{ id: 'done', label: 'Afgerond', minWidth: 20 },
 ]
 
 const createRow = (action) => {
@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 	},
 	container: {
-		maxHeight: 440,
+		maxHeight: 500,
 	},
 	visuallyHidden: {
 		border: 0,
