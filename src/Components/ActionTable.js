@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchActions, actionStatusChange } from '../store/appFeed/actions'
+import { fetchActions } from '../store/appFeed/actions'
 import { selectActions } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
+import StatusSwitch from './StatusSwitch'
 import {
 	FormControlLabel,
 	Switch,
@@ -17,7 +18,6 @@ import {
 	TablePagination,
 	TableSortLabel,
 	Box,
-	Typography,
 } from '@material-ui/core'
 import moment from 'moment'
 import { selectUser } from '../store/user/selectors'
@@ -208,10 +208,6 @@ export default function ActionTable() {
 		setOnlyThisUser(event.target.checked)
 	}
 
-	const handleChangeDone = (actionId) => {
-		dispatch(actionStatusChange(actionId))
-	}
-
 	if (!actions) {
 		return null
 	} else {
@@ -246,16 +242,7 @@ export default function ActionTable() {
 												const value = row[column.id]
 												if (column.id === 'done') {
 													return (
-														<TableCell>
-															<FormControlLabel
-																control={
-																	<Switch
-																		checked={row.done}
-																		onChange={handleChangeDone(row.actionId)}
-																	/>
-																}
-															/>
-														</TableCell>
+														<StatusSwitch key={row.actionId} actionId={row.actionId}/>
 													)
 												} else {
 													return <TableCell key={column.id}>{value}</TableCell>
