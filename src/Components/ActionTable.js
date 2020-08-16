@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import StatusSwitch from './StatusSwitch'
 import {
 	FormControlLabel,
-	Typography, 
+	Typography,
 	Switch,
 	Paper,
 	Table,
@@ -169,6 +169,7 @@ export default function ActionTable() {
 	const [page, setPage] = useState(0)
 	const [rowsPerPage, setRowsPerPage] = useState(10)
 	const [onlyThisUser, setOnlyThisUser] = useState(false)
+	const [onlyActiveActions, setOnlyActiveActions] = useState(true)
 
 	useEffect(() => {
 		dispatch(fetchActions)
@@ -180,19 +181,39 @@ export default function ActionTable() {
 		setOrderBy(property)
 	}
 
-	const filteractions = (actions) => {
+	const filterActions = (actions) => {
 		if (!actions) {
 			return []
-		} else if (onlyThisUser) {
+		} else if (onlyThisUser && onlyActiveActions) {
+			const activeActions = actions.filter(action => {
+				return !action.done
+			})
+			return activeActions.filter((action) => {
+				return action.userId === user.id
+			})
+		} else if (onlyThisUser && !onlyActiveActions) {
 			return actions.filter((action) => {
 				return action.userId === user.id
 			})
+		} else if (!onlyThisUser && onlyActiveActions) {
+			return actions.filter((action) => {
+				return !action.done
+			})
+		} else if (!onlyThisUser && !onlyActiveActions) {
+			return actions
 		} else {
 			return actions
 		}
 	}
 
-	const filteredActions = filteractions(actions)
+	const handleChangeUserSelect = (event) => {
+		setOnlyThisUser(event.target.checked)
+	}
+
+	const handleChangeActiveActions = (event) => {
+		setOnlyActiveActions(event.target.checked)
+	}
+	const filteredActions = filterActions(actions)
 
 	const rows = filteredActions.map((action) => createRow(action))
 
@@ -205,17 +226,13 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
-	const handleChangeUserSelect = (event) => {
-		setOnlyThisUser(event.target.checked)
-	}
-
 	if (!actions) {
 		return null
 	} else {
 		return (
 			<Paper className={classes.root}>
 				<Box className={classes.switches}>
-				<Typography variant='h3'> Acties </Typography>
+					<Typography variant='h3'> Acties </Typography>
 					<FormControlLabel
 						control={
 							<Switch
@@ -224,6 +241,15 @@ export default function ActionTable() {
 							/>
 						}
 						label='Aleen van deze gebruiker'
+					/>
+					<FormControlLabel
+						control={
+							<Switch
+								checked={onlyActiveActions}
+								onChange={handleChangeActiveActions}
+							/>
+						}
+						label='geen afgronde acties'
 					/>
 				</Box>
 				<TableContainer className={classes.container}>

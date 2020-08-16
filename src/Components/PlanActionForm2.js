@@ -50,7 +50,6 @@ export default function PlanActionForm() {
 		set_note('')
 		set_leadId('')
 	}
-	console.log('******LEADS****:', leads)
 
 	if (!leads) {
 		return null
