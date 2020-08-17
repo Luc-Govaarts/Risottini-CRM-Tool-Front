@@ -139,6 +139,7 @@ export async function fetchLeads(dispatch, getState) {
 	const leads = res.data
 	dispatch(storeLeads(leads))
 }
+
 export function updateContact(contactId, leadId) {
 	return async function updateContact(dispatch, getState) {
 		dispatch(startLoading(true))
@@ -166,6 +167,17 @@ export async function fetchContacts(dispatch, getState) {
 	})
 	const contacts = res.data
 	dispatch(storeContacts(contacts))
+}
+
+export async function fetchReports(dispatch, getState) {
+	dispatch(startLoading(true))
+	const state = getState()
+	const token = state.user.token
+	const res = await axios({
+		method: 'get',
+		url: `${apiUrl}/reports`,
+		headers: {Authorization: `Bearer ${token}`}
+	})
 }
 
 export function fetchReportsById(id) {

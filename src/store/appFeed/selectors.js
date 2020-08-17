@@ -18,6 +18,10 @@ export function selectContacts(state) {
     return state.appFeed.contacts
 }
 
+export function selectReports(state) {
+    return state.appFeed.reports
+}
+
 export const selectLeadById = (id) => (state) => {
     return state.appFeed.leads.find(lead => lead.id === id)
 }

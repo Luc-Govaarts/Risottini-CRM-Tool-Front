@@ -4,6 +4,7 @@ const initialState = {
 	SalesCyclePhases: [],
 	contacts: [],
 	actions: [],
+	reports: [],
 	users: [],
 }
 
