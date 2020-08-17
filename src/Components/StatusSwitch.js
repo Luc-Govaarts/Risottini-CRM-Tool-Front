@@ -19,7 +19,9 @@ export default function StatusSwitch(props) {
 	const handleStatus = (event) => {
 		set_status(event.target.checked)
         
-        sendStatusChange(actionId, status)	
+		sendStatusChange(actionId, status)	
+		
+		dispatch(fetchActions)
     }
     
     const sendStatusChange = (actionId, status) => {

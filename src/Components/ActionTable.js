@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import StatusSwitch from './StatusSwitch'
 import {
 	FormControlLabel,
+	Typography,
 	Switch,
 	Paper,
 	Table,
@@ -57,19 +58,19 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-	{ id: 'actionTitle', label: 'Actie', minWidth: 120 },
-	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 120 },
-	{ id: 'note', label: 'Notitie', minWidth: 250 },
-	{ id: 'leadName', label: 'Lead', minWidth: 120 },
-	{ id: 'userName', label: 'Gebruiker', minWidth: 120 },
-	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 120 },
-	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 120 },
-	{ id: 'done', label: 'Afgerond', minWidth: 100 },
+	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 130 },
+	{ id: 'leadName', label: 'Lead', minWidth: 80 },
+	{ id: 'actionTitle', label: 'Actie', minWidth: 80 },
+	{ id: 'note', label: 'Notitie', minWidth: 140 },
+	{ id: 'userName', label: 'Gebruiker', minWidth: 65 },
+	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 65 },
+	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 65 },
+	{ id: 'done', label: 'Afgerond', minWidth: 20 },
 ]
 
 const createRow = (action) => {
 	const actionTitle = action.action
-	const due_date = moment(action.due_date).format('DD MMM YYYY')
+	const due_date = moment(action.due_date).format('DD MMM YYYY hh:mm')
 	const note = action.note
 	const leadName = action.lead.company_name
 	const userName = action.user.name
@@ -137,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 	},
 	container: {
-		maxHeight: 440,
+		maxHeight: 500,
 	},
 	visuallyHidden: {
 		border: 0,
@@ -168,6 +169,7 @@ export default function ActionTable() {
 	const [page, setPage] = useState(0)
 	const [rowsPerPage, setRowsPerPage] = useState(10)
 	const [onlyThisUser, setOnlyThisUser] = useState(false)
+	const [onlyActiveActions, setOnlyActiveActions] = useState(true)
 
 	useEffect(() => {
 		dispatch(fetchActions)
@@ -179,19 +181,39 @@ export default function ActionTable() {
 		setOrderBy(property)
 	}
 
-	const filteractions = (actions) => {
+	const filterActions = (actions) => {
 		if (!actions) {
 			return []
-		} else if (onlyThisUser) {
+		} else if (onlyThisUser && onlyActiveActions) {
+			const activeActions = actions.filter(action => {
+				return !action.done
+			})
+			return activeActions.filter((action) => {
+				return action.userId === user.id
+			})
+		} else if (onlyThisUser && !onlyActiveActions) {
 			return actions.filter((action) => {
 				return action.userId === user.id
 			})
+		} else if (!onlyThisUser && onlyActiveActions) {
+			return actions.filter((action) => {
+				return !action.done
+			})
+		} else if (!onlyThisUser && !onlyActiveActions) {
+			return actions
 		} else {
 			return actions
 		}
 	}
 
-	const filteredActions = filteractions(actions)
+	const handleChangeUserSelect = (event) => {
+		setOnlyThisUser(event.target.checked)
+	}
+
+	const handleChangeActiveActions = (event) => {
+		setOnlyActiveActions(event.target.checked)
+	}
+	const filteredActions = filterActions(actions)
 
 	const rows = filteredActions.map((action) => createRow(action))
 
@@ -204,16 +226,13 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
-	const handleChangeUserSelect = (event) => {
-		setOnlyThisUser(event.target.checked)
-	}
-
 	if (!actions) {
 		return null
 	} else {
 		return (
 			<Paper className={classes.root}>
 				<Box className={classes.switches}>
+					<Typography variant='h3'> Acties </Typography>
 					<FormControlLabel
 						control={
 							<Switch
@@ -223,9 +242,18 @@ export default function ActionTable() {
 						}
 						label='Aleen van deze gebruiker'
 					/>
+					<FormControlLabel
+						control={
+							<Switch
+								checked={onlyActiveActions}
+								onChange={handleChangeActiveActions}
+							/>
+						}
+						label='geen afgronde acties'
+					/>
 				</Box>
 				<TableContainer className={classes.container}>
-					<Table>
+					<Table size='small'>
 						<MyTableHead
 							classes={classes}
 							order={order}
@@ -242,7 +270,10 @@ export default function ActionTable() {
 												const value = row[column.id]
 												if (column.id === 'done') {
 													return (
-														<StatusSwitch key={row.actionId} actionId={row.actionId}/>
+														<StatusSwitch
+															key={row.actionId}
+															actionId={row.actionId}
+														/>
 													)
 												} else {
 													return <TableCell key={column.id}>{value}</TableCell>
