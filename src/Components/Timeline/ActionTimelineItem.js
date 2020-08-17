@@ -114,7 +114,7 @@ export default function TimelineItemLeft(props) {
                         {dateUpdated}</Typography> : null}
                         <Box>
                             <Button onClick={handleOpenAdjust} color="primary" size="small" >Aanpassen</Button>
-                            <Button onClick={handleOpenDelete} color="red" size="small" >Verwijderen</Button>
+                            <Button onClick={handleOpenDelete} color="default" size="small" >Verwijderen</Button>
                         </Box>
                     </Box>
                 </Paper>

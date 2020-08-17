@@ -55,21 +55,23 @@ export default function SearchBar() {
 	const [searchInputValue, setSearchInputValue] = useState('')
 
 	useEffect(() => {
-		// if (!leads) {
-		// 	dispatch(fetchLeads)
-		// } else if (!actions) {
-		// 	dispatch(fetchActions)
-		// } else if (!reports) {
-		// 	dispatch(fetchReports)
-		// } else if (contacts) {
-		// 	dispatch(fetchContacts)
-		// }
-	}, [dispatch])
+		dispatch(fetchActions)
+	}, [actions])
 
 	console.log('***LEADS***:', leads)
 	console.log('***REPORTS***:', reports)
 	console.log('***CONTACTS***:', contacts)
 	console.log('***ACTIONS***:', actions)
+
+	const options = [
+		{ title: 'bla' },
+		{ title: 'bla' },
+		{ title: 'bla' },
+		{ title: 'bla' },
+		{ title: 'bla' },
+		{ title: 'bla' },
+		{ title: 'bla' },
+	]
 	return (
 		<div className={classes.search}>
 			<div className={classes.searchIcon}>
@@ -77,8 +79,6 @@ export default function SearchBar() {
 			</div>
 			<Autocomplete
 				id='search-bar'
-				label='Zoek...'
-				classes={classes.searchBar}
 				value={searchValue}
 				onChange={(event, newValue) => {
 					setSearchValue(newValue)
@@ -87,10 +87,8 @@ export default function SearchBar() {
 				onInputChange={(event, newInputValue) => {
 					setSearchInputValue(newInputValue)
 				}}
-				options={leads}
-				renderInput={(params) => (
-					<TextField {...params} variant='outlined' />
-				)}
+				options={options.map((option) => option.title)}
+				renderInput={(params) => <TextField {...params} label='Search input' />}
 			/>
 		</div>
 	)

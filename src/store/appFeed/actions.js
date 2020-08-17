@@ -178,6 +178,8 @@ export async function fetchReports(dispatch, getState) {
 		url: `${apiUrl}/reports`,
 		headers: {Authorization: `Bearer ${token}`}
 	})
+	const reports = res.data
+	dispatch(storeReports(reports))
 }
 
 export function fetchReportsById(id) {

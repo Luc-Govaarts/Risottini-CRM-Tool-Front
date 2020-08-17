@@ -108,7 +108,7 @@ export default function ContactCard(props) {
 				<Button onClick={handleOpenAdjust} color='primary' size='small'>
 					Aanpassen
 				</Button>
-				<Button onClick={handleOpenDelete} color='red'>
+				<Button onClick={handleOpenDelete} color='default'>
 					Verwijderen
 				</Button>
 			</CardActions>

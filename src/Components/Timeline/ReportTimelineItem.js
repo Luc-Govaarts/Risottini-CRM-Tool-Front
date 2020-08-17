@@ -165,7 +165,7 @@ export default function TimelineItemLeft(props) {
 							<Button onClick={handleCloseDelete} color='primary'>
 								Cancel
 							</Button>
-							<Button color='primary' onClick={handleDelete}>
+							<Button color='default' onClick={handleDelete}>
 								Bevestigen
 							</Button>
 						</DialogActions>
