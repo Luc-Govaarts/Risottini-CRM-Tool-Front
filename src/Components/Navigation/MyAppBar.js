@@ -5,19 +5,7 @@ import WorkIcon from '@material-ui/icons/WorkOutlineOutlined'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhoneOutlined'
 import EventIcon from '@material-ui/icons/EventOutlined'
 import { selectToken } from '../../store/user/selectors'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-	fetchLeads,
-	fetchActions,
-	fetchContacts,
-	fetchReports,
-} from '../../store/appFeed/actions'
-import {
-	selectLeads,
-	selectReports,
-	selectActions,
-	selectContacts,
-} from '../../store/appFeed/selectors'
+import { useSelector } from 'react-redux'
 import LoggedIn from './LoggedIn'
 import LoggedOut from './LoggedOut'
 import SearchBar from './SearchBar/SearchBar'
