@@ -50,7 +50,6 @@ export default (state = initialState, action) => {
 			)
 			return { ...state, leads: newLeadsArray4, reports: [...state.reports, action.payload ], loading: false }
 		case 'STORE_REPORTS':
-			console.log("^^&^#$^#$%$#%#$%$#%")
 			return { ...state, reports: [...action.payload], loading: false }
 		case 'STORE_USERS':
 			return { ...state, users: [...action.payload], loading: false }

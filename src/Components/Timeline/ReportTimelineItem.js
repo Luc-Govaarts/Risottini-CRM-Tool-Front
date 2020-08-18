@@ -117,7 +117,7 @@ export default function TimelineItemLeft(props) {
 						<Button onClick={handleOpenAdjust} color='primary' size='small'>
 							Aanpassen
 						</Button>
-						<Button onClick={handleOpenDelete} color='red' size='small'>
+						<Button onClick={handleOpenDelete} size='small'>
 							Verwijderen
 						</Button>
 					</Box>
