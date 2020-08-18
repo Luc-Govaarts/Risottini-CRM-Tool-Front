@@ -112,7 +112,7 @@ export default function LeadCard(props) {
             </CardContent>
             <CardActions>
                 <Button onClick={handleOpenAdjust} color="primary" size="small" >Aanpassen</Button>
-                <Button onClick={handleOpenDelete} color="red">Verwijderen</Button>
+                <Button onClick={handleOpenDelete} color="default">Verwijderen</Button>
             </CardActions>
         </Card>
         {open_adjust ? 
