@@ -14,13 +14,14 @@ import {
 	TableHead,
 	TablePagination,
 	TableSortLabel,
+	Link,
 } from '@material-ui/core'
 import moment from 'moment'
 
 function descendingComparator(a, b, orderBy) {
-	if(orderBy === 'createdAt' || orderBy === 'updatedAt'){
-        return new Date(a[orderBy]) - new Date(b[orderBy])
-    }
+	if (orderBy === 'createdAt' || orderBy === 'updatedAt') {
+		return new Date(a[orderBy]) - new Date(b[orderBy])
+	}
 
 	if (b[orderBy] < a[orderBy]) {
 		return -1
@@ -65,6 +66,7 @@ const createRow = (lead) => {
 	const supplier = lead.supplier
 	const createdAt = moment(lead.createdAt).format('DD MMM YYYY')
 	const updatedAt = moment(lead.updatedAt).format('DD MMM YYYY')
+	const leadId = lead.id
 
 	return {
 		company_name,
@@ -74,6 +76,7 @@ const createRow = (lead) => {
 		supplier,
 		createdAt,
 		updatedAt,
+		leadId,
 	}
 }
 const MyTableHead = (props) => {
@@ -138,7 +141,7 @@ const useStyles = makeStyles({
 export default function StickyHeadTable(props) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-    const leads = useSelector(selectLeads)
+	const leads = useSelector(selectLeads)
 	const [order, setOrder] = useState('asc')
 	const [orderBy, setOrderBy] = useState('leads')
 	const [page, setPage] = useState(0)
@@ -186,7 +189,9 @@ export default function StickyHeadTable(props) {
 										<TableRow hover tabIndex={-1} key={row.company_name}>
 											{columns.map((column) => {
 												const value = row[column.id]
-												return <TableCell key={column.id}>{value}</TableCell>
+												return (
+														<TableCell key={column.id}>{value}</TableCell>
+												)
 											})}
 										</TableRow>
 									)

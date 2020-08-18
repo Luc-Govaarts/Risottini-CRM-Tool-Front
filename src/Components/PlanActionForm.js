@@ -56,7 +56,6 @@ export default function PlanActionForm(props) {
 							id='action'
 							required
 							fullWidth
-							autoFocus
 						/>
 						<MuiPickersUtilsProvider utils={MomentUtils}>
 							<KeyboardDatePicker
