@@ -4,6 +4,7 @@ const initialState = {
 	SalesCyclePhases: [],
 	contacts: [],
 	actions: [],
+	reports: [],
 	users: [],
 }
 
@@ -25,7 +26,6 @@ export default (state = initialState, action) => {
 				loading: false,
 			}
 		case 'STORE_NEW_ACTION':
-			console.log("RESPONSE IN REDUCER CHECK: ", action.payload)
 			return { ...state, actions: [...state.actions, action.payload],loading: false }
 		case 'STORE_ACTIONS':
 			return { ...state, actions: [...action.payload], loading: false }
@@ -48,14 +48,9 @@ export default (state = initialState, action) => {
 					? { ...lead, reports: [...lead.reports, action.payload] }
 					: lead
 			)
-			return { ...state, leads: newLeadsArray4, loading: false }
+			return { ...state, leads: newLeadsArray4, reports: [...state.reports, action.payload ], loading: false }
 		case 'STORE_REPORTS':
-			const newLeadArray5 = state.leads.map((lead) =>
-				lead.is === action.payload.leadId
-					? { ...lead, reports: [...action.payload] }
-					: lead
-			)
-			return { ...state, leads: newLeadArray5, loading: false }
+			return { ...state, reports: [...action.payload], loading: false }
 		case 'STORE_USERS':
 			return { ...state, users: [...action.payload], loading: false }
 		case 'STORE_ADJUSTED_REPORT':
