@@ -9,11 +9,6 @@ import {
 } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
-	contactList: {
-		width: '350px',
-		maxHeight: '500px',
-		scrollable: true,
-	},
 	avatar: {
 		backgroundColor: theme.palette.secondary.main,
 	},

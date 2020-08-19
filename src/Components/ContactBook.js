@@ -9,7 +9,11 @@ import {
 import ContactListItem from './ContactListItem'
 
 const useStyles = makeStyles((theme) => ({
-
+	contactList: {
+		width: '350px',
+		maxHeight: '500px',
+		scrollable: true,
+	},
 }))
 
 export default function ContactBook(props) {
