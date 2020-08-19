@@ -157,8 +157,8 @@ const useStyles = makeStyles((theme) => ({
 	head: {
 		margin: theme.spacing(3),
 	},
-	switches: {
-		margin: theme.spacing(2),
+	avatar: {
+		backgroundColor: theme.palette.primary.main,
 	},
 }))
 
@@ -237,7 +237,7 @@ export default function ActionTable() {
 				<CardHeader
 					title='Acties'
 					avatar={
-						<Avatar>
+						<Avatar className={classes.avatar}>
 							<EventIcon />
 						</Avatar>
 					}

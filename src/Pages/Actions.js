@@ -13,7 +13,7 @@ export default function Actions() {
 					</Box>
 				</Grid>
 				<Grid item xs={3}>
-					<Box mt={2} ml={3}>
+					<Box ml={3}>
 						<PlanActionForm2 />
 					</Box>
 				</Grid>
