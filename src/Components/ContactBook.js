@@ -23,6 +23,22 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
+const ContactListItem = (props) => {
+    const classes = useStyles()
+    const contact = props.contact
+
+	return (
+		<ListItem>
+			<ListItemAvatar>
+				<Avatar className={classes.avatar}>
+					<ContactPhoneIcon />
+				</Avatar>
+			</ListItemAvatar>
+			<ListItemText primary={contact.name} secondary={contact.job_title} />
+		</ListItem>
+	)
+}
+
 export default function ContactBook(props) {
 	const classes = useStyles()
 	const contacts = props.contacts
@@ -34,17 +50,7 @@ export default function ContactBook(props) {
 					<List className={classes.contactList}>
 						{contacts.map((contact) => {
 							return (
-								<ListItem>
-									<ListItemAvatar>
-										<Avatar className={classes.avatar}>
-											<ContactPhoneIcon />
-										</Avatar>
-									</ListItemAvatar>
-									<ListItemText
-										primary={contact.name}
-										secondary={contact.job_title}
-									/>
-								</ListItem>
+								<ContactListItem contact={contact}/>
 							)
 						})}
 					</List>
