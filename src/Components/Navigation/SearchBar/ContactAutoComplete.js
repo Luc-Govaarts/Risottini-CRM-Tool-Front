@@ -2,6 +2,9 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Grid, Typography, Link } from '@material-ui/core'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone'
+import { setSelectedContactId } from '../../../store/ContactBook/actions'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
 	icon: {
@@ -12,10 +15,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ContactAutoComplete(props) {
 	const classes = useStyles()
+	const dispatch = useDispatch()
 	const contact = props.contact
+	const history = useHistory()
+
+	const handleClick = () => {
+		history.push('/contacts')
+		dispatch(setSelectedContactId(contact.id))
+		
+	}
 
 	return (
-		<Link href={`/contacts/${contact.id}`}>
+		<Link onClick={handleClick}>
 			<Grid container alignItems='center'>
 				<Grid item>
 					<ContactPhoneIcon className={classes.icon} />
