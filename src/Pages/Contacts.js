@@ -4,7 +4,8 @@ import { fetchContacts } from '../store/appFeed/actions'
 import { selectContacts } from '../store/appFeed/selectors'
 import { selectToken } from '../store/user/selectors'
 import { useSelector, useDispatch } from 'react-redux'
-import { Box } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
+import ContactBook from '../Components/ContactBook'
 
 export default function Contacts() {
 	const dispatch = useDispatch()
@@ -20,12 +21,14 @@ export default function Contacts() {
 		dispatch(fetchContacts)
 	}, [dispatch])
 
+    console.log("CONTACTS: ", contacts)
+
 	return (
 		<>
-			<Box mt={12} mx={25}>
+			<Box mt={12} mx={3}>
 				<Grid container direction='row' justify='flex-start'>
-					<Grid item xs={6}></Grid>
-					<Grid item xs={4}></Grid>
+					<Grid item xs={6}><ContactBook contacts={contacts}/></Grid>
+					<Grid item xs={6}>dsfd</Grid>
 				</Grid>
 			</Box>
 		</>
