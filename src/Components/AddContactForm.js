@@ -21,12 +21,6 @@ const useStyles = makeStyles((theme) => ({
 		flexDirection: 'column',
 		alignItems: 'center',
 	},
-	formControl: {
-        marginBottom: theme.spacing(1),
-        marginRight: theme.spacing(2),
-        marginLeft: theme.spacing(2),
-		width: '100%',
-	},
 	avatar: {
 		margin: theme.spacing(1),
 		backgroundColor: theme.palette.secondary.main,
