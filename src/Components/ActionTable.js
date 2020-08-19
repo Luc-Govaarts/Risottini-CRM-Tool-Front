@@ -5,11 +5,11 @@ import { fetchActions } from '../store/appFeed/actions'
 import { selectActions } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
 import StatusSwitch from './StatusSwitch'
+import EventIcon from '@material-ui/icons/Event'
 import {
 	FormControlLabel,
-	Typography,
 	Switch,
-	Paper,
+	Card,
 	Table,
 	TableBody,
 	TableCell,
@@ -19,6 +19,9 @@ import {
 	TablePagination,
 	TableSortLabel,
 	Box,
+	CardHeader,
+	CardContent,
+	Avatar,
 } from '@material-ui/core'
 import moment from 'moment'
 import { selectUser } from '../store/user/selectors'
@@ -185,7 +188,7 @@ export default function ActionTable() {
 		if (!actions) {
 			return []
 		} else if (onlyThisUser && onlyActiveActions) {
-			const activeActions = actions.filter(action => {
+			const activeActions = actions.filter((action) => {
 				return !action.done
 			})
 			return activeActions.filter((action) => {
@@ -230,71 +233,84 @@ export default function ActionTable() {
 		return null
 	} else {
 		return (
-			<Paper className={classes.root}>
-				<Box className={classes.switches}>
-					<Typography variant='h3'> Acties </Typography>
-					<FormControlLabel
-						control={
-							<Switch
-								checked={onlyThisUser}
-								onChange={handleChangeUserSelect}
+			<Card className={classes.root}>
+				<CardHeader
+					title='Acties'
+					avatar={
+						<Avatar>
+							<EventIcon />
+						</Avatar>
+					}
+					action={
+						<Box>
+							<FormControlLabel
+								control={
+									<Switch
+										checked={onlyThisUser}
+										onChange={handleChangeUserSelect}
+									/>
+								}
+								label='Aleen van deze gebruiker'
 							/>
-						}
-						label='Aleen van deze gebruiker'
-					/>
-					<FormControlLabel
-						control={
-							<Switch
-								checked={onlyActiveActions}
-								onChange={handleChangeActiveActions}
+							<FormControlLabel
+								control={
+									<Switch
+										checked={onlyActiveActions}
+										onChange={handleChangeActiveActions}
+									/>
+								}
+								label='geen afgronde acties'
 							/>
-						}
-						label='geen afgronde acties'
+						</Box>
+					}>
+				</CardHeader>
+				<CardContent>
+					<TableContainer className={classes.container}>
+						<Table size='small'>
+							<MyTableHead
+								classes={classes}
+								order={order}
+								orderBy={orderBy}
+								onRequestSort={handleRequestSort}
+							/>
+							<TableBody>
+								{stableSort(rows, getComparator(order, orderBy))
+									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+									.map((row, index) => {
+										return (
+											<TableRow hover tabIndex={-1} key={index}>
+												{columns.map((column) => {
+													const value = row[column.id]
+													if (column.id === 'done') {
+														return (
+															<StatusSwitch
+																key={row.actionId}
+																actionId={row.actionId}
+															/>
+														)
+													} else {
+														return (
+															<TableCell key={column.id}>{value}</TableCell>
+														)
+													}
+												})}
+											</TableRow>
+										)
+									})}
+							</TableBody>
+						</Table>
+					</TableContainer>
+					<TablePagination
+						rowsPerPageOptions={[5, 10, 25, 50]}
+						component='div'
+						count={rows.length}
+						rowsPerPage={rowsPerPage}
+						page={page}
+						onChangePage={handleChangePage}
+						onChangeRowsPerPage={handleChangeRowsPerPage}
 					/>
-				</Box>
-				<TableContainer className={classes.container}>
-					<Table size='small'>
-						<MyTableHead
-							classes={classes}
-							order={order}
-							orderBy={orderBy}
-							onRequestSort={handleRequestSort}
-						/>
-						<TableBody>
-							{stableSort(rows, getComparator(order, orderBy))
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((row, index) => {
-									return (
-										<TableRow hover tabIndex={-1} key={index}>
-											{columns.map((column) => {
-												const value = row[column.id]
-												if (column.id === 'done') {
-													return (
-														<StatusSwitch
-															key={row.actionId}
-															actionId={row.actionId}
-														/>
-													)
-												} else {
-													return <TableCell key={column.id}>{value}</TableCell>
-												}
-											})}
-										</TableRow>
-									)
-								})}
-						</TableBody>
-					</Table>
-				</TableContainer>
-				<TablePagination
-					rowsPerPageOptions={[5, 10, 25, 50]}
-					component='div'
-					count={rows.length}
-					rowsPerPage={rowsPerPage}
-					page={page}
-					onChangePage={handleChangePage}
-					onChangeRowsPerPage={handleChangeRowsPerPage}
-				/>
-			</Paper>
+				</CardContent>
+			</Card>
 		)
 	}
 }
