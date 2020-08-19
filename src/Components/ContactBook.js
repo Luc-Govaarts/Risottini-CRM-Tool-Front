@@ -10,6 +10,7 @@ import {
 	Avatar,
 	CardHeader,
 	CardContent,
+	Divider,
 } from '@material-ui/core'
 import ContactListItem from './ContactListItem'
 import ContactCard from './ContactCard'
@@ -17,9 +18,12 @@ import ContactPhoneIcon from '@material-ui/icons/ContactPhone'
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		height: '400px',
+		height: '400px'
 	},
-	contactList: {},
+	contactList: {
+		maxHeight: '400px',
+		overflow: 'auto'
+	},
 	avatar: {
 		backgroundColor: theme.palette.primary.main,
 	},
@@ -43,9 +47,10 @@ export default function ContactBook(props) {
 					</Avatar>
 				}></CardHeader>
 			<CardContent>
+				<Divider/>
 				<Box className={classes.root}>
 					<Grid container direction='row' justify='flex-start'>
-						<Grid item xs={6}>
+						<Grid item xs={5}>
 							<List className={classes.contactList}>
 								{contacts.map((contact) => {
 									return (
@@ -58,7 +63,7 @@ export default function ContactBook(props) {
 								})}
 							</List>
 						</Grid>
-						<Grid item xs={6}>
+						<Grid item xs={7}>
 							{selectedContact ? (
 								<ContactCard contact={selectedContact} />
 							) : null}

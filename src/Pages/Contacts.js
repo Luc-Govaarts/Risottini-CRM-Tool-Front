@@ -22,14 +22,12 @@ export default function Contacts() {
 		dispatch(fetchContacts)
 	}, [dispatch])
 
-	console.log(contacts)
-
 	return (
 		<>
 			<Box mt={12} mx={3}>
 				<Grid container direction='row' justify='flex-start'>
-					<Grid item xs={8}><ContactBook contacts={contacts}/></Grid>
-					<Grid item xs={4}><AddContactForm/></Grid>
+					<Grid item xs={7}><ContactBook contacts={contacts}/></Grid>
+					<Grid item xs={5}><AddContactForm/></Grid>
 				</Grid>
 			</Box>
 		</>

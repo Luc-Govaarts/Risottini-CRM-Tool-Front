@@ -37,7 +37,7 @@ export default function ContactListItem(props) {
 			}}>
 			<ListItemAvatar>
 				<Avatar className={classes.avatar}>
-					<ContactPhoneIcon />
+					{contact.name.charAt(0)}
 				</Avatar>
 			</ListItemAvatar>
 			<ListItemText primary={contact.name} secondary={contact.job_title} />
