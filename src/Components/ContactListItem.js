@@ -23,20 +23,15 @@ export default function ContactListItem(props) {
 	const contact = props.contact
 	const index = props.index
 	const selectedContactId = useSelector(selectSelectedContactId)
-	const [selectedIndex, setSelectedIndex] = useState(0)
 
 	const handleClickListItem = (event, index) => {
-		setSelectedIndex(index)
 		dispatch(setSelectedContactId(index))
 	}
-
-    console.log('INDEX: ', index)
-    console.log('SELECTEDINDEX: ', selectedIndex)
 
 	return (
 		<ListItem
 			button
-			selected={selectedIndex === index}
+			selected={selectedContactId === index}
 			onClick={(event) => {
 				handleClickListItem(event, index)
 			}}>

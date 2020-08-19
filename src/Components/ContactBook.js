@@ -20,11 +20,11 @@ export default function ContactBook(props) {
 	const selectedContactId = useSelector(selectSelectedContactId)
 	const selectedContact = contacts.find(
 		(contact) => contact.id === selectedContactId
-    )
-    
+	)
+
 	return (
-		<Grid container direction='row' justify='flex-start'>
-			<Paper>
+		<Paper>
+			<Grid container direction='row' justify='flex-start'>
 				<Grid item xs={6}>
 					<List className={classes.contactList}>
 						{contacts.map((contact) => {
@@ -38,10 +38,10 @@ export default function ContactBook(props) {
 						})}
 					</List>
 				</Grid>
-				<Grid item>
+				<Grid item xs={6}>
 					{selectedContact ? <ContactCard contact={selectedContact} /> : null}
 				</Grid>
-			</Paper>
-		</Grid>
+			</Grid>
+		</Paper>
 	)
 }

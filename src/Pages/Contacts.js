@@ -27,8 +27,8 @@ export default function Contacts() {
 		<>
 			<Box mt={12} mx={3}>
 				<Grid container direction='row' justify='flex-start'>
-					<Grid item xs={6}><ContactBook contacts={contacts}/></Grid>
-					<Grid item xs={6}>dsfd</Grid>
+					<Grid item xs={8}><ContactBook contacts={contacts}/></Grid>
+					<Grid item xs={4}></Grid>
 				</Grid>
 			</Box>
 		</>
