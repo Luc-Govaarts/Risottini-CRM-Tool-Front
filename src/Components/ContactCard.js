@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
+import { adjustContactDetails } from '../store/appFeed/actions'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone'
 import {
 	Link,
@@ -46,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ContactCard(props) {
 	const classes = useStyles()
+	const dispatch = useDispatch()
 	const contact = props.contact
 	const dateUpdated = moment(contact.updatedAt).format('DD MMM YYYY, hh:mm a')
 	const dateCreated = moment(contact.createdAt).format('DD MMM YYYY, hh:mm a')
@@ -72,7 +75,15 @@ export default function ContactCard(props) {
 		set_delete_open(false)
 	}
 
-	const handleAdjustContact = () => {}
+	const handleAdjustContact = () => {
+		dispatch(adjustContactDetails(
+			contact.id,
+			contact_name,
+			contact_email,
+			contact_phone,
+			job_title
+		))
+	}
 
 	const handleDeleteContact = () => {}
 
@@ -139,6 +150,7 @@ export default function ContactCard(props) {
 							<TextField
 								onChange={(event) => set_contact_name(event.target.value)}
 								value={contact_name}
+								defaultValue={contact.name}
 								variant='outlined'
 								margin='normal'
 								required
@@ -151,6 +163,7 @@ export default function ContactCard(props) {
 							<TextField
 								onChange={(event) => set_job_title(event.target.value)}
 								value={job_title}
+								defaultValue={contact.job_title}
 								variant='outlined'
 								margin='normal'
 								required
@@ -163,6 +176,7 @@ export default function ContactCard(props) {
 							<TextField
 								onChange={(event) => set_contact_email(event.target.value)}
 								value={contact_email}
+								defaultValue={contact.email}
 								variant='outlined'
 								margin='normal'
 								required
@@ -175,6 +189,7 @@ export default function ContactCard(props) {
 							<TextField
 								onChange={(event) => set_contact_phone(event.target.value)}
 								value={contact_phone}
+								defaultValue={contact.phone}
 								variant='outlined'
 								margin='normal'
 								required

@@ -114,6 +114,14 @@ export function removeLead(data) {
 	}
 }
 
+export function storeUpdatedContact(data) {
+	return {
+		type: 'STORE_UPDATED_CONTACT',
+		payload: data,
+	}
+}
+
+
 export async function fetchUsers(dispatch, getState) {
 	dispatch(startLoading(true))
 	const state = getState()
@@ -167,6 +175,22 @@ export async function fetchContacts(dispatch, getState) {
 	})
 	const contacts = res.data
 	dispatch(storeContacts(contacts))
+}
+
+export function adjustContactDetails(contactId, contact_name, contact_email, contact_phone, job_title) {
+	return async function thunk(dispatch, getState) {
+		dispatch(startLoading(true))
+		const state = getState()
+		const token = state.user.token
+		const res = await axios({
+			method: 'patch',
+			url: `${apiUrl}/contacts/${contactId}/`,
+			data: { contact_name, contact_email, contact_phone, job_title},
+			headers: { Authorization: `Bearer ${token}` }
+		})
+		dispatch(storeUpdatedContact(res.data))
+		dispatch(setMessage('success', true, 'Contact updated succesfully'))
+	}
 }
 
 export async function fetchReports(dispatch, getState) {
