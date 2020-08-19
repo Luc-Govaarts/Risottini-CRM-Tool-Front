@@ -6,6 +6,7 @@ import { selectToken } from '../store/user/selectors'
 import { useSelector, useDispatch } from 'react-redux'
 import { Box, Grid } from '@material-ui/core'
 import ContactBook from '../Components/ContactBook'
+import AddContactForm from '../Components/AddContactForm'
 
 export default function Contacts() {
 	const dispatch = useDispatch()
@@ -28,7 +29,7 @@ export default function Contacts() {
 			<Box mt={12} mx={3}>
 				<Grid container direction='row' justify='flex-start'>
 					<Grid item xs={8}><ContactBook contacts={contacts}/></Grid>
-					<Grid item xs={4}></Grid>
+					<Grid item xs={4}><AddContactForm/></Grid>
 				</Grid>
 			</Box>
 		</>
