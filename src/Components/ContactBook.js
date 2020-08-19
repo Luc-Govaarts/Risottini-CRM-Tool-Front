@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux'
 import { selectSelectedContactId } from '../store/ContactBook/selectors'
 import { makeStyles } from '@material-ui/core/styles'
 import {
+	Box,
 	Card,
 	Grid,
 	List,
-	Typography,
 	Avatar,
 	CardHeader,
 	CardContent,
@@ -16,11 +16,10 @@ import ContactCard from './ContactCard'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone'
 
 const useStyles = makeStyles((theme) => ({
-	contactList: {
-		width: '350px',
-		maxHeight: '500px',
-		scrollable: true,
+	root: {
+		height: '400px',
 	},
+	contactList: {},
 	avatar: {
 		backgroundColor: theme.palette.primary.main,
 	},
@@ -44,24 +43,28 @@ export default function ContactBook(props) {
 					</Avatar>
 				}></CardHeader>
 			<CardContent>
-				<Grid container direction='row' justify='flex-start'>
-					<Grid item xs={6}>
-						<List className={classes.contactList}>
-							{contacts.map((contact) => {
-								return (
-									<ContactListItem
-										key={contact.id}
-										index={contact.id}
-										contact={contact}
-									/>
-								)
-							})}
-						</List>
+				<Box className={classes.root}>
+					<Grid container direction='row' justify='flex-start'>
+						<Grid item xs={6}>
+							<List className={classes.contactList}>
+								{contacts.map((contact) => {
+									return (
+										<ContactListItem
+											key={contact.id}
+											index={contact.id}
+											contact={contact}
+										/>
+									)
+								})}
+							</List>
+						</Grid>
+						<Grid item xs={6}>
+							{selectedContact ? (
+								<ContactCard contact={selectedContact} />
+							) : null}
+						</Grid>
 					</Grid>
-					<Grid item xs={6}>
-						{selectedContact ? <ContactCard contact={selectedContact} /> : null}
-					</Grid>
-				</Grid>
+				</Box>
 			</CardContent>
 		</Card>
 	)

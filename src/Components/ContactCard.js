@@ -1,6 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import {
+	Link,
 	Typography,
 	Avatar,
 	Card,
@@ -20,14 +21,12 @@ export default function ContactCard(props) {
 	const contact = props.contact
 	const dateUpdated = moment(contact.updatedAt).format('DD MMM YYYY, hh:mm a')
 	const dateCreated = moment(contact.createdAt).format('DD MMM YYYY, hh:mm a')
-	
+
 	return (
 		<Card>
 			<CardHeader
 				avatar={
-					<Avatar className={classes.avatar}>
-						{contact.name.charAt(0)}
-					</Avatar>
+					<Avatar className={classes.avatar}>{contact.name.charAt(0)}</Avatar>
 				}
 				title={contact.name}
 			/>
@@ -48,6 +47,18 @@ export default function ContactCard(props) {
 						{dateUpdated}
 					</Typography>
 				) : null}
+				<Typography>
+					<strong> Lead(s): </strong>{' '}
+				</Typography>
+				{contact.leads.map((lead) => {
+					return (
+						<Typography key={lead.id}>
+							<Link href={`leads/${lead.id}`} variant='body2'>
+								{lead.company_name}
+							</Link>
+						</Typography>
+					)
+				})}
 			</CardContent>
 		</Card>
 	)

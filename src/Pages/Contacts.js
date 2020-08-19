@@ -22,7 +22,7 @@ export default function Contacts() {
 		dispatch(fetchContacts)
 	}, [dispatch])
 
-    console.log("CONTACTS: ", contacts)
+	console.log(contacts)
 
 	return (
 		<>
