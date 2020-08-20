@@ -45,11 +45,12 @@ export default function ContactBook(props) {
 
 	const filterContacts = (contacts, condition) => {
 		return contacts.filter((contact) => {
+			const leadNameArray = contact.leads.map(lead => lead.company_name)
 			if(contact.leads[0]){
 				return (
 					contact.name.includes(condition) ||
 					contact.job_title.includes(condition) ||
-					contact.leads.map(lead => lead.company_name).includes(condition)
+					leadNameArray.join('').includes(condition)
 				)
 			} else {
 				return (
