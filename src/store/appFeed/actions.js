@@ -37,6 +37,13 @@ export function storeContacts(data) {
 	}
 }
 
+export function removeContact(data) {
+	return {
+		type: 'REMOVE_CONTACT',
+		payload: data
+	}
+}
+
 export function storeReports(data) {
 	return {
 		type: 'STORE_REPORTS',
@@ -190,6 +197,21 @@ export function adjustContactDetails(contactId, contact_name, contact_email, con
 		})
 		dispatch(storeUpdatedContact(res.data))
 		dispatch(setMessage('success', true, 'Contact updated succesfully'))
+	}
+}
+
+export function deleteContact(id) {
+	return async function thunk(dispatch, getState) {
+		dispatch(startLoading(true))
+		const state = getState()
+		const token = state.user.token
+		const res = await axios({
+			method: 'delete',
+			url: `${apiUrl}/contacts/${id}/`,
+			headers: { Authorization: `Bearer ${token}` }
+		})
+		dispatch(removeContact(id))
+		dispatch(setMessage('success', true, 'Contact was deleted'))
 	}
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { adjustContactDetails } from '../store/appFeed/actions'
+import { adjustContactDetails, deleteContact } from '../store/appFeed/actions'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhone'
 import {
 	Link,
@@ -85,9 +85,10 @@ export default function ContactCard(props) {
 		))
 	}
 
-	const handleDeleteContact = () => {}
-
-	const submitContactForm = () => {}
+	const handleDeleteContact = () => {
+		dispatch(deleteContact(contact.id))
+		handleCloseDelete()
+	}
 
 	return (
 		<Card>
@@ -145,7 +146,7 @@ export default function ContactCard(props) {
 						<DialogContent>Pas de contact gegevens aan</DialogContent>
 						<form
 							className={classes.form}
-							onSubmit={submitContactForm}
+							onSubmit={handleAdjustContact}
 							noValidate>
 							<TextField
 								onChange={(event) => set_contact_name(event.target.value)}

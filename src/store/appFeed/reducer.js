@@ -56,6 +56,16 @@ export default (state = initialState, action) => {
 				],
 				loading: false,
 			}
+		case 'REMOVE_CONTACT':
+			return {
+				...state,
+				contacts: [
+					...state.contacts.filter((contact) =>
+						contact.id !== action.payload
+					),
+				],
+				loading: false,
+			}
 		case 'STORE_NEW_REPORT':
 			const newLeadsArray4 = state.leads.map((lead) =>
 				lead.id === action.payload.leadId
