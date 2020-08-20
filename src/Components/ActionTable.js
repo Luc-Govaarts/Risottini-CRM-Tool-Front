@@ -62,14 +62,14 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 130 },
-	{ id: 'leadName', label: 'Lead', minWidth: 80 },
-	{ id: 'actionTitle', label: 'Actie', minWidth: 80 },
-	{ id: 'note', label: 'Notitie', minWidth: 140 },
-	{ id: 'userName', label: 'Gebruiker', minWidth: 65 },
-	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 65 },
-	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 65 },
-	{ id: 'done', label: 'Afgerond', minWidth: 20 },
+	{ id: 'due_date', label: 'Datum en Tijd', maxWidth: 90 },
+	{ id: 'leadName', label: 'Lead', maxWidth: 75 },
+	{ id: 'actionTitle', label: 'Actie', maxWidth: 75 },
+	{ id: 'note', label: 'Notitie', maxWidth: 100 },
+	{ id: 'userName', label: 'Gebruiker', maxWidth: 65 },
+	{ id: 'createdAt', label: 'Gecreëerd op', maxWidth: 65 },
+	{ id: 'updatedAt', label: 'Aangepast op', maxWidth: 65 },
+	{ id: 'done', label: 'Afgerond', maxWidth: 65 },
 ]
 
 const createRow = (action) => {
@@ -124,7 +124,8 @@ const MyTableHead = (props) => {
 					<TableCell
 						key={column.id}
 						sortDirection={orderBy === column.id ? order : false}
-						style={{ minWidth: column.minWidth }}>
+						style={{ maxWidth: column.maxWidth }}
+						align='center'>
 						<TableSortLabel
 							active={orderBy === column.id}
 							direction={orderBy === column.id ? order : 'asc'}

@@ -75,7 +75,7 @@ export default function PlanActionForm(props) {
 				<Avatar className={classes.avatar}>
 					<EventIcon />
 				</Avatar>
-				<Typography component='h1' variant='h5'>
+				<Typography align='center' component='h1' variant='h5'>
 					Voeg nieuwe actie toe
 				</Typography>
 				<form className={classes.form} onSubmit={submitHandler}>
