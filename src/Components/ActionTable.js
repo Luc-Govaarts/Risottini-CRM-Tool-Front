@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchActions } from '../store/appFeed/actions'
+import { fetchActions, actionStatusChange } from '../store/appFeed/actions'
 import { selectActions } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
-import StatusSwitch from './StatusSwitch'
 import EventIcon from '@material-ui/icons/Event'
 import {
 	FormControlLabel,
@@ -229,6 +228,10 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
+	const handleStatus = (event, actionId) => {
+		dispatch(actionStatusChange(actionId, event.target.checked))
+    }
+
 	if (!actions) {
 		return null
 	} else {
@@ -262,8 +265,7 @@ export default function ActionTable() {
 								label='geen afgronde acties'
 							/>
 						</Box>
-					}>
-				</CardHeader>
+					}></CardHeader>
 				<CardContent>
 					<TableContainer className={classes.container}>
 						<Table size='small'>
@@ -283,10 +285,16 @@ export default function ActionTable() {
 													const value = row[column.id]
 													if (column.id === 'done') {
 														return (
-															<StatusSwitch
-																key={row.actionId}
-																actionId={row.actionId}
-															/>
+															<TableCell>
+																<FormControlLabel
+																	control={
+																		<Switch
+																			checked={row.done}
+																			onChange={event => handleStatus(event, row.actionId)}
+																		/>
+																	}
+																/>
+															</TableCell>
 														)
 													} else {
 														return (
