@@ -26,6 +26,7 @@ import {
 } from '@material-ui/core'
 import moment from 'moment'
 import { selectUser } from '../store/user/selectors'
+import ActionColorLegend from './ActionColorLegend'
 
 function descendingComparator(a, b, orderBy) {
 	if (
@@ -279,6 +280,7 @@ export default function ActionTable() {
 								}
 								label='geen afgronde acties'
 							/>
+							<ActionColorLegend />
 						</Box>
 					}></CardHeader>
 				<CardContent>
