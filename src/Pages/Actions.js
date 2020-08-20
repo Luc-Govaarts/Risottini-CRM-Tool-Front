@@ -8,14 +8,10 @@ export default function Actions() {
 		<Box mt={12} mx={3}>
 			<Grid container direction='row' justify='flex-start'>
 				<Grid item xs={9}>
-					<Box>
 						<ActionTable />
-					</Box>
 				</Grid>
 				<Grid item xs={3}>
-					<Box ml={3}>
 						<PlanActionForm2 />
-					</Box>
 				</Grid>
 			</Grid>
 		</Box>

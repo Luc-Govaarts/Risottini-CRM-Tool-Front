@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchActions } from '../store/appFeed/actions'
+import { fetchActions, actionStatusChange } from '../store/appFeed/actions'
 import { selectActions } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
-import StatusSwitch from './StatusSwitch'
 import EventIcon from '@material-ui/icons/Event'
+import { red, green, blue, orange } from '@material-ui/core/colors'
+
 import {
 	FormControlLabel,
 	Switch,
@@ -25,6 +26,7 @@ import {
 } from '@material-ui/core'
 import moment from 'moment'
 import { selectUser } from '../store/user/selectors'
+import ActionColorLegend from './ActionColorLegend'
 
 function descendingComparator(a, b, orderBy) {
 	if (
@@ -72,6 +74,17 @@ const columns = [
 ]
 
 const createRow = (action) => {
+	const colorSetter = (due_date, done) => {
+		if (moment(due_date) < moment() && done) {
+			return green[100]
+		} else if (moment(due_date) < moment() && !done) {
+			return red[100]
+		} else if (moment(due_date) > moment() && !done) {
+			return blue[100]
+		} else if (moment(due_date) > moment() && done) {
+			return orange[100]
+		}
+	}
 	const actionTitle = action.action
 	const due_date = moment(action.due_date).format('DD MMM YYYY hh:mm')
 	const note = action.note
@@ -82,6 +95,7 @@ const createRow = (action) => {
 	const done = action.done
 	const actionId = action.id
 	const leadId = action.lead.id
+	const color = colorSetter(due_date, done)
 
 	return {
 		actionTitle,
@@ -94,6 +108,7 @@ const createRow = (action) => {
 		done,
 		actionId,
 		leadId,
+		color,
 	}
 }
 
@@ -229,6 +244,10 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
+	const handleStatus = (event, actionId) => {
+		dispatch(actionStatusChange(actionId, event.target.checked))
+	}
+
 	if (!actions) {
 		return null
 	} else {
@@ -261,9 +280,9 @@ export default function ActionTable() {
 								}
 								label='geen afgronde acties'
 							/>
+							<ActionColorLegend />
 						</Box>
-					}>
-				</CardHeader>
+					}></CardHeader>
 				<CardContent>
 					<TableContainer className={classes.container}>
 						<Table size='small'>
@@ -278,15 +297,27 @@ export default function ActionTable() {
 									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 									.map((row, index) => {
 										return (
-											<TableRow hover tabIndex={-1} key={index}>
+											<TableRow
+												style={{ backgroundColor: row.color }}
+												hover
+												tabIndex={-1}
+												key={index}>
 												{columns.map((column) => {
 													const value = row[column.id]
 													if (column.id === 'done') {
 														return (
-															<StatusSwitch
-																key={row.actionId}
-																actionId={row.actionId}
-															/>
+															<TableCell key={column.id}>
+																<FormControlLabel
+																	control={
+																		<Switch
+																			checked={row.done}
+																			onChange={(event) =>
+																				handleStatus(event, row.actionId)
+																			}
+																		/>
+																	}
+																/>
+															</TableCell>
 														)
 													} else {
 														return (
