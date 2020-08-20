@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Toolbar, Box, IconButton, InputBase } from '@material-ui/core'
+import { AppBar, Toolbar, Box, IconButton } from '@material-ui/core'
 import WorkIcon from '@material-ui/icons/WorkOutlineOutlined'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhoneOutlined'
 import EventIcon from '@material-ui/icons/EventOutlined'
