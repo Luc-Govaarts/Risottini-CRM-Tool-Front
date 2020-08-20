@@ -10,7 +10,7 @@ import AddReportForm from '../Components/AddReportForm'
 import PhaseCard from '../Components/PhaseCard'
 import PlanActionForm from '../Components/PlanActionForm'
 import MyTimeline from '../Components/Timeline/MyTimeline'
-import ContactCard from '../Components/ContactCard';
+import LeadContactCard from '../Components/LeadContactCard';
 import LeafletMap from '../Components/LeafletMap';
 import { setMessage } from '../store/appState/actions';
 import ConnectContactCard from '../Components/ConnectContactCard';
@@ -77,7 +77,7 @@ export default function LeadDetails() {
                                     <Typography variant="h5">Contact</Typography>
                                 </Box>
                                 <Box mt={1}>
-                                    <ContactCard
+                                    <LeadContactCard
                                         key={contact.id}
                                         leadId={leadId}
                                         name={contact.name}
