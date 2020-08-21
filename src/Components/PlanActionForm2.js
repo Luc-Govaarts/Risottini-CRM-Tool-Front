@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { createAction, fetchLeads } from '../store/appFeed/actions'
-import { selectLeads } from '../store/appFeed/selectors'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { createAction } from '../store/appFeed/actions'
 import EventIcon from '@material-ui/icons/Event'
 import { makeStyles } from '@material-ui/core/styles'
 import {
@@ -25,9 +24,9 @@ import moment from 'moment'
 
 const useStyles = makeStyles((theme) => ({
 	paper: {
-        marginRight: theme.spacing(2),
-        marginLeft: theme.spacing(2),
-        padding: theme.spacing(2),
+		marginRight: theme.spacing(2),
+		marginLeft: theme.spacing(2),
+		padding: theme.spacing(2),
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
@@ -45,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function PlanActionForm() {
+export default function PlanActionForm(props) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
-	const leads = useSelector(selectLeads)
+	const leads = props.leads
 	const [action, set_action] = useState('')
 	const [date, set_date] = useState(new Date())
 	const [time, set_time] = useState(new Date())
@@ -57,12 +56,6 @@ export default function PlanActionForm() {
 	const due_date = `${moment(date).format('YYYY-MM-DD')} ${moment(time).format(
 		'HH:mm:ss'
 	)}`
-
-	useEffect(() => {
-		if (!leads[0]) {
-			dispatch(fetchLeads)
-		}
-	}, [dispatch])
 
 	const submitHandler = (event) => {
 		event.preventDefault()
@@ -76,95 +69,91 @@ export default function PlanActionForm() {
 		set_leadId('')
 	}
 
-	if (!leads) {
-		return null
-	} else {
-		return (
-			<Box>
-				<Paper className={classes.paper}>
-					<Avatar className={classes.avatar}>
-						<EventIcon />
-					</Avatar>
-					<Typography component='h1' variant='h5'>
-						Voeg nieuwe actie toe
-					</Typography>
-					<form className={classes.form} onSubmit={submitHandler}>
-						<FormControl fullWidth>
-							<Select
-								value={leadId}
-								onChange={(e) => set_leadId(e.target.value)}
-								variant='outlined'
-								label='lead'>
-								{leads.map((lead) => {
-									return (
-										<MenuItem key={lead.id} value={lead.id}>
-											{lead.company_name}
-										</MenuItem>
-									)
-								})}
-							</Select>
-						</FormControl>
-						<TextField
-							onChange={(e) => {
-								set_action(e.target.value)
-							}}
-							value={action}
+	return (
+		<Box>
+			<Paper className={classes.paper}>
+				<Avatar className={classes.avatar}>
+					<EventIcon />
+				</Avatar>
+				<Typography align='center' component='h1' variant='h5'>
+					Voeg nieuwe actie toe
+				</Typography>
+				<form className={classes.form} onSubmit={submitHandler}>
+					<FormControl fullWidth>
+						<Select
+							value={leadId}
+							onChange={(e) => set_leadId(e.target.value)}
 							variant='outlined'
+							label='lead'>
+							{leads.map((lead) => {
+								return (
+									<MenuItem key={lead.id} value={lead.id}>
+										{lead.company_name}
+									</MenuItem>
+								)
+							})}
+						</Select>
+					</FormControl>
+					<TextField
+						onChange={(e) => {
+							set_action(e.target.value)
+						}}
+						value={action}
+						variant='outlined'
+						margin='normal'
+						id='action'
+						required
+						fullWidth
+						autoFocus
+					/>
+					<MuiPickersUtilsProvider utils={MomentUtils}>
+						<KeyboardDatePicker
+							disableToolbar
+							variant='inline'
+							format='YYYY-MM-DD'
 							margin='normal'
-							id='action'
-							required
-							fullWidth
-							autoFocus
-						/>
-						<MuiPickersUtilsProvider utils={MomentUtils}>
-							<KeyboardDatePicker
-								disableToolbar
-								variant='inline'
-								format='YYYY-MM-DD'
-								margin='normal'
-								id='date-picker-inline'
-								label='Datum'
-								value={date}
-								onChange={(date) => set_date(date)}
-								KeyboardButtonProps={{
-									'aria-label': 'change date',
-								}}
-							/>
-							<KeyboardTimePicker
-								margin='normal'
-								id='time-picker'
-								label='Tijd'
-								value={time}
-								onChange={(time) => set_time(time)}
-								KeyboardButtonProps={{
-									'aria-label': 'change time',
-								}}
-							/>
-						</MuiPickersUtilsProvider>
-						<TextField
-							onChange={(e) => {
-								set_note(e.target.value)
+							id='date-picker-inline'
+							label='Datum'
+							value={date}
+							onChange={(date) => set_date(date)}
+							KeyboardButtonProps={{
+								'aria-label': 'change date',
 							}}
-							value={note}
-							variant='outlined'
-							margin='normal'
-							required
-							fullWidth
-							id='noteAction'
-							label='Notitie'
-							autoFocus
 						/>
-						<Button
-							type='submit'
-							variant='contained'
-							fullWidth
-							color='primary'
-							className={classes.submit}>
-							Bewaren
-						</Button>
-					</form>
-				</Paper>
-			</Box>
-		)
-	}
+						<KeyboardTimePicker
+							margin='normal'
+							id='time-picker'
+							label='Tijd'
+							value={time}
+							onChange={(time) => set_time(time)}
+							KeyboardButtonProps={{
+								'aria-label': 'change time',
+							}}
+						/>
+					</MuiPickersUtilsProvider>
+					<TextField
+						onChange={(e) => {
+							set_note(e.target.value)
+						}}
+						value={note}
+						variant='outlined'
+						margin='normal'
+						required
+						fullWidth
+						id='noteAction'
+						label='Notitie'
+						autoFocus
+					/>
+					<Button
+						type='submit'
+						variant='contained'
+						fullWidth
+						color='primary'
+						className={classes.submit}>
+						Bewaren
+					</Button>
+				</form>
+			</Paper>
+		</Box>
+	)
 }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
-import { fetchActions } from '../store/appFeed/actions'
-import { selectActions } from '../store/appFeed/selectors'
+import { actionStatusChange } from '../store/appFeed/actions'
 import { makeStyles } from '@material-ui/core/styles'
-import StatusSwitch from './StatusSwitch'
 import EventIcon from '@material-ui/icons/Event'
+import { red, green, blue, orange } from '@material-ui/core/colors'
+
 import {
 	FormControlLabel,
 	Switch,
@@ -25,6 +25,7 @@ import {
 } from '@material-ui/core'
 import moment from 'moment'
 import { selectUser } from '../store/user/selectors'
+import ActionColorLegend from './ActionColorLegend'
 
 function descendingComparator(a, b, orderBy) {
 	if (
@@ -61,17 +62,28 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-	{ id: 'due_date', label: 'Datum en Tijd', minWidth: 130 },
-	{ id: 'leadName', label: 'Lead', minWidth: 80 },
-	{ id: 'actionTitle', label: 'Actie', minWidth: 80 },
-	{ id: 'note', label: 'Notitie', minWidth: 140 },
-	{ id: 'userName', label: 'Gebruiker', minWidth: 65 },
-	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 65 },
-	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 65 },
-	{ id: 'done', label: 'Afgerond', minWidth: 20 },
+	{ id: 'due_date', label: 'Datum en Tijd', maxWidth: 90 },
+	{ id: 'leadName', label: 'Lead', maxWidth: 75 },
+	{ id: 'actionTitle', label: 'Actie', maxWidth: 75 },
+	{ id: 'note', label: 'Notitie', maxWidth: 100 },
+	{ id: 'userName', label: 'Gebruiker', maxWidth: 65 },
+	{ id: 'createdAt', label: 'Gecreëerd op', maxWidth: 65 },
+	{ id: 'updatedAt', label: 'Aangepast op', maxWidth: 65 },
+	{ id: 'done', label: 'Afgerond', maxWidth: 65 },
 ]
 
 const createRow = (action) => {
+	const colorSetter = (due_date, done) => {
+		if (moment(due_date) < moment() && done) {
+			return green[100]
+		} else if (moment(due_date) < moment() && !done) {
+			return red[100]
+		} else if (moment(due_date) > moment() && !done) {
+			return blue[100]
+		} else if (moment(due_date) > moment() && done) {
+			return orange[100]
+		}
+	}
 	const actionTitle = action.action
 	const due_date = moment(action.due_date).format('DD MMM YYYY hh:mm')
 	const note = action.note
@@ -82,6 +94,7 @@ const createRow = (action) => {
 	const done = action.done
 	const actionId = action.id
 	const leadId = action.lead.id
+	const color = colorSetter(due_date, done)
 
 	return {
 		actionTitle,
@@ -94,6 +107,7 @@ const createRow = (action) => {
 		done,
 		actionId,
 		leadId,
+		color,
 	}
 }
 
@@ -110,7 +124,8 @@ const MyTableHead = (props) => {
 					<TableCell
 						key={column.id}
 						sortDirection={orderBy === column.id ? order : false}
-						style={{ minWidth: column.minWidth }}>
+						style={{ maxWidth: column.maxWidth }}
+						align='center'>
 						<TableSortLabel
 							active={orderBy === column.id}
 							direction={orderBy === column.id ? order : 'asc'}
@@ -162,21 +177,17 @@ const useStyles = makeStyles((theme) => ({
 	},
 }))
 
-export default function ActionTable() {
+export default function ActionTable(props) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
 	const user = useSelector(selectUser)
-	const actions = useSelector(selectActions)
+	const actions = props.actions
 	const [order, setOrder] = useState('desc')
 	const [orderBy, setOrderBy] = useState('due_date')
 	const [page, setPage] = useState(0)
 	const [rowsPerPage, setRowsPerPage] = useState(10)
 	const [onlyThisUser, setOnlyThisUser] = useState(false)
 	const [onlyActiveActions, setOnlyActiveActions] = useState(true)
-
-	useEffect(() => {
-		dispatch(fetchActions)
-	}, [dispatch])
 
 	const handleRequestSort = (event, property) => {
 		const isAsc = orderBy === property && order === 'asc'
@@ -229,88 +240,98 @@ export default function ActionTable() {
 		setPage(0)
 	}
 
-	if (!actions) {
-		return null
-	} else {
-		return (
-			<Card className={classes.root}>
-				<CardHeader
-					title='Acties'
-					avatar={
-						<Avatar className={classes.avatar}>
-							<EventIcon />
-						</Avatar>
-					}
-					action={
-						<Box>
-							<FormControlLabel
-								control={
-									<Switch
-										checked={onlyThisUser}
-										onChange={handleChangeUserSelect}
-									/>
-								}
-								label='Aleen van deze gebruiker'
-							/>
-							<FormControlLabel
-								control={
-									<Switch
-										checked={onlyActiveActions}
-										onChange={handleChangeActiveActions}
-									/>
-								}
-								label='geen afgronde acties'
-							/>
-						</Box>
-					}>
-				</CardHeader>
-				<CardContent>
-					<TableContainer className={classes.container}>
-						<Table size='small'>
-							<MyTableHead
-								classes={classes}
-								order={order}
-								orderBy={orderBy}
-								onRequestSort={handleRequestSort}
-							/>
-							<TableBody>
-								{stableSort(rows, getComparator(order, orderBy))
-									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-									.map((row, index) => {
-										return (
-											<TableRow hover tabIndex={-1} key={index}>
-												{columns.map((column) => {
-													const value = row[column.id]
-													if (column.id === 'done') {
-														return (
-															<StatusSwitch
-																key={row.actionId}
-																actionId={row.actionId}
-															/>
-														)
-													} else {
-														return (
-															<TableCell key={column.id}>{value}</TableCell>
-														)
-													}
-												})}
-											</TableRow>
-										)
-									})}
-							</TableBody>
-						</Table>
-					</TableContainer>
-					<TablePagination
-						rowsPerPageOptions={[5, 10, 25, 50]}
-						component='div'
-						count={rows.length}
-						rowsPerPage={rowsPerPage}
-						page={page}
-						onChangePage={handleChangePage}
-						onChangeRowsPerPage={handleChangeRowsPerPage}
-					/>
-				</CardContent>
-			</Card>
-		)
+	const handleStatus = (event, actionId) => {
+		dispatch(actionStatusChange(actionId, event.target.checked))
 	}
+
+	return (
+		<Card className={classes.root}>
+			<CardHeader
+				title='Acties'
+				avatar={
+					<Avatar className={classes.avatar}>
+						<EventIcon />
+					</Avatar>
+				}
+				action={
+					<Box>
+						<FormControlLabel
+							control={
+								<Switch
+									checked={onlyThisUser}
+									onChange={handleChangeUserSelect}
+								/>
+							}
+							label='Aleen van deze gebruiker'
+						/>
+						<FormControlLabel
+							control={
+								<Switch
+									checked={onlyActiveActions}
+									onChange={handleChangeActiveActions}
+								/>
+							}
+							label='geen afgronde acties'
+						/>
+						<ActionColorLegend />
+					</Box>
+				}></CardHeader>
+			<CardContent>
+				<TableContainer className={classes.container}>
+					<Table size='small'>
+						<MyTableHead
+							classes={classes}
+							order={order}
+							orderBy={orderBy}
+							onRequestSort={handleRequestSort}
+						/>
+						<TableBody>
+							{stableSort(rows, getComparator(order, orderBy))
+								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+								.map((row, index) => {
+									return (
+										<TableRow
+											style={{ backgroundColor: row.color }}
+											hover
+											tabIndex={-1}
+											key={index}>
+											{columns.map((column) => {
+												const value = row[column.id]
+												if (column.id === 'done') {
+													return (
+														<TableCell key={column.id}>
+															<FormControlLabel
+																control={
+																	<Switch
+																		checked={row.done}
+																		onChange={(event) =>
+																			handleStatus(event, row.actionId)
+																		}
+																	/>
+																}
+															/>
+														</TableCell>
+													)
+												} else {
+													return <TableCell key={column.id}>{value}</TableCell>
+												}
+											})}
+										</TableRow>
+									)
+								})}
+						</TableBody>
+					</Table>
+				</TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[5, 10, 25, 50]}
+					component='div'
+					count={rows.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onChangePage={handleChangePage}
+					onChangeRowsPerPage={handleChangeRowsPerPage}
+				/>
+			</CardContent>
+		</Card>
+	)
 }

@@ -60,9 +60,7 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				contacts: [
-					...state.contacts.filter((contact) =>
-						contact.id !== action.payload
-					),
+					...state.contacts.filter((contact) => contact.id !== action.payload),
 				],
 				loading: false,
 			}
@@ -98,20 +96,17 @@ export default (state = initialState, action) => {
 			})
 			return { ...state, leads: newLeadArray6, loading: false }
 		case 'STORE_ADJUSTED_ACTION':
-			const newLeadArray7 = state.leads.map((lead) => {
-				if (lead.id === action.payload.leadId) {
-					return lead.actions.map((leadAction) => {
-						if (leadAction.id === action.payload.id) {
-							return action.payload
-						} else {
-							return leadAction
-						}
-					})
-				} else {
-					return lead
-				}
-			})
-			return { ...state, leads: newLeadArray7, loading: false }
+			const newLeadArray7 = state.leads.map((lead) =>
+				lead.id === action.payload.leadId
+					? lead.actions.map((leadAction) =>
+							leadAction.id === action.payload.id ? action.payload : leadAction
+					  )
+					: lead
+			)
+			const newActionArray2 = state.actions.map((leadAction) =>
+				leadAction.id === action.payload.id ? action.payload : leadAction
+			)
+			return { ...state, leads: newLeadArray7, actions: newActionArray2, loading: false}
 		case 'REMOVE_REPORT':
 			const newLeadArray8 = state.leads.map((lead) => {
 				if (lead.id === action.payload.leadId) {
