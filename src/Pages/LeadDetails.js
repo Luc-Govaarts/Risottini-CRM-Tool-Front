@@ -2,7 +2,7 @@ import React, { useEffect }from 'react'
 import { useParams, useHistory} from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { fetchLeads, fetchUsers } from '../store/appFeed/actions'
-import { selectLeadById } from '../store/appFeed/selectors'
+import { selectLeadById, selectUsers } from '../store/appFeed/selectors'
 import { selectToken } from "../store/user/selectors";
 import { Box, Grid, Typography } from'@material-ui/core'
 import LeadCard from '../Components/LeadCard'
@@ -12,7 +12,6 @@ import PlanActionForm from '../Components/PlanActionForm'
 import MyTimeline from '../Components/Timeline/MyTimeline'
 import LeadContactCard from '../Components/LeadContactCard';
 import LeafletMap from '../Components/LeafletMap';
-import { setMessage } from '../store/appState/actions';
 import ConnectContactCard from '../Components/ConnectContactCard';
 
 
@@ -21,6 +20,7 @@ export default function LeadDetails() {
     const params = useParams()   
     const leadId = parseInt(params.id)
     const lead = useSelector(selectLeadById(leadId))
+    const users = useSelector(selectUsers)
     const contact = {...lead}.contact
     const token = useSelector(selectToken)
     const history = useHistory();
@@ -32,12 +32,11 @@ export default function LeadDetails() {
     useEffect(() =>  {
         if(!lead) {
             dispatch(fetchLeads)
-        } 
+        } else if (!users.length)
         dispatch(fetchUsers)
     }, [dispatch, lead])
 
-    if(!lead) {
-        setMessage("succes", true, "Pagina opnieuw laden")
+    if(!lead || !users.length) {
         return <></>
     }
     return (

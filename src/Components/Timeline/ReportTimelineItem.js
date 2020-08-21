@@ -92,7 +92,7 @@ export default function TimelineItemLeft(props) {
 		<TimelineItem>
 			<TimelineOppositeContent>
 				<Box>
-					<Typography align='left' variant='body2' color='textSecondary'>
+					<Typography variant='body2' color='textSecondary'>
 						{dateCreated}
 					</Typography>
 				</Box>
@@ -106,21 +106,14 @@ export default function TimelineItemLeft(props) {
 			<TimelineContent>
 				<Paper elevation={3}>
 					<Box className={classes.note}>
-						<Typography align='left' variant='h6'>
-							{name}
-						</Typography>
-						<Typography align='left'>{props.note}</Typography>
-						<Box>
-							{dateUpdated !== dateCreated ? (
-								<Typography
-									align='left'
-									variant='caption'
-									color='textSecondary'>
-									{'Aangepast op: '}
-									{dateUpdated}
-								</Typography>
-							) : null}
-						</Box>
+						<Typography variant='h6'>{name}</Typography>
+						<Typography>{props.note}</Typography>
+						{dateUpdated !== dateCreated ? (
+							<Typography variant='caption' color='textSecondary'>
+								{'Aangepast op: '}
+								{dateUpdated}
+							</Typography>
+						) : null}
 						<Button onClick={handleOpenAdjust} color='primary' size='small'>
 							Aanpassen
 						</Button>
