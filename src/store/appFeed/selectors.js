@@ -10,6 +10,10 @@ export function selectActions(state) {
     return state.appFeed.actions
 }
 
+export function selectUsers(state) {
+    return state.appFeed.users
+}
+
 export const selectActionById = (id) => (state) => {
     return state.appFeed.actions.find(action => action.id === id)
 }
