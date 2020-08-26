@@ -59,7 +59,7 @@ export default function AddLeadMUI() {
         if (!contacts || !contacts[0]) {
             dispatch(fetchContacts)
         }
-    }, [contacts]);
+    }, []);
 
     const submitLeadForm = (event) => {
         event.preventDefault()
