@@ -22,7 +22,7 @@ export default function PhaseCard(props) {
     const handleMin = () => {
         dispatch(changePhaseTo(phase_id - 1, leadId))
     }
-    if (phase_id === 5) {
+    if (phase_id === 7) {
         return (
             <Card>
                 <Grid
