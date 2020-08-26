@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Box, IconButton } from '@material-ui/core'
 import WorkIcon from '@material-ui/icons/WorkOutlineOutlined'
 import ContactPhoneIcon from '@material-ui/icons/ContactPhoneOutlined'
 import EventIcon from '@material-ui/icons/EventOutlined'
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { selectToken } from '../../store/user/selectors'
 import { useSelector } from 'react-redux'
 import LoggedIn from './LoggedIn'
@@ -39,6 +40,9 @@ export default function MyAppBar() {
 					</IconButton>
 					<IconButton href='/contacts'>
 						<ContactPhoneIcon className={classes.icon}></ContactPhoneIcon>
+					</IconButton>
+					<IconButton href='/leads/add'>
+						<AddCircleOutlineIcon className={classes.icon}></AddCircleOutlineIcon>
 					</IconButton>
 				</Box>
 				<SearchBar
