@@ -22,11 +22,11 @@ I am a Hotelschool the Hague graduate and a Codaisseur Javascript Bootcamp gradu
 
 #### Adding a Lead & Making a report
 
-![Demo](https://media.giphy.com/media/JTgklSab4Z7M6x7S8S/giphy.gif){ size= 10 }
+![Demo](https://media.giphy.com/media/JTgklSab4Z7M6x7S8S/giphy.gif)
 
 #### Managing actions 
 
-![Demo](https://media.giphy.com/media/fVUkZIedGdCZ3Oa3ZV/giphy.gif){ size=10 }
+![Demo](https://media.giphy.com/media/fVUkZIedGdCZ3Oa3ZV/giphy.gif)
 
 #### Managing contacts
 
@@ -34,7 +34,12 @@ I am a Hotelschool the Hague graduate and a Codaisseur Javascript Bootcamp gradu
 
 #### Searchbar 
 
-![demo]()
+![demo](https://media.giphy.com/media/KdwNb4lPr4jlEKa8F8/giphy.gif)
+
+#### All leads page
+
+![demo](https://media.giphy.com/media/cnipYbE3EM4Xh5ybew/giphy.gif)
+
 ## Technologies-used
 
 ### Front-end:
