@@ -20,6 +20,7 @@ I am a Hotelschool the Hague graduate and a Codaisseur Javascript Bootcamp gradu
 
 ## Demo
 
+![demo](src/Images/Animated GIF-original.mp4)
 
 ## Technologies-used
 
