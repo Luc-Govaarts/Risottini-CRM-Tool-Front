@@ -1,4 +1,2 @@
-
-export const apiUrl = "https://crispy-production.herokuapp.com";
-export const DEFAULT_MESSAGE_TIMEOUT = 300;
-
+export const apiUrl = "https://crispy-risottini.herokuapp.com";
+export const DEFAULT_MESSAGE_TIMEOUT = 3000
