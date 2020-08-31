@@ -20,7 +20,7 @@ I am a Hotelschool the Hague graduate and a Codaisseur Javascript Bootcamp gradu
 
 ## Demo
 
-![Demo](https://media.giphy.com/media/JTgklSab4Z7M6x7S8S/source.mp4)
+![Demo](https://media.giphy.com/media/JTgklSab4Z7M6x7S8S/giphy.gif)
 
 ## Technologies-used
 
