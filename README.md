@@ -99,8 +99,6 @@ To install Crispy it is recommended to install the server first. check the serve
 1. Clone the repo
 2. Install the dependencies by running npm install
 3. open the constants.js file in the config folder and add the link to the server.
-
-The server is set up with some dummy seed data.
 4. create a new account 
 5. Check the existing leads on the home page or add new leads.
 6. add notes and plan activities on the lead details pages. 
