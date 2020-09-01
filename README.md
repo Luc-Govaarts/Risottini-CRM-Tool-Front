@@ -1,7 +1,7 @@
 
 ## Crispy 
 
-Crispy is a custom CRM system built for a company that operates in the dutch snack industry. Risottini, is a start-up that produces crispy, risotto balls in two flavours, tomato mozarella and mushroom truffel. The aim of this software project is to develop a system to track contact details of different restaurants and track leads in different phases of their specific sales cycle. Interested in the company behind these snacks? see there page [here](https://www.risottini.com/)
+Crispy is a custom CRM system built for a company that operates in the Dutch snack industry. Risottini, is a start-up that produces crispy risotto balls in two flavours; tomato mozarella and mushroom truffel. The aim of this software project is to develop a sales system to track contact details of different restaurants based on their location in the Netherlands. Also it is meant to track leads in different phases of their specific sales cycle. Interested in the company behind these snacks? See there page [here](https://www.risottini.com/)
 
 The demo version with some test data is available [here](https://ecstatic-rosalind-f39297.netlify.app)
 Log in: Email: Demo@demo.com, password: test1234
@@ -15,7 +15,6 @@ I am a Hotelschool the Hague graduate and a Codaisseur Javascript Bootcamp gradu
  2. [`Technologies used`](#Technologies-used)
  3. [`User stories`](#User-stories)
  4. [`Goals`](#Goals)
- 5. [`Wireframe`](#Wireframe)
  6. [`Installation`](#Installation)
 
 ## Demo
