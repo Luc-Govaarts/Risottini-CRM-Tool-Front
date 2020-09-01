@@ -25,7 +25,7 @@ export function storeUsers(data) {
 
 export function storeNewLead(data) {
 	return {
-		type: 'STORE__NEW_LEAD',
+		type: 'STORE_NEW_LEAD',
 		payload: data,
 	}
 }

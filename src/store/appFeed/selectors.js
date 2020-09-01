@@ -6,6 +6,10 @@ export function selectLeads(state) {
     return state.appFeed.leads
 }
 
+export const selectLeadByName = (name) => (state) => {
+    return state.appFeed.leads.find(lead => lead.company_name === name)
+}
+
 export function selectActions(state) {
     return state.appFeed.actions
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 import { fetchLeads } from '../store/appFeed/actions'
 import { selectLeads } from '../store/appFeed/selectors'
 import { makeStyles } from '@material-ui/core/styles'
@@ -140,6 +141,7 @@ const useStyles = makeStyles({
 export default function StickyHeadTable(props) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
+	const history = useHistory()
 	const leads = useSelector(selectLeads)
 	const [order, setOrder] = useState('asc')
 	const [orderBy, setOrderBy] = useState('leads')
@@ -167,6 +169,11 @@ export default function StickyHeadTable(props) {
 		setPage(0)
 	}
 
+	const handleClickRow = (event, leadId) => {
+		event.preventDefault()
+		return history.push(`/leads/${leadId}`) 
+	}
+
 	if (!leads) {
 		return null
 	} else {
@@ -185,12 +192,14 @@ export default function StickyHeadTable(props) {
 								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 								.map((row, index) => {
 									return (
-										<TableRow hover tabIndex={-1} key={row.company_name}>
+										<TableRow
+											hover
+											tabIndex={-1}
+											key={row.company_name}
+											onClick={(event) => handleClickRow(event, row.leadId)}>
 											{columns.map((column) => {
 												const value = row[column.id]
-												return (
-														<TableCell key={column.id}>{value}</TableCell>
-												)
+												return <TableCell key={column.id}>{value}</TableCell>
 											})}
 										</TableRow>
 									)
