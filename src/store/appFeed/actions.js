@@ -261,7 +261,7 @@ export function addLead(
 	associated_company_name,
 	company_phone,
 	company_address,
-	company_email,
+	contact_person,
 	supplier,
 	contactId
 ) {
@@ -279,7 +279,7 @@ export function addLead(
 				associated_company_name,
 				company_phone,
 				company_address,
-				company_email,
+				contact_person,
 				supplier,
 				contactId,
 				userId,
@@ -462,7 +462,7 @@ export function adjustLead(
 	associated_company_name,
 	company_phone,
 	company_address,
-	company_email,
+	contact_person,
 	supplier
 ) {
 	return async function (dispatch, getState) {
@@ -473,7 +473,7 @@ export function adjustLead(
 			associated_company_name: associated_company_name,
 			company_phone: company_phone,
 			company_address: company_address,
-			company_email: company_email,
+			contact_person: contact_person,
 			supplier: supplier,
 		}
 		const state = getState()

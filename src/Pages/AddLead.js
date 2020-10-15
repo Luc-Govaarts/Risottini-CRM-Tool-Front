@@ -52,7 +52,7 @@ export default function AddLeadMUI() {
 	const [associated_company_name, set_associated_company_name] = useState('')
 	const [company_phone, set_company_phone] = useState()
 	const [company_address, set_company_address] = useState('')
-	const [company_email, set_company_email] = useState('')
+	const [contact_person, set_contact_person] = useState('')
 	const [supplier, set_supplier] = useState('')
 	const [contactId, set_contactId] = useState()
 	const dispatch = useDispatch()
@@ -81,7 +81,7 @@ export default function AddLeadMUI() {
 					associated_company_name,
 					company_phone,
 					company_address,
-					company_email,
+					contact_person,
 					supplier
 				)
 			)
@@ -92,7 +92,7 @@ export default function AddLeadMUI() {
 					associated_company_name,
 					company_phone,
 					company_address,
-					company_email,
+					contact_person,
 					supplier,
 					contactId
 				)
@@ -102,7 +102,7 @@ export default function AddLeadMUI() {
 		set_associated_company_name('')
 		set_company_phone()
 		set_company_address('')
-		set_company_email('')
+		set_contact_person('')
 		set_supplier('')
         set_contactId()
         set_submitted(true)
@@ -169,15 +169,15 @@ export default function AddLeadMUI() {
 							autoFocus
 						/>
 						<TextField
-							onChange={(event) => set_company_email(event.target.value)}
-							value={company_email}
+							onChange={(event) => set_contact_person(event.target.value)}
+							value={contact_person}
 							variant='outlined'
 							margin='normal'
 							required
 							fullWidth
-							id='company_email'
-							label='Voeg email toe'
-							name='company_email'
+							id='contact_person'
+							label='Voeg contact persoon toe'
+							name='contact_person'
 							autoFocus
 						/>
 						<TextField

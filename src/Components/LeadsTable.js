@@ -52,7 +52,7 @@ const columns = [
 	{ id: 'company_name', label: 'Lead', minWidth: 120 },
 	{ id: 'salesCyclePhase', label: 'Verkoop fase', minWidth: 120 },
 	{ id: 'company_phone', label: 'Telefoon', minWidth: 100 },
-	{ id: 'company_email', label: 'Email', minWidth: 100 },
+	{ id: 'contact_person', label: 'Contact Persoon', minWidth: 100 },
 	{ id: 'supplier', label: 'Leverancier', minWidth: 100 },
 	{ id: 'createdAt', label: 'Gecreëerd op', minWidth: 120 },
 	{ id: 'updatedAt', label: 'Aangepast op', minWidth: 120 },
@@ -62,7 +62,7 @@ const createRow = (lead) => {
 	const company_name = lead.company_name
 	const salesCyclePhase = lead.salesCyclePhase.name
 	const company_phone = lead.company_phone
-	const company_email = lead.company_email
+	const contact_person = lead.contact_person
 	const supplier = lead.supplier
 	const createdAt = moment(lead.createdAt).format('DD MMM YYYY')
 	const updatedAt = moment(lead.updatedAt).format('DD MMM YYYY')
@@ -72,7 +72,7 @@ const createRow = (lead) => {
 		company_name,
 		salesCyclePhase,
 		company_phone,
-		company_email,
+		contact_person,
 		supplier,
 		createdAt,
 		updatedAt,

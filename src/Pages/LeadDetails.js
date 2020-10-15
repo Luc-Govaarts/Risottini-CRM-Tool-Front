@@ -63,7 +63,7 @@ export default function LeadDetails() {
                                         associated_company_name={lead.associated_company_name}
                                         address={lead.company_address}
                                         phone={lead.company_phone}
-                                        email={lead.company_email}
+                                        contact_person={lead.contact_person}
                                         supplier={lead.supplier}
                                         createdAt={lead.createdAt}/>
                                 </Box>
