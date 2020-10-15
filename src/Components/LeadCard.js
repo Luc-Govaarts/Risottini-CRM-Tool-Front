@@ -57,7 +57,7 @@ export default function LeadCard(props) {
 	const [associated_company_name, set_associated_company_name] = useState('')
 	const [company_phone, set_company_phone] = useState('')
 	const [company_address, set_company_address] = useState('')
-	const [company_email, set_company_email] = useState('')
+	const [contact_person, set_contact_person] = useState('')
 	const [supplier, set_supplier] = useState('')
 	const history = useHistory()
 	const dispatch = useDispatch()
@@ -87,7 +87,7 @@ export default function LeadCard(props) {
 				associated_company_name,
 				company_phone,
 				company_address,
-				company_email,
+				contact_person,
 				supplier
 			)
 		)
@@ -96,7 +96,7 @@ export default function LeadCard(props) {
 		set_associated_company_name('')
 		set_company_phone('')
 		set_company_address('')
-		set_company_email('')
+		set_contact_person('')
 		set_supplier('')
 		handleCloseAdjust()
 	}
@@ -122,8 +122,8 @@ export default function LeadCard(props) {
 						<strong>Telefoon: </strong> {props.phone}
 					</Typography>
 					<Typography>
-						<strong>Email: </strong>
-						{props.email}
+						<strong>Contact persoon: </strong>
+						{props.contact_person}
 					</Typography>
 					<Typography>
 						<strong>Leverancier: </strong>
@@ -203,15 +203,15 @@ export default function LeadCard(props) {
 										/>
 										<TextField
 											onChange={(event) =>
-												set_company_email(event.target.value)
+												set_contact_person(event.target.value)
 											}
-											value={company_email}
+											value={contact_person}
 											variant='outlined'
 											margin='normal'
 											fullWidth
-											id='company_email'
-											label='Voeg email toe'
-											name='company_email'
+											id='contact_person'
+											label='Voeg contact persoon toe'
+											name='contact_person'
 											autoFocus
 										/>
 										<TextField

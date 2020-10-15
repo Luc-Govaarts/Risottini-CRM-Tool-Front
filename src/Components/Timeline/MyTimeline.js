@@ -9,7 +9,7 @@ import Today from './Today'
 import moment from 'moment';
  
 function compareDates(a, b) {
-    return new Date(a.due_date || a.createdAt) - new Date(b.due_date || b.createdAt)
+    return new Date(b.due_date || b.createdAt) - new Date(a.due_date || a.createdAt)
 }
 
 export default function MyTimeline(props) {

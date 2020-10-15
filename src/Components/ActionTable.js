@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { actionStatusChange } from '../store/appFeed/actions'
@@ -180,6 +181,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ActionTable(props) {
 	const classes = useStyles()
 	const dispatch = useDispatch()
+	const history = useHistory()
 	const user = useSelector(selectUser)
 	const actions = props.actions
 	const [order, setOrder] = useState('desc')
@@ -244,6 +246,11 @@ export default function ActionTable(props) {
 		dispatch(actionStatusChange(actionId, event.target.checked))
 	}
 
+	const handleClickRow = (event, leadId) => {
+		event.preventDefault()
+		return history.push(`/leads/${leadId}`) 
+	}
+
 	return (
 		<Card className={classes.root}>
 			<CardHeader
@@ -294,7 +301,8 @@ export default function ActionTable(props) {
 											style={{ backgroundColor: row.color }}
 											hover
 											tabIndex={-1}
-											key={index}>
+											key={index}
+											onClick={(event) => handleClickRow(event, row.leadId)}>
 											{columns.map((column) => {
 												const value = row[column.id]
 												if (column.id === 'done') {
