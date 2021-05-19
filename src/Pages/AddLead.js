@@ -161,7 +161,6 @@ export default function AddLeadMUI() {
 							value={company_phone}
 							variant='outlined'
 							margin='normal'
-							required
 							fullWidth
 							id='company_phone'
 							label='Telefoon nummer'
@@ -173,7 +172,6 @@ export default function AddLeadMUI() {
 							value={contact_person}
 							variant='outlined'
 							margin='normal'
-							required
 							fullWidth
 							id='contact_person'
 							label='Voeg contact persoon toe'
@@ -185,7 +183,6 @@ export default function AddLeadMUI() {
 							value={company_address}
 							variant='outlined'
 							margin='normal'
-							required
 							fullWidth
 							id='company_address'
 							label='Voeg address toe'
@@ -197,7 +194,6 @@ export default function AddLeadMUI() {
 							value={supplier}
 							variant='outlined'
 							margin='normal'
-							required
 							fullWidth
 							id='supplier'
 							label='Leverancier'
